@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Dataservice
 {
-    class Movie
+    public class Movie
     {
+        public string Tconst { get; set; }
+        public string Name { get; set; }
     }
 }
