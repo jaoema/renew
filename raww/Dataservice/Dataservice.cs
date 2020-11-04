@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Dataservice
+namespace DataserviceLib
 {
     public class Dataservice
     {
