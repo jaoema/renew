@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 
 namespace DataserviceLib
@@ -13,5 +14,6 @@ namespace DataserviceLib
         public string Language { get; set; }
         public string Attributes { get; set; }
         public bool Isoriginaltitle { get; set; }
+        public Types types { get; set; }
     }
 }
