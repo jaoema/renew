@@ -8,6 +8,6 @@ namespace DataserviceLib
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public 
+        public Bookmark Bookmark { get; set; }
     }
 }

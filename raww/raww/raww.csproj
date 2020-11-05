@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Dataservice\DataserviceLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SqlFunctions\" />
+  </ItemGroup>
+
 </Project>
