@@ -6,20 +6,20 @@ namespace DataserviceLib
 {
     public class Dataservice
     {
-        private List<Movie> _movies = new List<Movie>
+        private List<Titlebasics> _titles = new List<Titlebasics>
         {
-            new Movie {Tconst = "tconst123", Name = "minfilm"},
-            new Movie {Tconst = "tconst1", Name = "minfil"}
+            new Titlebasics {Tconst = "tconst123", Name = "minfilm"},
+            new Titlebasics {Tconst = "tconst1", Name = "minfil"}
             //get data 
         };
 
-        public IList<Movie> GetMovies()
+        public IList<Titlebasics> GetTitles()
         {
-            return _movies;
+            return _titles;
         }
-        public Movie GetMovie(string tconst)
+        public Titlebasics GetTitle(string tconst)
         {
-            return _movies.FirstOrDefault(x => x.Tconst == tconst);
+            return _titles.FirstOrDefault(x => x.Tconst == tconst);
         }
     }
 }
