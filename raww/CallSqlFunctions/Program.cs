@@ -51,8 +51,6 @@ namespace CallSqlFunctions
             ctx.SaveChanges();
 
 
-
-
             //var result = ctx.Add_Rating_History.FromSqlInterpolated($"insert into ratinghistory('username', 'movie', 'rating')");
 
             //foreach (var ARH in result)
