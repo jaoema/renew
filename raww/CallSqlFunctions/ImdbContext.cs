@@ -24,7 +24,7 @@ namespace CallSqlFunctions
 
         public DbSet<Find_Popular_Actors> Find_Popular_Actors { get; set; }
 
-        public DbSet<Add_Rating_History> Add_Rating_History { get; set; }
+        public DbSet<Add_Rating_History> Add_Rating_Histories { get; set; }
 
         public DbSet<Ratinghistory> Ratinghistories { get; set; }
 
