@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataserviceLib", "Dataservi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CallSqlFunction", "CallSqlFunction", "{05C0EC1C-67EE-47E0-863C-630AC45548F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallSqlFunctions", "CallSqlFunctions\CallSqlFunctions.csproj", "{82323871-1811-4797-B557-54F8F32B4DB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallSqlFunctions", "CallSqlFunctions\CallSqlFunctions.csproj", "{82323871-1811-4797-B557-54F8F32B4DB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
