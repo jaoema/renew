@@ -10,7 +10,7 @@ namespace CallSqlFunctions
         {
             var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
 
-          
+
 
             //(UseAdo(connectionString);
             NS(connectionString);
@@ -19,7 +19,7 @@ namespace CallSqlFunctions
 
         }
 
-        //This method seraches for a name, the ref for this method is NS
+        //This method searches for a name, the ref for this method is NS
         private static void NS(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
@@ -43,18 +43,25 @@ namespace CallSqlFunctions
             }
         }
         //DUR IKKE
-            private static void ARH(string connectionString)
-            {
-                var ctx = new ImdbContext(connectionString);
-                var result = ctx.Add_Rating_History.FromSqlInterpolated($"insert into ratinghistory('username', 'movie', 'rating')");
+        private static void ARH(string connectionString)
+        {
+            using var ctx = new ImdbContext(connectionString);
 
-                //foreach (var ARH in result)
-               // {
-                    Console.WriteLine($"{ Add_Rating_History.username}, {Add_Rating_History.movie}, {Add_Rating_History.rating}");
-                //}
+            ctx.Ratinghistories.Add(new Ratinghistory{});
+            ctx.SaveChanges();
 
-            }
-        
+
+
+
+            //var result = ctx.Add_Rating_History.FromSqlInterpolated($"insert into ratinghistory('username', 'movie', 'rating')");
+
+            //foreach (var ARH in result)
+            // {
+            //    Console.WriteLine($"{ Add_Rating_History.username}, {Add_Rating_History.movie}, {Add_Rating_History.rating}");
+            //}
+
+        }
+
 
         private static void UseAdo(string connectionString)
         {

@@ -26,6 +26,8 @@ namespace CallSqlFunctions
 
         public DbSet<Add_Rating_History> Add_Rating_History { get; set; }
 
+        public DbSet<Ratinghistory> Ratinghistories { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(_connectionString);
@@ -51,6 +53,11 @@ namespace CallSqlFunctions
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.username).HasColumnName("username");
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.movie).HasColumnName("movie");
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.rating).HasColumnName("rating");
+
+            modelBuilder.Entity<Ratinghistory>().HasNoKey();
+            modelBuilder.Entity<Ratinghistory>().Property(x => x.username).HasColumnName("username");
+            modelBuilder.Entity<Ratinghistory>().Property(x => x.rating).HasColumnName("rating");
+            modelBuilder.Entity<Ratinghistory>().Property(x => x.tconst).HasColumnName("tconst");
         }
     }
 }
