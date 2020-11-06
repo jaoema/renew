@@ -13,9 +13,9 @@ namespace CallSqlFunctions
 
 
             //(UseAdo(connectionString);
-            NS(connectionString);
-            FPA(connectionString);
-            //ARH(connectionString);
+            //NS(connectionString);
+            //FPA(connectionString);
+            ARH(connectionString);
 
         }
 
@@ -46,10 +46,18 @@ namespace CallSqlFunctions
         private static void ARH(string connectionString)
         {
             using var ctx = new ImdbContext(connectionString);
+            Ratinghistory r = new Ratinghistory
+            {
+                username = "jaja",
+                rating = 4,
+                tconst = "tconst"
+            };
 
-            ctx.Ratinghistories.Add(new Ratinghistory{});
+            //ctx.Ratinghistories.Add(new Ratinghistory{username = "username", rating = 5, tconst = "tconst"  });
+            ctx.Ratinghistories.Attach(r);
             ctx.SaveChanges();
 
+           
 
             //var result = ctx.Add_Rating_History.FromSqlInterpolated($"insert into ratinghistory('username', 'movie', 'rating')");
 
