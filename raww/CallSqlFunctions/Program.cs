@@ -15,6 +15,7 @@ namespace CallSqlFunctions
             //(UseAdo(connectionString);
             NS(connectionString);
             FPA(connectionString);
+            //ARH(connectionString);
 
         }
 
@@ -31,17 +32,29 @@ namespace CallSqlFunctions
         }
 
         // Finds popular actors the ref for this method is FPA
-            private static void FPA (string connectionString)
-            {
-                var ctx = new ImdbContext(connectionString);
-                var result = ctx.Find_Popular_Actors.FromSqlInterpolated($"select * from popular_actors(10) ");
+        private static void FPA(string connectionString)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.Find_Popular_Actors.FromSqlInterpolated($"select * from popular_actors(10) ");
 
-            foreach (var Find_Popular_Actors in result )
+            foreach (var Find_Popular_Actors in result)
             {
                 Console.WriteLine($"{ Find_Popular_Actors.primaryname}, {Find_Popular_Actors.rating}");
             }
-            
-        } 
+        }
+        //DUR IKKE
+            private static void ARH(string connectionString)
+            {
+                var ctx = new ImdbContext(connectionString);
+                var result = ctx.Add_Rating_History.FromSqlInterpolated($"insert into ratinghistory('username', 'movie', 'rating')");
+
+                //foreach (var ARH in result)
+               // {
+                    Console.WriteLine($"{ Add_Rating_History.username}, {Add_Rating_History.movie}, {Add_Rating_History.rating}");
+                //}
+
+            }
+        
 
         private static void UseAdo(string connectionString)
         {

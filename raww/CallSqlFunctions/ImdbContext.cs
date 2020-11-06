@@ -24,6 +24,8 @@ namespace CallSqlFunctions
 
         public DbSet<Find_Popular_Actors> Find_Popular_Actors { get; set; }
 
+        public DbSet<Add_Rating_History> Add_Rating_History { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(_connectionString);
@@ -44,7 +46,11 @@ namespace CallSqlFunctions
             modelBuilder.Entity<Find_Popular_Actors>().HasNoKey();
             modelBuilder.Entity<Find_Popular_Actors>().Property(x => x.primaryname).HasColumnName("primaryname");
             modelBuilder.Entity<Find_Popular_Actors>().Property(x => x.rating).HasColumnName("rating");
-        
+
+            modelBuilder.Entity<Add_Rating_History>().HasNoKey();
+            modelBuilder.Entity<Add_Rating_History>().Property(x => x.username).HasColumnName("username");
+            modelBuilder.Entity<Add_Rating_History>().Property(x => x.movie).HasColumnName("movie");
+            modelBuilder.Entity<Add_Rating_History>().Property(x => x.rating).HasColumnName("rating");
         }
     }
 }
