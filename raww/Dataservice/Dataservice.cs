@@ -6,7 +6,7 @@ namespace DataserviceLib
 {
     public class Dataservice
     {
-        private List<Titlebasics> _titles = new List<Titlebasics>
+        private List<Titlebasics> _titlebasics = new List<Titlebasics>
         {
             new Titlebasics {Tconst = "tconst123", Name = "minfilm"},
             new Titlebasics {Tconst = "tconst1", Name = "minfil"}
@@ -15,11 +15,11 @@ namespace DataserviceLib
 
         public IList<Titlebasics> GetTitles()
         {
-            return _titles;
+            return _titlebasics;
         }
         public Titlebasics GetTitle(string tconst)
         {
-            return _titles.FirstOrDefault(x => x.Tconst == tconst);
+            return _titlebasics.FirstOrDefault(x => x.Tconst == tconst);
         }
     }
 }
