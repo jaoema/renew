@@ -10,7 +10,7 @@ namespace raww.Controllers
     [ApiController]
     public class Usercontroller : ControllerBase
     {
-        [HttpPost("api/signup?username={username}&password={password}")]
+        [HttpPost("api/signup")] //?username={username}&password={password}
         public IActionResult CreateUser(User user)
         {
             var ds = new Dataservice();
@@ -19,7 +19,7 @@ namespace raww.Controllers
             return Created("",user.Username);
         }
 
-        [HttpPost("api/login?username={username}&password={password}")]
+        [HttpPost("api/login")]
         public IActionResult Login(User user)
         {
             var ds = new Dataservice();
@@ -28,7 +28,7 @@ namespace raww.Controllers
             return Ok();
         }
 
-        [HttpPost("api/logout?username={username}")]
+        [HttpPost("api/logout")] //?username={username}
         public IActionResult Logout(User user)
         {
             var ds = new Dataservice();

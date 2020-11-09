@@ -10,11 +10,24 @@ namespace raww.Controllers
     [ApiController]
     public class HistoryController : ControllerBase
     {
-        [HttpGet("api/actorsearch/{searchstring}")]
-        public IActionResult ActorSearch(string searchstring)
+        [HttpGet("api/searchhistory")]
+        public IActionResult SearchHistory()
         {
             var ds = new Dataservice();
-            var searchresult = ds.FindActor(searchstring);
+            var searchresult = ds.GetSearchHistory();
+
+            if (searchresult == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(searchresult);
+        }
+        [HttpGet("api/ratinghistory")]
+        public IActionResult RatingHistory()
+        {
+            var ds = new Dataservice();
+            var searchresult = ds.GetRatingHistory();
 
             if (searchresult == null)
             {

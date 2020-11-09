@@ -25,7 +25,7 @@ namespace raww.Controllers
         }
         [HttpGet("api/actorsearch/{searchstring}")]
         public IActionResult ActorSearch(string searchstring)
-        {
+        { 
             var ds = new Dataservice();
             var searchresult = ds.FindActor(searchstring);
 

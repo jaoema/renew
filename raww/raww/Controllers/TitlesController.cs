@@ -23,7 +23,19 @@ namespace raww.Controllers
             
             return Ok(movie);
         }
+        [HttpGet("api/similarmovies/{id}")]
+        public IActionResult FindSimilarTitles(string id)
+        {
+            var ds = new Dataservice();
+            var searchresult = ds.GetSimilarTitles(id);
 
+            if (searchresult == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(searchresult);
+        }
 
     }
 }

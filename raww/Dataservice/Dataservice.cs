@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace DataserviceLib
 {
@@ -22,6 +23,11 @@ namespace DataserviceLib
             return _titlebasics.FirstOrDefault(x => x.Tconst == tconst);
         }
 
+        public List<Titlebasics> GetSimilarTitles(string id)
+        {
+            var titles = _titlebasics;
+            return titles;
+        }
         public void CreateUser(User user)
         {
             //DB create user call
@@ -56,5 +62,32 @@ namespace DataserviceLib
             //get results from db coplayer search function
             return null;
         }
+
+        public Searchhistory GetSearchHistory()
+        {
+            return null;
+        }
+
+        public Ratinghistory GetRatingHistory()
+        {
+            return null;
+        }
+
+        public bool CreateBookmark(string id)
+        {
+            return true;
+        }
+
+        public bool DeleteBookmark(string id)
+        {
+            return true;
+        }
+
+        public Bookmark GetBookmarked()
+        {
+            Bookmark marked = new Bookmark();
+            return marked;
+        }
+
     }
 }
