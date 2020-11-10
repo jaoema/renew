@@ -51,8 +51,9 @@ namespace CallSqlFunctions
 
             modelBuilder.Entity<Add_Rating_History>().HasNoKey();
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.username).HasColumnName("username");
-            modelBuilder.Entity<Add_Rating_History>().Property(x => x.movie).HasColumnName("movie");
+            modelBuilder.Entity<Add_Rating_History>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.rating).HasColumnName("rating");
+            
 
             modelBuilder.Entity<Ratinghistory>().HasNoKey();
             modelBuilder.Entity<Ratinghistory>().Property(x => x.username).HasColumnName("username");

@@ -7,7 +7,7 @@ namespace CallSqlFunctions
     public class Add_Rating_History
     {
         public string username { get; set; }
-        public string movie { get; set; }
-        public double rating { get; set; }
+        public string tconst { get; set; }
+        public int rating { get; set; }
     }
 }

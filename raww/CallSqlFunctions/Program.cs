@@ -45,26 +45,29 @@ namespace CallSqlFunctions
         //DUR IKKE
         private static void ARH(string connectionString)
         {
-            using var ctx = new ImdbContext(connectionString);
-            Ratinghistory r = new Ratinghistory
-            {
-                username = "jaja",
-                rating = 4,
-                tconst = "tconst"
-            };
+           var ctx = new ImdbContext(connectionString);
 
-            //ctx.Ratinghistories.Add(new Ratinghistory{username = "username", rating = 5, tconst = "tconst"  });
-            ctx.Ratinghistories.Attach(r);
-            ctx.SaveChanges();
+            var result = ctx.Add_Rating_Histories.FromSqlInterpolated($"select add_rating_history('hans1', 'tt10850402', 2)");
+            /*Ratinghistory r = new Ratinghistory
+           {
+               username = "jaja",
+               rating = 4,
+               tconst = "tconst"
+           };
 
-           
+           ctx.Ratinghistories.Add(new Ratinghistory{username = "username", rating = 5, tconst = "tconst"  });
+          // ctx.Ratinghistories.Attach(r);
+           ctx.SaveChanges();
+           */
 
-            //var result = ctx.Add_Rating_History.FromSqlInterpolated($"insert into ratinghistory('username', 'movie', 'rating')");
+
+
+            //Console.WriteLine(result + "heheheheheh");
 
             //foreach (var ARH in result)
-            // {
-            //    Console.WriteLine($"{ Add_Rating_History.username}, {Add_Rating_History.movie}, {Add_Rating_History.rating}");
-            //}
+            //{
+            // Console.WriteLine($"{ Add_Rating_History.username}, {Add_Rating_History.movie}, {Add_Rating_History.rating}");
+            // }
 
         }
 
