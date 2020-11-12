@@ -14,6 +14,7 @@ namespace DataserviceLib
         public int Startyear { get; set; }
         public int Endyear { get; set; }
         public int Runtimeminutes { get; set; }
+        public string Plot { get; set; }
         public Titleepisode Titleepisode { get; set; }
         public Titleaka Titleakas { get; set; }
         public Titleprincipal Titleprincipals { get; set; }
