@@ -14,6 +14,13 @@ namespace DataserviceLib
             //get data 
         };
 
+        private List<SimpleSearch> _SimpleSearch = new List<SimpleSearch>
+        {
+            new SimpleSearch {Tconst = "tconst123", Title = "test", Year = 2000, Rating = 2.5},
+            new SimpleSearch {Tconst = "tconst1", Title = "test2", Year = 200, Rating = 3.5},
+            //get data 
+        };
+
         public IList<Titlebasics> GetTitles()
         {
             return _titlebasics;
@@ -45,13 +52,14 @@ namespace DataserviceLib
             return true;
         }
 
-        public Titlebasics SimpleSearch(string searchstring)
+        public IList<SimpleSearch> SimpleSearch(string searchstring, int page = 1, int pagesize = 50)
         {
-            //get results from DB function
-            return null;
+            //get results from DB function. Take amount equal to page*pagesize -> tolist
+            var mylist = _SimpleSearch;
+            return mylist;
         }
 
-        public Person FindActor(string searchstring)
+        public Person FindActor(string searchstring, int page = 1, int pagesize = 50)
         {
             //get results from DB name search function
             return null;

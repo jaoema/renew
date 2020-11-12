@@ -4,30 +4,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using raww.Models;
 
 namespace raww.Controllers
 {
     [ApiController]
     public class Searchcontroller : ControllerBase
     {
-        [HttpGet("api/simplesearch/{searchstring}")]
-        public IActionResult SimpleSearch(string searchstring)
+        [HttpGet("api/simplesearch")]
+        public IActionResult SimpleSearch()
         {
             var ds = new Dataservice();
-            var searchresult = ds.SimpleSearch(searchstring);
+            var searchresult = ds.SimpleSearch("gjhe", 1, 50);
 
-            if (searchresult == null)
+            if (!searchresult.Any())
             {
                 return NotFound();
             }
 
+            //searchresult = searchresult.Select(SearchDto);
+            //var populatedresult = CreateResult(page, pagesize, searchresult);
             return Ok(searchresult);
         }
         [HttpGet("api/actorsearch/{searchstring}")]
-        public IActionResult ActorSearch(string searchstring)
+        public IActionResult ActorSearch(string searchstring, int page, int pagesize)
         { 
             var ds = new Dataservice();
-            var searchresult = ds.FindActor(searchstring);
+            var searchresult = ds.FindActor(searchstring, page, pagesize);
 
             if (searchresult == null)
             {
@@ -49,7 +52,7 @@ namespace raww.Controllers
 
             return Ok(searchresult);
         }
-        private object CreateResult(int page, int pageSize, IList<Titlebasics> titles)
+        private object CreateResult(int page, int pageSize, IList<SimpleSearch> titles)
         {
             //var titles = titles.Select(CreateProductElementDto);
 
