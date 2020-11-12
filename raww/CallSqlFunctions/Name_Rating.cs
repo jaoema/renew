@@ -6,7 +6,7 @@ namespace CallSqlFunctions
 {
     public class Name_Rating
     {
-        public string primaryname { get; set; }
+        public int primaryname { get; set; }
 
     }
 }

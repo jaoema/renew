@@ -20,13 +20,17 @@ namespace CallSqlFunctions
 
         public DbSet<Name_Search> Name_Search { get; set; }
 
-        public DbSet<Rate> Rate { get; set; }
+       
 
         public DbSet<Find_Popular_Actors> Find_Popular_Actors { get; set; }
 
-        public DbSet<Add_Rating_History> Add_Rating_Histories { get; set; }
+        public DbSet<Name_Rating> Name_Rating { get; set; }
 
-        public DbSet<Create_User> Create_User { get; set; }
+        public DbSet<String_Search> String_Search{ get; set; }
+
+
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,24 +44,20 @@ namespace CallSqlFunctions
             modelBuilder.Entity<Name_Search>().Property(x => x.primaryname).HasColumnName("primaryname");
 
 
-            modelBuilder.Entity<Rate>().HasNoKey();
-            modelBuilder.Entity<Rate>().Property(x => x.username).HasColumnName("username");
-            modelBuilder.Entity<Rate>().Property(x => x.rating).HasColumnName("rating");
-            modelBuilder.Entity<Rate>().Property(x => x.tconst).HasColumnName("tconst");
-
             modelBuilder.Entity<Find_Popular_Actors>().HasNoKey();
             modelBuilder.Entity<Find_Popular_Actors>().Property(x => x.primaryname).HasColumnName("primaryname");
             modelBuilder.Entity<Find_Popular_Actors>().Property(x => x.rating).HasColumnName("rating");
 
-            modelBuilder.Entity<Add_Rating_History>().HasNoKey();
-            modelBuilder.Entity<Add_Rating_History>().Property(x => x.username).HasColumnName("username");
-            modelBuilder.Entity<Add_Rating_History>().Property(x => x.tconst).HasColumnName("tconst");
-            modelBuilder.Entity<Add_Rating_History>().Property(x => x.rating).HasColumnName("rating");
+            modelBuilder.Entity<Name_Rating>().HasNoKey();
+            modelBuilder.Entity<Name_Rating>().Property(x => x.primaryname).HasColumnName("name_rating");
+            
+            modelBuilder.Entity<String_Search>().HasNoKey();
+            modelBuilder.Entity<String_Search>().Property(x => x.tconst).HasColumnName("tconst");
+            modelBuilder.Entity<String_Search>().Property(x => x.primarytitle).HasColumnName("primarytitle");
 
 
-            modelBuilder.Entity<Create_User>().HasNoKey();
-            modelBuilder.Entity<Create_User>().Property(x => x.usernam).HasColumnName("username");
-            modelBuilder.Entity<Create_User>().Property(x => x.pass).HasColumnName("password");
+
+
         }
     }
 }
