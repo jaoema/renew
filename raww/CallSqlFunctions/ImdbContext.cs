@@ -12,21 +12,21 @@ namespace CallSqlFunctions
         private readonly string _connectionString;
         public ImdbContext(string connectionString)
         {
-         _connectionString = connectionString;
+            _connectionString = connectionString;
         }
 
 
-        
+
 
         public DbSet<Name_Search> Name_Search { get; set; }
 
-        public DbSet<Rate> Rate{ get; set; }
+        public DbSet<Rate> Rate { get; set; }
 
         public DbSet<Find_Popular_Actors> Find_Popular_Actors { get; set; }
 
         public DbSet<Add_Rating_History> Add_Rating_Histories { get; set; }
 
-        public DbSet<Ratinghistory> Ratinghistories { get; set; }
+        public DbSet<Create_User> Create_User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,12 +53,11 @@ namespace CallSqlFunctions
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.username).HasColumnName("username");
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<Add_Rating_History>().Property(x => x.rating).HasColumnName("rating");
-            
 
-            modelBuilder.Entity<Ratinghistory>().HasNoKey();
-            modelBuilder.Entity<Ratinghistory>().Property(x => x.username).HasColumnName("username");
-            modelBuilder.Entity<Ratinghistory>().Property(x => x.rating).HasColumnName("rating");
-            modelBuilder.Entity<Ratinghistory>().Property(x => x.tconst).HasColumnName("tconst");
+
+            modelBuilder.Entity<Create_User>().HasNoKey();
+            modelBuilder.Entity<Create_User>().Property(x => x.usernam).HasColumnName("username");
+            modelBuilder.Entity<Create_User>().Property(x => x.pass).HasColumnName("password");
         }
     }
 }

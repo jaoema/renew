@@ -4,11 +4,11 @@ using System.Text;
 
 namespace CallSqlFunctions
 {
-    public class Ratinghistory
+    class Add_Search_history
     {
         public string username { get; set; }
-        public int rating { get; set; }
         public string tconst { get; set; }
-
-    }
+        public int rating { get; set; }
+    
+}
 }

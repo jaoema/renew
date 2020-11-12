@@ -10,17 +10,20 @@ namespace CallSqlFunctions
         {
             var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
 
-
-
             //(UseAdo(connectionString);
-            //NS(connectionString);
-            //FPA(connectionString);
-            ARH(connectionString);
-
+            //Name_Search(connectionString);
+            //Find_Popular_Actors(connectionString);
+            //Add_Rating_History(connectionString);
+            Create_User(connectionString);
+            //Rate(connectionString);
+            //Login(connectionString);
+            //Name_Rating(connectionString);
+           
         }
 
         //This method searches for a name, the ref for this method is NS
-        private static void NS(string connectionString)
+
+        public static void Name_Search(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search('hans1','Mads')");
@@ -30,9 +33,8 @@ namespace CallSqlFunctions
                 Console.WriteLine($"{ Name_Search.nconst}, { Name_Search.primaryname}");
             }
         }
-
         // Finds popular actors the ref for this method is FPA
-        private static void FPA(string connectionString)
+        private static void Find_Popular_Actors(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Find_Popular_Actors.FromSqlInterpolated($"select * from popular_actors(10) ");
@@ -42,34 +44,62 @@ namespace CallSqlFunctions
                 Console.WriteLine($"{ Find_Popular_Actors.primaryname}, {Find_Popular_Actors.rating}");
             }
         }
-        //DUR IKKE
-        private static void ARH(string connectionString)
+       
+        private static void Add_Rating_History(string connectionString)
         {
-           var ctx = new ImdbContext(connectionString);
 
-            var result = ctx.Add_Rating_Histories.FromSqlInterpolated($"select add_rating_history('hans1', 'tt10850402', 2)");
-            /*Ratinghistory r = new Ratinghistory
-           {
-               username = "jaja",
-               rating = 4,
-               tconst = "tconst"
-           };
-
-           ctx.Ratinghistories.Add(new Ratinghistory{username = "username", rating = 5, tconst = "tconst"  });
-          // ctx.Ratinghistories.Attach(r);
-           ctx.SaveChanges();
-           */
-
-
-
-            //Console.WriteLine(result + "heheheheheh");
-
-            //foreach (var ARH in result)
-            //{
-            // Console.WriteLine($"{ Add_Rating_History.username}, {Add_Rating_History.movie}, {Add_Rating_History.rating}");
-            // }
-
+            var ctx = new ImdbContext(connectionString);
+            var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
+            connection.Open();
+            var cmd = new NpgsqlCommand($"select add_rating_history('hans1', 'tt10850402', 9)", connection);
+            cmd.ExecuteNonQuery();
         }
+
+        private static void Create_User(string connectionString)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
+            connection.Open();
+            var cmd = new NpgsqlCommand($"select create_user('ddheas', 'eerrrghg')", connection);
+            cmd.ExecuteNonQuery();
+        }
+
+        private static void Rate(string connectionString)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
+            connection.Open();
+            var cmd = new NpgsqlCommand($"select rate('hans1', 'tt11097072', 2)", connection);
+            cmd.ExecuteNonQuery();
+        }
+
+        //Bookmark
+        //Find_Coplayers
+
+        private static void Login(string connectionString)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
+            connection.Open();
+            var cmd = new NpgsqlCommand($"select login('rasmus2', 'baad')", connection);
+            cmd.ExecuteNonQuery();
+                        
+        }
+
+        //Find out what this returns and how to get it. 
+        private static void Name_Rating(string connectionString)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.Name_Rating.FromSqlInterpolated($"select name_rating('Mads Mikkelsen')");
+
+            foreach (var Name_Rating in result)
+            {
+                Console.WriteLine($"{ Name_Rating.primaryname}");
+            }
+        }
+
+      
+
 
 
         private static void UseAdo(string connectionString)
@@ -83,13 +113,7 @@ namespace CallSqlFunctions
             //hans1 needs to be replaced by Username later on. So that it works for everyone.
             var cmd = new NpgsqlCommand("select * from name_search(hans1,%ab%)", connection);
 
-            /*
-            var username = "hans1";
-            var primname = "mads";
-
-            var cmd = new NpgsqlCommand("select * from name_search(username,primname)", connection);
-            */
-
+         
             var reader = cmd.ExecuteReader();
 
             while (reader.Read())
