@@ -9,7 +9,7 @@ namespace DataserviceLib
     {
         private List<Titlebasics> _titlebasics = new List<Titlebasics>
         {
-            new Titlebasics {Tconst = "tconst123", Primarytitle = "minfilm"},
+            new Titlebasics {Tconst = "tconst123", Titletype = "test", Primarytitle = "minfilm", Originaltitle = "minflm", Isadult = false, Startyear = 2000, Endyear = 2002, Runtimeminutes = 120},
             new Titlebasics {Tconst = "tconst1", Primarytitle = "minfil"}
             //get data 
         };
