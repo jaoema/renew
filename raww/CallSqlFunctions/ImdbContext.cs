@@ -15,21 +15,13 @@ namespace CallSqlFunctions
             _connectionString = connectionString;
         }
 
-
-
-
         public DbSet<Name_Search> Name_Search { get; set; }
-
-       
 
         public DbSet<Find_Popular_Actors> Find_Popular_Actors { get; set; }
 
         public DbSet<Name_Rating> Name_Rating { get; set; }
 
         public DbSet<String_Search> String_Search{ get; set; }
-
-
-
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -10,7 +10,7 @@ namespace CallSqlFunctions
         {
             var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
 
-            //(UseAdo(connectionString);
+            (UseAdo(connectionString);
             //Name_Search(connectionString);
             //Find_Popular_Actors(connectionString);
             //Add_Rating_History(connectionString);
@@ -19,7 +19,7 @@ namespace CallSqlFunctions
             //Login(connectionString);
             //Name_Rating(connectionString);
             //String_Search(connectionString);
-            Bookmark(connectionString);
+            //Bookmark(connectionString);
         }
 
         //This method searches for a name, the ref for this method is NS
@@ -27,7 +27,7 @@ namespace CallSqlFunctions
         public static void Name_Search(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search('hans1','Mads')");
+            var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search('hans1','Mads Mikkelsen')");
 
             foreach (var Name_Search in result)
             {
