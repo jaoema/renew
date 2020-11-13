@@ -10,10 +10,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataserviceLib", "Dataservi
 		{0D01DCBC-420B-4C82-A431-F90F1C76DE65} = {0D01DCBC-420B-4C82-A431-F90F1C76DE65}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CallSqlFunction", "CallSqlFunction", "{05C0EC1C-67EE-47E0-863C-630AC45548F5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallSqlFunctions", "CallSqlFunctions\CallSqlFunctions.csproj", "{82323871-1811-4797-B557-54F8F32B4DB1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlFunctions", "SqlFunctions\SqlFunctions.csproj", "{0D01DCBC-420B-4C82-A431-F90F1C76DE65}"
 EndProject
 Global
@@ -30,10 +26,6 @@ Global
 		{FD2EB5ED-BCFA-4090-999D-91E954EA68A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD2EB5ED-BCFA-4090-999D-91E954EA68A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD2EB5ED-BCFA-4090-999D-91E954EA68A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82323871-1811-4797-B557-54F8F32B4DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82323871-1811-4797-B557-54F8F32B4DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82323871-1811-4797-B557-54F8F32B4DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82323871-1811-4797-B557-54F8F32B4DB1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D01DCBC-420B-4C82-A431-F90F1C76DE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D01DCBC-420B-4C82-A431-F90F1C76DE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D01DCBC-420B-4C82-A431-F90F1C76DE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,9 +33,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{82323871-1811-4797-B557-54F8F32B4DB1} = {05C0EC1C-67EE-47E0-863C-630AC45548F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75838CC4-4934-44A6-BD7A-28B9A38A13EE}
