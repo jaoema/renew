@@ -14,11 +14,12 @@ namespace CallSqlFunctions
             //Name_Search(connectionString);
             //Find_Popular_Actors(connectionString);
             //Add_Rating_History(connectionString);
-            Create_User(connectionString);
+            // Create_User(connectionString);
             //Rate(connectionString);
             //Login(connectionString);
             //Name_Rating(connectionString);
-           
+            //String_Search(connectionString);
+            Bookmark(connectionString);
         }
 
         //This method searches for a name, the ref for this method is NS
@@ -75,7 +76,16 @@ namespace CallSqlFunctions
             cmd.ExecuteNonQuery();
         }
 
-        //Bookmark
+        private static void Bookmark(string connectionString)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
+            connection.Open();
+            var cmd = new NpgsqlCommand($"select bookmark('alex5', 'Mads Mikkelsen', 'Act')", connection);
+            cmd.ExecuteNonQuery();
+
+        }
+
         //Find_Coplayers
 
         private static void Login(string connectionString)
@@ -88,8 +98,8 @@ namespace CallSqlFunctions
                         
         }
 
-        //Find out what this returns and how to get it. 
-        private static void Name_Rating(string connectionString)
+        
+         private static void Name_Rating(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Name_Rating.FromSqlInterpolated($"select name_rating('Mads Mikkelsen')");
@@ -98,11 +108,21 @@ namespace CallSqlFunctions
             {
                 Console.WriteLine($"{ Name_Rating.primaryname}");
             }
+        } 
+
+        public static void String_Search(string connectionString)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.String_Search.FromSqlInterpolated($"select * from string_search('hans1','vampire')");
+
+            foreach (var String_Search in result)
+            {
+                Console.WriteLine($"{String_Search.tconst}, { String_Search.primarytitle}");
+            }
         }
 
-      
-
-
+        
+        
 
         private static void UseAdo(string connectionString)
         {

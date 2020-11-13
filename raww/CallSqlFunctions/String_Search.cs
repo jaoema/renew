@@ -4,10 +4,10 @@ using System.Text;
 
 namespace CallSqlFunctions
 {
-    class String_Search
+    public class String_Search
     {
-        public string nconst { get; set; }
-        public string primaryname { get; set; }
+        public string tconst { get; set; }
+        public string primarytitle { get; set; }
 
     }
 }
