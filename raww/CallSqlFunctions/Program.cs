@@ -32,22 +32,22 @@ namespace CallSqlFunctions
             var searchterm = "Mads";
 
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search({usernam},{searchterm})");
+            var result = ctx.NameSearch.FromSqlInterpolated($"select * from name_search({usernam},{searchterm})");
 
-            foreach (var Name_Search in result)
+            foreach (var NameSearch in result)
             {
-                Console.WriteLine($"{ Name_Search.nconst}, { Name_Search.primaryname}");
+                Console.WriteLine($"{ NameSearch.nconst}, { NameSearch.primaryname}");
             }
         }
         // Finds popular actors the ref for this method is FPA
         private static void FindPopularActors(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Find_Popular_Actors.FromSqlInterpolated($"select * from popular_actors(10) ");
+            var result = ctx.FindPopularActors.FromSqlInterpolated($"select * from popular_actors(10) ");
 
-            foreach (var Find_Popular_Actors in result)
+            foreach (var FindPopularActors in result)
             {
-                Console.WriteLine($"{ Find_Popular_Actors.primaryname}, {Find_Popular_Actors.rating}");
+                Console.WriteLine($"{ FindPopularActors.primaryname}, {FindPopularActors.rating}");
             }
         }
        
@@ -110,22 +110,22 @@ namespace CallSqlFunctions
          private static void NameRating(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Name_Rating.FromSqlInterpolated($"select name_rating('Mads Mikkelsen')");
+            var result = ctx.NameRating.FromSqlInterpolated($"select name_rating('Mads Mikkelsen')");
 
-            foreach (var Name_Rating in result)
+            foreach (var NameRating in result)
             {
-                Console.WriteLine($"{ Name_Rating.primaryname}");
+                Console.WriteLine($"{ NameRating.primaryname}");
             }
         } 
 
         public static void StringSearch(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.String_Search.FromSqlInterpolated($"select * from string_search('hans1','vampire')");
+            var result = ctx.StringSearch.FromSqlInterpolated($"select * from string_search('hans1','vampire')");
 
-            foreach (var String_Search in result)
+            foreach (var StringSearch in result)
             {
-                Console.WriteLine($"{String_Search.tconst}, { String_Search.primarytitle}");
+                Console.WriteLine($"{StringSearch.tconst}, { StringSearch.primarytitle}");
             }
         }
 
