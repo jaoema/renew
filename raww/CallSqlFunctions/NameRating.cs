@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CallSqlFunctions
 {
-    public class Name_Rating
+    public class NameRating
     {
         public int primaryname { get; set; }
 

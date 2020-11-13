@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CallSqlFunctions
 {
-    public class String_Search
+    public class StringSearch
     {
         public string tconst { get; set; }
         public string primarytitle { get; set; }
