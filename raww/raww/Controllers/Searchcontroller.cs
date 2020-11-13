@@ -5,29 +5,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using raww.Models;
+using AutoMapper;
+using raww.Models.Profiles;
 
 namespace raww.Controllers
 {
     [ApiController]
     public class Searchcontroller : ControllerBase
     {
-        [HttpGet("api/simplesearch")]
-        public IActionResult SimpleSearch()
+        private readonly IMapper _mapper;
+        public Searchcontroller(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
+        [HttpGet("api/simplesearch", Name = nameof(SimpleSearch))]
+        public IActionResult SimpleSearch(string searchstring, int page, int pagesize)
         {
             var ds = new Dataservice();
-            var searchresult = ds.SimpleSearch("gjhe", 1, 50);
+            var searchresult = ds.SimpleSearch("gjhe", page, pagesize);
 
             if (!searchresult.Any())
             {
                 return NotFound();
             }
 
-            //searchresult = searchresult.Select(SearchDto);
-            //var populatedresult = CreateResult(page, pagesize, searchresult);
-            return Ok(searchresult);
+            
+            var populatedresult = CreateResult(page, pagesize, searchresult);
+            return Ok(populatedresult);
         }
         [HttpGet("api/actorsearch/{searchstring}")]
-        public IActionResult ActorSearch(string searchstring, int page, int pagesize)
+        public IActionResult ActorSearch(string searchstring, int page = 0, int pagesize = 50)
         { 
             var ds = new Dataservice();
             var searchresult = ds.FindActor(searchstring, page, pagesize);
@@ -52,11 +60,19 @@ namespace raww.Controllers
 
             return Ok(searchresult);
         }
+        private SearchDto AddSearchLink(SimpleSearch elem)
+        {
+            var dto = _mapper.Map<SearchDto>(elem);
+            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { elem.Tconst });
+
+            return dto;
+        }
         private object CreateResult(int page, int pageSize, IList<SimpleSearch> titles)
         {
-            //var titles = titles.Select(CreateProductElementDto);
-
             var count = titles.Count();
+
+            var titlelist = titles.Select(AddSearchLink);
+            
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count);
 
@@ -66,8 +82,9 @@ namespace raww.Controllers
                 navigationUrls.cur,
                 navigationUrls.next,
                 count,
-                titles
+                titlelist
             };
+
             return result;
         }
         private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
