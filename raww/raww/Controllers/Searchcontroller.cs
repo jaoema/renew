@@ -23,19 +23,18 @@ namespace raww.Controllers
         public IActionResult SimpleSearch(string searchstring, int page, int pagesize)
         {
             var ds = new Dataservice();
-            var searchresult = ds.SimpleSearch("gjhe", page, pagesize);
+            var searchresult = ds.SimpleSearch(searchstring, page, pagesize);
 
             if (!searchresult.Any())
             {
                 return NotFound();
             }
 
-            
-            var populatedresult = CreateResult(page, pagesize, searchresult);
+            var populatedresult = CreateSimpleSearchResult(page, pagesize, searchresult);
             return Ok(populatedresult);
         }
-        [HttpGet("api/actorsearch/{searchstring}")]
-        public IActionResult ActorSearch(string searchstring, int page = 0, int pagesize = 50)
+        [HttpGet("api/namesearch", Name = nameof(NameSearch))]
+        public IActionResult NameSearch(string searchstring, int page, int pagesize)
         { 
             var ds = new Dataservice();
             var searchresult = ds.FindActor(searchstring, page, pagesize);
@@ -44,11 +43,12 @@ namespace raww.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(searchresult);
+            
+            var populatedresult = CreateNameSearchResult(page, pagesize, searchresult);
+            return Ok(populatedresult);
         }
-        [HttpGet("api/coactorsearch/{searchstring}")]
-        public IActionResult CoActorSearch(string searchstring)
+        [HttpGet("api/coactorsearch", Name = nameof(CoActorSearch))]
+        public IActionResult CoActorSearch(string searchstring, int page, int pagesize)
         {
             var ds = new Dataservice();
             var searchresult = ds.FindCoActor(searchstring);
@@ -58,7 +58,9 @@ namespace raww.Controllers
                 return NotFound();
             }
 
-            return Ok(searchresult);
+            var populatedresult = CreateCoActorSearchResult(page, pagesize, searchresult);
+
+            return Ok(populatedresult);
         }
         private SearchDto AddSearchLink(SimpleSearch elem)
         {
@@ -67,14 +69,27 @@ namespace raww.Controllers
 
             return dto;
         }
-        private object CreateResult(int page, int pageSize, IList<SimpleSearch> titles)
+        private PersonDto AddNameLink(Person elem)
+        {
+            var dto = _mapper.Map<PersonDto>(elem);
+            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
+
+            return dto;
+        }
+        private CoActorDto AddCoActorLink(Person elem)
+        {
+            var dto = _mapper.Map<CoActorDto>(elem);
+            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
+
+            return dto;
+        }
+        private object CreateSimpleSearchResult(int page, int pageSize, IList<SimpleSearch> titles)
         {
             var count = titles.Count();
 
             var titlelist = titles.Select(AddSearchLink);
             
-
-            var navigationUrls = CreatePagingNavigation(page, pageSize, count);
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(SimpleSearch));
 
             var result = new
             {
@@ -87,21 +102,59 @@ namespace raww.Controllers
 
             return result;
         }
-        private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count)
+        private object CreateNameSearchResult(int page, int pageSize, IList<Person> persons)
+        {
+            var count = persons.Count();
+
+            var personlist = persons.Select(AddNameLink);
+
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(NameSearch));
+
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                personlist
+            };
+
+            return result;
+        }
+        private object CreateCoActorSearchResult(int page, int pageSize, IList<Person> persons)
+        {
+            var count = persons.Count();
+
+            var personlist = persons.Select(AddCoActorLink);
+
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(CoActorSearch));
+
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                personlist
+            };
+
+            return result;
+        }
+        private (string prev, string cur, string next) CreatePagingNavigation(int page, int pageSize, int count, string prefix)
         {
             string prev = null;
 
             if (page > 0)
             {
-                prev = Url.Link(nameof(SimpleSearch), new { page = page - 1, pageSize });
+                prev = Url.Link(prefix, new { page = page - 1, pageSize });
             }
 
             string next = null;
 
             if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(nameof(SimpleSearch), new { page = page + 1, pageSize });
+                next = Url.Link(prefix, new { page = page + 1, pageSize });
 
-            var cur = Url.Link(nameof(SimpleSearch), new { page, pageSize });
+            var cur = Url.Link(prefix, new { page, pageSize });
 
             return (prev, cur, next);
         }
