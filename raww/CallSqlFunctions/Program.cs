@@ -8,26 +8,31 @@ namespace CallSqlFunctions
     {
         static void Main(string[] args)
         {
-            var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+            //var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+            var connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
 
             //(UseAdo(connectionString);
-            //Name_Search(connectionString);
-            //Find_Popular_Actors(connectionString);
-            //Add_Rating_History(connectionString);
-            // Create_User(connectionString);
+            //NameSearch(connectionString);
+            //FindPopularActors(connectionString);
+            AddRatingHistory(connectionString);
+            // CreateUser(connectionString);
             //Rate(connectionString);
             //Login(connectionString);
-            //Name_Rating(connectionString);
-            //String_Search(connectionString);
-            Bookmark(connectionString);
+            //NameRating(connectionString);
+            //StringSearch(connectionString);
+            //Bookmark(connectionString);
         }
 
         //This method searches for a name, the ref for this method is NS
 
-        public static void Name_Search(string connectionString)
+        public static void NameSearch(string connectionString)
         {
+
+            var usernam = "hans1";
+            var searchterm = "Mads";
+
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search('hans1','Mads')");
+            var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search({usernam},{searchterm})");
 
             foreach (var Name_Search in result)
             {
@@ -35,7 +40,7 @@ namespace CallSqlFunctions
             }
         }
         // Finds popular actors the ref for this method is FPA
-        private static void Find_Popular_Actors(string connectionString)
+        private static void FindPopularActors(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Find_Popular_Actors.FromSqlInterpolated($"select * from popular_actors(10) ");
@@ -46,17 +51,22 @@ namespace CallSqlFunctions
             }
         }
        
-        private static void Add_Rating_History(string connectionString)
+        private static void AddRatingHistory(string connectionString)
         {
+            var usernam = "hans1";
+            var tconst = "tt10850402";
+            int rating = 9;
+
 
             var ctx = new ImdbContext(connectionString);
+
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
             connection.Open();
-            var cmd = new NpgsqlCommand($"select add_rating_history('hans1', 'tt10850402', 9)", connection);
+            var cmd = new NpgsqlCommand($"select add_rating_history({usernam}, {tconst}, {rating})", connection);
             cmd.ExecuteNonQuery();
         }
 
-        private static void Create_User(string connectionString)
+        private static void CreateUser(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
@@ -97,7 +107,7 @@ namespace CallSqlFunctions
         }
 
         
-         private static void Name_Rating(string connectionString)
+         private static void NameRating(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Name_Rating.FromSqlInterpolated($"select name_rating('Mads Mikkelsen')");
@@ -108,7 +118,7 @@ namespace CallSqlFunctions
             }
         } 
 
-        public static void String_Search(string connectionString)
+        public static void StringSearch(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.String_Search.FromSqlInterpolated($"select * from string_search('hans1','vampire')");

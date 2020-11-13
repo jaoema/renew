@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CallSqlFunctions
 {
-    public class Name_Search
+    public class NameSearch
     {
         public string nconst {get; set;}
         public string primaryname { get; set; }

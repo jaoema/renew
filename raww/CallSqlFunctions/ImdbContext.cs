@@ -18,15 +18,15 @@ namespace CallSqlFunctions
 
 
 
-        public DbSet<Name_Search> Name_Search { get; set; }
+        public DbSet<NameSearch> NameSearch { get; set; }
 
        
 
-        public DbSet<Find_Popular_Actors> Find_Popular_Actors { get; set; }
+        public DbSet<FindPopularActors> FindPopularActors { get; set; }
 
-        public DbSet<Name_Rating> Name_Rating { get; set; }
+        public DbSet<NameRating> NameRating { get; set; }
 
-        public DbSet<String_Search> String_Search{ get; set; }
+        public DbSet<StringSearch> StringSearch{ get; set; }
 
 
 
@@ -39,21 +39,21 @@ namespace CallSqlFunctions
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Name_Search>().HasNoKey();
-            modelBuilder.Entity<Name_Search>().Property(x => x.nconst).HasColumnName("nconst");
-            modelBuilder.Entity<Name_Search>().Property(x => x.primaryname).HasColumnName("primaryname");
+            modelBuilder.Entity<NameSearch>().HasNoKey();
+            modelBuilder.Entity<NameSearch>().Property(x => x.nconst).HasColumnName("nconst");
+            modelBuilder.Entity<NameSearch>().Property(x => x.primaryname).HasColumnName("primaryname");
 
 
-            modelBuilder.Entity<Find_Popular_Actors>().HasNoKey();
-            modelBuilder.Entity<Find_Popular_Actors>().Property(x => x.primaryname).HasColumnName("primaryname");
-            modelBuilder.Entity<Find_Popular_Actors>().Property(x => x.rating).HasColumnName("rating");
+            modelBuilder.Entity<FindPopularActors>().HasNoKey();
+            modelBuilder.Entity<FindPopularActors>().Property(x => x.primaryname).HasColumnName("primaryname");
+            modelBuilder.Entity<FindPopularActors>().Property(x => x.rating).HasColumnName("rating");
 
-            modelBuilder.Entity<Name_Rating>().HasNoKey();
-            modelBuilder.Entity<Name_Rating>().Property(x => x.primaryname).HasColumnName("name_rating");
+            modelBuilder.Entity<NameRating>().HasNoKey();
+            modelBuilder.Entity<NameRating>().Property(x => x.primaryname).HasColumnName("name_rating");
             
-            modelBuilder.Entity<String_Search>().HasNoKey();
-            modelBuilder.Entity<String_Search>().Property(x => x.tconst).HasColumnName("tconst");
-            modelBuilder.Entity<String_Search>().Property(x => x.primarytitle).HasColumnName("primarytitle");
+            modelBuilder.Entity<StringSearch>().HasNoKey();
+            modelBuilder.Entity<StringSearch>().Property(x => x.tconst).HasColumnName("tconst");
+            modelBuilder.Entity<StringSearch>().Property(x => x.primarytitle).HasColumnName("primarytitle");
 
 
 

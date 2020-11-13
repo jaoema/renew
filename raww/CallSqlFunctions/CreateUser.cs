@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CallSqlFunctions
 {
-    public class Create_User
+    public class CreateUser
     {
         public string usernam { get; set; }
         public string pass { get; set; }
