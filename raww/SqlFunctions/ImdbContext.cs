@@ -1,11 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Runtime.InteropServices;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
-namespace CallSqlFunctions
+namespace SqlFunctions
 {
     public class ImdbContext : DbContext
     {
@@ -16,17 +14,13 @@ namespace CallSqlFunctions
         }
 
 
-
-
         public DbSet<NameSearch> NameSearch { get; set; }
-
-       
 
         public DbSet<FindPopularActors> FindPopularActors { get; set; }
 
         public DbSet<NameRating> NameRating { get; set; }
 
-        public DbSet<StringSearch> StringSearch{ get; set; }
+        public DbSet<StringSearch> StringSearch { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,7 +41,7 @@ namespace CallSqlFunctions
 
             modelBuilder.Entity<NameRating>().HasNoKey();
             modelBuilder.Entity<NameRating>().Property(x => x.primaryname).HasColumnName("name_rating");
-            
+
             modelBuilder.Entity<StringSearch>().HasNoKey();
             modelBuilder.Entity<StringSearch>().Property(x => x.tconst).HasColumnName("tconst");
             modelBuilder.Entity<StringSearch>().Property(x => x.primarytitle).HasColumnName("primarytitle");

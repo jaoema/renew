@@ -1,18 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace CallSqlFunctions
+namespace SqlFunctions
 {
-    class Program
+    public class Functions
     {
         static void Main(string[] args)
         {
-            //var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
-           // var connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
+            var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+            //var connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
 
             //(UseAdo(connectionString);
-            //NameSearch(connectionString);
+            NameSearch(connectionString);
             //FindPopularActors(connectionString);
             //AddRatingHistory(connectionString);
             // CreateUser(connectionString);
@@ -40,7 +42,7 @@ namespace CallSqlFunctions
             }
         }
         // Finds popular actors the ref for this method is FPA
-        private static void FindPopularActors(string connectionString)
+        public static void FindPopularActors(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.FindPopularActors.FromSqlInterpolated($"select * from popular_actors(10) ");
@@ -50,8 +52,8 @@ namespace CallSqlFunctions
                 Console.WriteLine($"{ FindPopularActors.primaryname}, {FindPopularActors.rating}");
             }
         }
-       
-        private static void AddRatingHistory(string connectionString)
+
+        public static void AddRatingHistory(string connectionString)
         {
             var usernam = "hans1";
             var tconst = "tt10850402";
@@ -66,7 +68,7 @@ namespace CallSqlFunctions
             cmd.ExecuteNonQuery();
         }
 
-        private static void CreateUser(string connectionString)
+        public static void CreateUser(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
@@ -75,7 +77,7 @@ namespace CallSqlFunctions
             cmd.ExecuteNonQuery();
         }
 
-        private static void Rate(string connectionString)
+        public static void Rate(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
@@ -84,7 +86,7 @@ namespace CallSqlFunctions
             cmd.ExecuteNonQuery();
         }
 
-        private static void Bookmark(string connectionString)
+        public static void Bookmark(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
@@ -96,18 +98,18 @@ namespace CallSqlFunctions
 
         //Find_Coplayers
 
-        private static void Login(string connectionString)
+        public static void Login(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
             connection.Open();
             var cmd = new NpgsqlCommand($"select login('rasmus2', 'baad')", connection);
             cmd.ExecuteNonQuery();
-                        
+
         }
 
-        
-         private static void NameRating(string connectionString)
+
+        public static void NameRating(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.NameRating.FromSqlInterpolated($"select name_rating('Mads Mikkelsen')");
@@ -116,7 +118,7 @@ namespace CallSqlFunctions
             {
                 Console.WriteLine($"{ NameRating.primaryname}");
             }
-        } 
+        }
 
         public static void StringSearch(string connectionString)
         {
@@ -129,8 +131,8 @@ namespace CallSqlFunctions
             }
         }
 
-        
-        
+
+
 
         private static void UseAdo(string connectionString)
         {
@@ -143,7 +145,7 @@ namespace CallSqlFunctions
             //hans1 needs to be replaced by Username later on. So that it works for everyone.
             var cmd = new NpgsqlCommand("select * from name_search(hans1,%ab%)", connection);
 
-         
+
             var reader = cmd.ExecuteReader();
 
             while (reader.Read())

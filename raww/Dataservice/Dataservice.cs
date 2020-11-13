@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Dynamic;
+using SqlFunctions;
+
 
 namespace DataserviceLib
 {
@@ -37,7 +39,7 @@ namespace DataserviceLib
         }
         public void CreateUser(User user)
         {
-            //DB create user call
+            
         }
 
         public bool Login(string username, string password)
