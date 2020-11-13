@@ -8,26 +8,31 @@ namespace CallSqlFunctions
     {
         static void Main(string[] args)
         {
-            var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+            //var connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+            var connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
 
             //(UseAdo(connectionString);
             //Name_Search(connectionString);
             //Find_Popular_Actors(connectionString);
-            //Add_Rating_History(connectionString);
+            Add_Rating_History(connectionString);
             // Create_User(connectionString);
             //Rate(connectionString);
             //Login(connectionString);
             //Name_Rating(connectionString);
             //String_Search(connectionString);
-            Bookmark(connectionString);
+            //Bookmark(connectionString);
         }
 
         //This method searches for a name, the ref for this method is NS
 
         public static void Name_Search(string connectionString)
         {
+
+            var usernam = "hans1";
+            var searchterm = "Mads";
+
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search('hans1','Mads')");
+            var result = ctx.Name_Search.FromSqlInterpolated($"select * from name_search({usernam},{searchterm})");
 
             foreach (var Name_Search in result)
             {
@@ -48,13 +53,16 @@ namespace CallSqlFunctions
        
         private static void Add_Rating_History(string connectionString)
         {
+            var usernam = "hans1";
+            var tconst = "tt10850402";
+            int rating = 9;
+
+
             var ctx = new ImdbContext(connectionString);
-
-
 
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
             connection.Open();
-            var cmd = new NpgsqlCommand($"select add_rating_history('hans1', 'tt10850402', 9)", connection);
+            var cmd = new NpgsqlCommand($"select add_rating_history({usernam}, {tconst}, {rating})", connection);
             cmd.ExecuteNonQuery();
         }
 
