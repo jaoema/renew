@@ -47,8 +47,10 @@ namespace CallSqlFunctions
        
         private static void Add_Rating_History(string connectionString)
         {
-
             var ctx = new ImdbContext(connectionString);
+
+
+
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
             connection.Open();
             var cmd = new NpgsqlCommand($"select add_rating_history('hans1', 'tt10850402', 9)", connection);
