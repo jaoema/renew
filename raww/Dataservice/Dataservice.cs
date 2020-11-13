@@ -59,16 +59,24 @@ namespace DataserviceLib
             return mylist;
         }
 
-        public Person FindActor(string searchstring, int page = 1, int pagesize = 50)
+        public IList<Person> FindActor(string searchstring, int page = 1, int pagesize = 50)
         {
             //get results from DB name search function
-            return null;
+            var mylist = new List<Person> { new Person { Nconst = "ncon123", Primaryname = "Mads Mikkelsen" }, new Person { Nconst = "ncon1234", Primaryname = "Peter Mikkelsen" } };
+            return mylist;
         }
 
-        public Person FindCoActor(string searchstring)
+        public Person GetPerson(string nconst)
+        {
+            //get person
+            return new Person();
+        }
+
+        public IList<Person> FindCoActor(string searchstring)
         {
             //get results from db coplayer search function
-            return null;
+            var mylist = new List<Person> { new Person { Nconst = "ncon123", Primaryname = "Mads Mikkelsen" }, new Person { Nconst = "ncon1234", Primaryname = "Peter Mikkelsen" } };
+            return mylist;
         }
 
         public Searchhistory GetSearchHistory()

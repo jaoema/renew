@@ -7,9 +7,9 @@ using DataserviceLib;
 
 namespace raww.Models.Profiles
 {
-    public class SearchListDto : Profile
+    public class SearchList : Profile
     {
-        public SearchListDto()
+        public SearchList()
         {
             CreateMap<SimpleSearch, SearchDto>().ReverseMap();
         }
