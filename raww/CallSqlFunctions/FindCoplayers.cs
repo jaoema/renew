@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CallSqlFunctions
 {
-   public class Find_Coplayers
+   public class FindCoplayers
     {
     }
 }

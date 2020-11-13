@@ -12,20 +12,20 @@ namespace CallSqlFunctions
             var connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
 
             //(UseAdo(connectionString);
-            //Name_Search(connectionString);
-            //Find_Popular_Actors(connectionString);
-            Add_Rating_History(connectionString);
-            // Create_User(connectionString);
+            //NameSearch(connectionString);
+            //FindPopularActors(connectionString);
+            AddRatingHistory(connectionString);
+            // CreateUser(connectionString);
             //Rate(connectionString);
             //Login(connectionString);
-            //Name_Rating(connectionString);
-            //String_Search(connectionString);
+            //NameRating(connectionString);
+            //StringSearch(connectionString);
             //Bookmark(connectionString);
         }
 
         //This method searches for a name, the ref for this method is NS
 
-        public static void Name_Search(string connectionString)
+        public static void NameSearch(string connectionString)
         {
 
             var usernam = "hans1";
@@ -40,7 +40,7 @@ namespace CallSqlFunctions
             }
         }
         // Finds popular actors the ref for this method is FPA
-        private static void Find_Popular_Actors(string connectionString)
+        private static void FindPopularActors(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Find_Popular_Actors.FromSqlInterpolated($"select * from popular_actors(10) ");
@@ -51,7 +51,7 @@ namespace CallSqlFunctions
             }
         }
        
-        private static void Add_Rating_History(string connectionString)
+        private static void AddRatingHistory(string connectionString)
         {
             var usernam = "hans1";
             var tconst = "tt10850402";
@@ -66,7 +66,7 @@ namespace CallSqlFunctions
             cmd.ExecuteNonQuery();
         }
 
-        private static void Create_User(string connectionString)
+        private static void CreateUser(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
@@ -107,7 +107,7 @@ namespace CallSqlFunctions
         }
 
         
-         private static void Name_Rating(string connectionString)
+         private static void NameRating(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Name_Rating.FromSqlInterpolated($"select name_rating('Mads Mikkelsen')");
@@ -118,7 +118,7 @@ namespace CallSqlFunctions
             }
         } 
 
-        public static void String_Search(string connectionString)
+        public static void StringSearch(string connectionString)
         {
             var ctx = new ImdbContext(connectionString);
             var result = ctx.String_Search.FromSqlInterpolated($"select * from string_search('hans1','vampire')");
