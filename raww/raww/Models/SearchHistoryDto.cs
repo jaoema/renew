@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace raww.Models
+{
+    public class SearchHistoryDto
+    {
+        public string Link { get; set; }
+        public string SearchString { get; set; }
+        public string SearchType { get; set; }
+
+    }
+}

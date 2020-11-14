@@ -30,21 +30,11 @@ namespace raww.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(_mapper.Map<TitleDto>(movie));
-        }
-        [HttpGet("api/similarmovies/{id}")]
-        public IActionResult FindSimilarTitles(string id)
-        {
-            var ds = new Dataservice();
-            var searchresult = ds.GetSimilarTitles(id);
-
-            if (searchresult == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(searchresult);
+            
+            var mapped = _mapper.Map<TitleDto>(movie);
+            mapped.Bookmarklink = Url.Link(nameof(BookmarkController.Bookmark), new { mapped.Tconst , movie=true});
+            
+            return Ok(mapped);
         }
 
     }
