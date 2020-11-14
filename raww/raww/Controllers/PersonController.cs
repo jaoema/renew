@@ -16,7 +16,7 @@ namespace raww.Controllers
         public IActionResult GetPerson(string nconst)
         {
             var ds = new Dataservice();
-            var result = ds.SearchName(nconst);
+            var result = ds.FindActor(nconst);
 
             return Ok(result);
         }

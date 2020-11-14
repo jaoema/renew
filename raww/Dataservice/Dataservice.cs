@@ -41,9 +41,23 @@ namespace DataserviceLib
             var titles = _titlebasics;
             return titles;
         }
-        public void CreateUser(User user)
+        public bool CreateUser(string username, string password)
         {
-            
+            var ctx = new ImdbContext(connectionString);
+
+            var user = ctx.Users.Find(username);
+
+            if (user == null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"select create_user('{username}', '{password}')");
+                ctx.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public bool Login(string username, string password)
@@ -68,7 +82,16 @@ namespace DataserviceLib
         public IList<Person> FindActor(string searchstring, int page = 1, int pagesize = 50)
         {
             //get results from DB name search function
-            var mylist = new List<Person> { new Person { Nconst = "ncon123", Primaryname = "Mads Mikkelsen" }, new Person { Nconst = "ncon1234", Primaryname = "Peter Mikkelsen" } };
+            var mylist = new List<Person>();
+
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search('hans1',{searchstring})");
+
+            foreach (var searchResult in result)
+            {
+                mylist.Add(searchResult);
+            }
+
             return mylist;
         }
 
