@@ -27,13 +27,14 @@ namespace DataserviceLib
             //get data 
         };
 
-        public IList<Titlebasics> GetTitles()
-        {
-            return _titlebasics;
-        }
+     
         public Titlebasics GetTitle(string tconst)
         {
-            return _titlebasics.FirstOrDefault(x => x.Tconst == tconst);
+            var ctx = new ImdbContext(connectionString);
+            var title = ctx.Titlebasicses.Find(tconst);
+
+           // return _titlebasics.FirstOrDefault(x => x.Tconst == tconst);
+           return title;
         }
 
         public List<Titlebasics> GetSimilarTitles(string id)
@@ -99,9 +100,10 @@ namespace DataserviceLib
         {
             //get person
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search('hans1',{nconst})");
+            //var result = ctx.Persons.FromSqlInterpolated($"select * from name_search('hans1',{nconst})");
+            var person = ctx.Persons.Find(nconst);
 
-            return new Person();
+            return person;
 
         }
 
