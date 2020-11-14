@@ -11,5 +11,6 @@ namespace raww.Models
         public string Originaltitle { get; set; }
         public int Endyear { get; set; }
         public int Runtimeminutes { get; set; }
+        public string Bookmarklink { get; set; }
     }
 }

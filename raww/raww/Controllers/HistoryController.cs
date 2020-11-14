@@ -4,52 +4,89 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using raww.Models;
+using AutoMapper;
 
 namespace raww.Controllers
 {
     [ApiController]
     public class HistoryController : ControllerBase
     {
-        [HttpGet("api/searchhistory")]
-        public IActionResult SearchHistory()
+        private readonly IMapper _mapper;
+        public HistoryController(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
+
+        [HttpGet("api/searchhistory", Name = nameof(SearchHistory))]
+        public IActionResult SearchHistory(int page, int pagesize)
         {
             var ds = new Dataservice();
-            var searchresult = ds.GetSearchHistory();
+            var searchresult = ds.GetSearchHistory(page, pagesize);
 
             if (searchresult == null)
             {
                 return NotFound();
             }
 
-            return Ok(searchresult);
+            var populatedresult = CreateSearchHistoryResult(page, pagesize, searchresult);
+            
+            return Ok(populatedresult);
         }
-        [HttpGet("api/ratinghistory")]
-        public IActionResult RatingHistory()
+        [HttpGet("api/ratinghistory", Name = nameof(RatingHistory))]
+        public IActionResult RatingHistory(int page, int pagesize)
         {
             var ds = new Dataservice();
-            var searchresult = ds.GetRatingHistory();
+            var searchresult = ds.GetRatingHistory(page, pagesize);
 
             if (searchresult == null)
             {
                 return NotFound();
             }
 
-            return Ok(searchresult);
+            var populatedresult = CreateRatingHistoryResult(page, pagesize, searchresult);
+            return Ok(populatedresult);
         }
-        private CoActorDto AddCoActorLink(Person elem)
+        private SearchHistoryDto MapSearchElement(Searchhistory elem)
         {
-            var dto = _mapper.Map<CoActorDto>(elem);
-            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
+            var dto = _mapper.Map<SearchHistoryDto>(elem);
+            //dto.Link = Url.Link(nameof(), new { elem.Nconst });
 
             return dto;
         }
-        private object CreateSearchHistoryResult(int page, int pageSize, IList<Person> persons)
+        private object CreateSearchHistoryResult(int page, int pageSize, IList<Searchhistory> histories)
         {
-            var count = persons.Count();
+            var count = histories.Count();
 
-            var linkedhistory = persons.Select(AddCoActorLink);
+            var mappedhistory = histories.Select(MapSearchElement);
 
-            var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(CoActorSearch));
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(SearchHistory));
+            
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                mappedhistory
+            };
+
+            return result;
+        }
+        private RatingHistoryDto MapRatingElement(Ratinghistory elem)
+        {
+            var dto = _mapper.Map<RatingHistoryDto>(elem);
+            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { elem.Tconst });
+
+            return dto;
+        }
+        private object CreateRatingHistoryResult(int page, int pageSize, IList<Ratinghistory> histories)
+        {
+            var count = histories.Count();
+
+            var mappedhistory = histories.Select(MapRatingElement);
+
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(RatingHistory));
 
             var result = new
             {
@@ -57,7 +94,7 @@ namespace raww.Controllers
                 navigationUrls.cur,
                 navigationUrls.next,
                 count,
-                linkedhistory
+                mappedhistory
             };
 
             return result;
