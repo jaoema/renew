@@ -12,6 +12,9 @@ namespace DataserviceLib
     {
 
         string connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
+        string adminUsername = "hans1";
+        string adminPassword = "grethe";
+
 
         private List<Titlebasics> _titlebasics = new List<Titlebasics>
         {
@@ -27,29 +30,51 @@ namespace DataserviceLib
             //get data 
         };
 
-        public IList<Titlebasics> GetTitles()
-        {
-            return _titlebasics;
-        }
+     
         public Titlebasics GetTitle(string tconst)
         {
-            return _titlebasics.FirstOrDefault(x => x.Tconst == tconst);
+            var ctx = new ImdbContext(connectionString);
+            var title = ctx.Titlebasicses.Find(tconst);
+
+           return title;
         }
 
-        public List<Titlebasics> GetSimilarTitles(string id)
+        public bool CreateUser(string username, string password)
         {
-            var titles = _titlebasics;
-            return titles;
-        }
-        public void CreateUser(User user)
-        {
-            
+            var ctx = new ImdbContext(connectionString);
+
+            var user = ctx.Users.Find(username);
+
+            if (user == null)
+            {
+                ctx.Database.ExecuteSqlInterpolated($"select create_user('{username}', '{password}')");
+                ctx.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public bool Login(string username, string password)
         {
             //DB login command
-            return true;
+            var ctx = new ImdbContext(connectionString);
+
+            var user = ctx.Users.Find(username);
+
+            if (username == adminUsername && password == adminPassword)
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
         public bool Logout(string username)
@@ -61,14 +86,30 @@ namespace DataserviceLib
         public IList<SimpleSearch> SimpleSearch(string searchstring, int page = 1, int pagesize = 50)
         {
             //get results from DB function. Take amount equal to page*pagesize -> tolist
-            var mylist = _SimpleSearch;
-            return mylist;
+            var mylist = new List<SimpleSearch>();
+            // use string search
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.Titlebasicses.FromSqlInterpolated($"select * from string_search({adminUsername},'vampire')");
+            
+            return mylist
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
         }
 
         public IList<Person> FindActor(string searchstring, int page = 1, int pagesize = 50)
         {
             //get results from DB name search function
-            var mylist = new List<Person> { new Person { Nconst = "ncon123", Primaryname = "Mads Mikkelsen" }, new Person { Nconst = "ncon1234", Primaryname = "Peter Mikkelsen" } };
+            var mylist = new List<Person>();
+
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search({adminUsername},{searchstring})");
+
+            foreach (var searchResult in result)
+            {
+                mylist.Add(searchResult);
+            }
+
             return mylist;
         }
 
@@ -76,19 +117,10 @@ namespace DataserviceLib
         {
             //get person
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search('hans1',{nconst})");
+            var person = ctx.Persons.Find(nconst);
 
-            return new Person();
+            return person;
 
-        }
-
-        public IQueryable<Person> SearchName(string search)
-        {
-
-            var ctx = new ImdbContext(connectionString);
-            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search('hans1',{search})");
-
-            return result;
         }
 
         public IList<Person> FindCoActor(string searchstring)
@@ -98,12 +130,22 @@ namespace DataserviceLib
             return mylist;
         }
 
-        public Searchhistory GetSearchHistory()
+        public IList<Person> GetPopularActors(int amount, int page = 1, int pagesize = 50)
         {
+            var mylist = new List<Person> { new Person { Nconst = "ncon123", Primaryname = "Mads Mikkelsen" }, new Person { Nconst = "ncon1234", Primaryname = "Peter Mikkelsen" } };
+            return mylist
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
+        }
+
+        public IList<Searchhistory> GetSearchHistory(int page = 1, int pagesize = 50)
+        {
+
             return null;
         }
 
-        public Ratinghistory GetRatingHistory()
+        public IList<Ratinghistory> GetRatingHistory(int page = 1, int pagesize = 50)
         {
             return null;
         }
