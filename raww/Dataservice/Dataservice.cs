@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Dynamic;
+using Microsoft.EntityFrameworkCore;
 using SqlFunctions;
 
 
@@ -9,6 +10,9 @@ namespace DataserviceLib
 {
     public class Dataservice
     {
+
+        string connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
+
         private List<Titlebasics> _titlebasics = new List<Titlebasics>
         {
             new Titlebasics {Tconst = "tconst123", Titletype = "test", Primarytitle = "minfilm", Originaltitle = "minflm", Isadult = false, Startyear = 2000, Endyear = 2002, Runtimeminutes = 120},
@@ -71,7 +75,20 @@ namespace DataserviceLib
         public Person GetPerson(string nconst)
         {
             //get person
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search('hans1',{nconst})");
+
             return new Person();
+
+        }
+
+        public IQueryable<Person> SearchName(string search)
+        {
+
+            var ctx = new ImdbContext(connectionString);
+            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search('hans1',{search})");
+
+            return result;
         }
 
         public IList<Person> FindCoActor(string searchstring)
