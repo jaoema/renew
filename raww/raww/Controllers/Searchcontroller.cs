@@ -19,7 +19,7 @@ namespace raww.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("api/simplesearch", Name = nameof(SimpleSearch))]
+        [HttpGet("api/simplesearch/{searchstring}", Name = nameof(SimpleSearch))]
         public IActionResult SimpleSearch(string searchstring, int page, int pagesize)
         {
             var ds = new Dataservice();
@@ -33,7 +33,7 @@ namespace raww.Controllers
             var populatedresult = CreateSimpleSearchResult(page, pagesize, searchresult);
             return Ok(populatedresult);
         }
-        [HttpGet("api/namesearch", Name = nameof(NameSearch))]
+        [HttpGet("api/namesearch/{searchstring}", Name = nameof(NameSearch))]
         public IActionResult NameSearch(string searchstring, int page, int pagesize)
         { 
             var ds = new Dataservice();
@@ -47,7 +47,7 @@ namespace raww.Controllers
             var populatedresult = CreateNameSearchResult(page, pagesize, searchresult);
             return Ok(populatedresult);
         }
-        [HttpGet("api/coactorsearch", Name = nameof(CoActorSearch))]
+        [HttpGet("api/coactorsearch/{searchstring}", Name = nameof(CoActorSearch))]
         public IActionResult CoActorSearch(string searchstring, int page, int pagesize)
         {
             var ds = new Dataservice();
