@@ -11,7 +11,7 @@ namespace DataserviceLib
     public class Dataservice
     {
 
-        string connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
+        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
         string adminUsername = "hans1";
         string adminPassword = "grethe";
 
@@ -43,7 +43,7 @@ namespace DataserviceLib
         {
             var ctx = new ImdbContext(connectionString);
 
-            var user = ctx.Users.Find(username);
+            /*var user = ctx.Users.Find(username);
 
             if (user == null)
             {
@@ -54,7 +54,11 @@ namespace DataserviceLib
             else
             {
                 return false;
-            }
+            }*/
+
+            ctx.Database.ExecuteSqlInterpolated($"select create_user('{username}', '{password}')");
+            ctx.SaveChanges();
+            return true;
 
         }
 
