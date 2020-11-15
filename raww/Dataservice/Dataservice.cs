@@ -43,13 +43,13 @@ namespace DataserviceLib
 
         public bool CreateUser(string username, string password)
         {
-            /*var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext(connectionString);
 
-            var user = ctx.Users.Find(username);
+            /*var user = ctx.Users.Find(username);
 
             if (user == null)
             {
-                ctx.Database.ExecuteSqlInterpolated($"select create_user('{username}', '{password}')");
+                ctx.Database.ExecuteSqlInterpolated($"select create_user({username}, {password})");
                 ctx.SaveChanges();
                 return true;
             }
@@ -58,17 +58,17 @@ namespace DataserviceLib
                 return false;
             } */
 
-            //var result = ctx.Database.ExecuteSqlInterpolated($"select create_user('{username}', '{password}')");
-            //ctx.SaveChanges();
-            //return true;
+            var result = ctx.Database.ExecuteSqlInterpolated($"select create_user({username}, {password})");
+            ctx.SaveChanges();
+            return true;
 
-            var ctx = new ImdbContext(connectionString);
+           /* var ctx = new ImdbContext(connectionString);
            
                 var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
                 connection.Open();
-                var cmd = new NpgsqlCommand($"select create_user('{username}','{password}')", connection);
+                var cmd = new NpgsqlCommand($"select create_user({username},{password})", connection);
                 cmd.ExecuteNonQuery();
-                return true;
+                return true; */
         
         }
 
@@ -95,7 +95,7 @@ namespace DataserviceLib
             return true;
         }
 
-        public IList<SimpleSearch> SimpleSearch(string searchstring, int page = 1, int pagesize = 50)
+        public IList<SimpleSearch> SimpleSearch(string searchstring, int page = 0, int pagesize = 50)
         {
             //get results from DB function. Take amount equal to page*pagesize -> tolist
             var mylist = new List<SimpleSearch>();
@@ -117,7 +117,7 @@ namespace DataserviceLib
 
       
 
-        public IList<Person> FindActor(string searchstring, int page = 1, int pagesize = 50)
+        public IList<Person> FindActor(string searchstring, int page = 0, int pagesize = 50)
         {
             //get results from DB name search function
             var mylist = new List<Person>();
@@ -150,7 +150,7 @@ namespace DataserviceLib
             return mylist;
         }
 
-        public IList<Person> GetPopularActors(int amount, int page = 1, int pagesize = 50)
+        public IList<Person> GetPopularActors(int amount, int page = 0, int pagesize = 50)
         {
             var mylist = new List<Person> { new Person { Nconst = "ncon123", Primaryname = "Mads Mikkelsen" }, new Person { Nconst = "ncon1234", Primaryname = "Peter Mikkelsen" } };
             return mylist
@@ -158,8 +158,7 @@ namespace DataserviceLib
                 .Take(pagesize)
                 .ToList();
         }
-
-        public IList<Searchhistory> GetSearchHistory(int page = 1, int pagesize = 50)
+        public IList<Searchhistory> GetSearchHistory(int page = 0, int pagesize = 50)
         {
             var mylist = new List<Searchhistory>();
             var ctx = new ImdbContext(connectionString);
@@ -176,15 +175,15 @@ namespace DataserviceLib
                 .Take(pagesize)
                 .ToList();
         }
-
-        public IList<Ratinghistory> GetRatingHistory(int page = 1, int pagesize = 50)
+        
+        public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)
         {
             var mylist = new List<Ratinghistory>();
             var ctx = new ImdbContext(connectionString);
 
             var result = ctx.Ratinghistories.FromSqlInterpolated($"select * from ratinghistory where username = {adminUsername}");
 
-            foreach (var searchResult in result)
+           foreach (var searchResult in result)
             {
                 mylist.Add(searchResult);
             }
