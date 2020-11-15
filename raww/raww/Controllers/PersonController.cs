@@ -12,7 +12,7 @@ namespace raww.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        AutoMapper.IMapper mapper;
+        private AutoMapper.IMapper mapper;
         [HttpGet("api/person/{nconst}", Name = nameof(GetPerson))]
         public IActionResult GetPerson(string nconst)
         {
