@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
 namespace raww.Controllers
@@ -11,30 +12,39 @@ namespace raww.Controllers
     public class Usercontroller : ControllerBase
     {
         [HttpPost("api/signup")] //?username={username}&password={password}
-        public IActionResult CreateUser(User user)
+        public IActionResult CreateUser(string username, string password)
         {
             var ds = new Dataservice();
-            ds.CreateUser(user);
+            var created = ds.CreateUser(username, password);
 
-            return Created("",user.Username);
+            if (!created)
+            {
+                return Conflict();
+            }
+            return Ok();
         }
 
         [HttpPost("api/login")]
-        public IActionResult Login(User user)
+        public IActionResult Login(string username, string password)
         {
             var ds = new Dataservice();
-            ds.Logout(user.Username);
+            var success = ds.Login(username, password);
+
+            if (!success)
+            {
+                return Conflict();
+            }
 
             return Ok();
         }
 
         [HttpPost("api/logout")] //?username={username}
-        public IActionResult Logout(User user)
+        public IActionResult Logout(string username)
         {
             var ds = new Dataservice();
-            ds.CreateUser(user);
+            ds.Logout(username);
 
-            return Created("", user.Username);
+            return Ok();
         }
     }
 }

@@ -25,6 +25,9 @@ namespace DataserviceLib
 
         public DbSet<Bookmark> Bookmarks { get; set; }
 
+        public DbSet<Titleaka> Titleakas { get; set; }
+        public DbSet<Titleepisode> Titleepisodes { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -43,7 +46,7 @@ namespace DataserviceLib
             modelBuilder.Entity<User>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
 
-            modelBuilder.Entity<Titlebasics>().HasNoKey();
+            modelBuilder.Entity<Titlebasics>().HasKey(x => x.Tconst);
             modelBuilder.Entity<Titlebasics>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Titletype).HasColumnName("titletype");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Primarytitle).HasColumnName("primarytitle");
@@ -66,6 +69,11 @@ namespace DataserviceLib
             modelBuilder.Entity<Bookmark>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Bookmark>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Bookmark>().Property(x => x.Nconst).HasColumnName("nconst");
+
+            modelBuilder.Entity<Titleaka>().HasKey(x => x.Tconst);
+
+            modelBuilder.Entity<Titleepisode>().
+
 
         }
     }

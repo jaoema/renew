@@ -63,7 +63,7 @@ namespace DataserviceLib
             //DB login command
             var ctx = new ImdbContext(connectionString);
 
-            var user = ctx.Users.Find(username);
+            //var user = ctx.Users.Find(username);
 
             if (username == adminUsername && password == adminPassword)
             {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataserviceLib;
 using SqlFunctions;
 using raww.Models;
@@ -12,7 +13,11 @@ namespace raww.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private AutoMapper.IMapper mapper;
+        private readonly IMapper _mapper;
+        public PersonController(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
         [HttpGet("api/person/{nconst}", Name = nameof(GetPerson))]
         public IActionResult GetPerson(string nconst)
         {
@@ -24,7 +29,7 @@ namespace raww.Controllers
                 return NotFound();
             }
 
-            var mapped = mapper.Map<PersonDto>(result);
+            var mapped = _mapper.Map<PersonDto>(result);
             mapped.Link = Url.Link(nameof(BookmarkController.Bookmark), new { mapped.Nconst, movie = false });
 
             return Ok(mapped);
