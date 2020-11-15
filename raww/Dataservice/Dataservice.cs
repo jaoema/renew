@@ -30,13 +30,13 @@ namespace DataserviceLib
             //get data 
         };
 
-     
+
         public Titlebasics GetTitle(string tconst)
         {
             var ctx = new ImdbContext(connectionString);
             var title = ctx.Titlebasicses.Find(tconst);
 
-           return title;
+            return title;
         }
 
         public bool CreateUser(string username, string password)
@@ -70,11 +70,9 @@ namespace DataserviceLib
                 return true;
 
             }
-            else
-            {
-                return false;
-            }
-            
+
+            return false;
+
         }
 
         public bool Logout(string username)
@@ -90,7 +88,7 @@ namespace DataserviceLib
             // use string search
             var ctx = new ImdbContext(connectionString);
             var result = ctx.Titlebasicses.FromSqlInterpolated($"select * from string_search({adminUsername},'vampire')");
-            
+
             return mylist
                 .Skip(page * pagesize)
                 .Take(pagesize)
@@ -141,18 +139,66 @@ namespace DataserviceLib
 
         public IList<Searchhistory> GetSearchHistory(int page = 1, int pagesize = 50)
         {
+            var mylist = new List<Searchhistory>();
+            var ctx = new ImdbContext(connectionString);
 
-            return null;
+            var result = ctx.Searchhistories.FromSqlInterpolated($"select * from searchhistory where username = {adminUsername}");
+
+            foreach (var searchResult in result)
+            {
+                mylist.Add(searchResult);
+            }
+
+            return mylist
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
         }
 
         public IList<Ratinghistory> GetRatingHistory(int page = 1, int pagesize = 50)
         {
-            return null;
+            var mylist = new List<Ratinghistory>();
+            var ctx = new ImdbContext(connectionString);
+
+            var result = ctx.Ratinghistories.FromSqlInterpolated($"select * from ratinghistory where username = {adminUsername}");
+
+            foreach (var searchResult in result)
+            {
+                mylist.Add(searchResult);
+            }
+
+            return mylist
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
         }
 
-        public bool CreateBookmark(string id)
+        public bool CreateBookmark(string id, bool movie)
         {
+            var ctx = new ImdbContext(connectionString);
+
+            string type;
+            if (movie)
+            {
+                type = "movie";
+            }
+            else
+            {
+                type = null;
+            }
+
+            ctx.Database.ExecuteSqlInterpolated($"select bookmark('{adminUsername}','{id}', {type})");
+            ctx.SaveChanges();
+
+            var bookmark = ctx.Bookmarks.Find(adminUsername, id);
+
+            if (bookmark == null)
+            {
+                return false;
+            }
+
             return true;
+
         }
 
         public bool DeleteBookmark(string id)
@@ -160,10 +206,23 @@ namespace DataserviceLib
             return true;
         }
 
-        public Bookmark GetBookmarked()
+        public IList<Bookmark> GetBookmarked(int page = 1, int pagesize = 50)
         {
-            Bookmark marked = new Bookmark();
-            return marked;
+
+            var mylist = new List<Bookmark>();
+            var ctx = new ImdbContext(connectionString);
+
+            var result = ctx.Bookmarks.FromSqlInterpolated($"select * from bookmarked where username = {adminUsername}");
+
+            foreach (var searchResult in result)
+            {
+                mylist.Add(searchResult);
+            }
+
+            return mylist
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
         }
 
     }
