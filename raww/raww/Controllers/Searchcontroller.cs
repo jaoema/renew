@@ -65,8 +65,8 @@ namespace raww.Controllers
         private SearchDto AddSearchLink(SimpleSearch elem)
         {
             var dto = _mapper.Map<SearchDto>(elem);
-            var trimmedtconst = elem.Tconst.Trim();
-            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { trimmedtconst });
+            elem.Tconst = elem.Tconst.Trim();
+            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { elem.Tconst });
 
             return dto;
         }
@@ -74,16 +74,16 @@ namespace raww.Controllers
         {
             var dto = _mapper.Map<PersonDto>(elem);
 
-            var trimmednconst = elem.Nconst.Trim();
-            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { trimmednconst });
+            elem.Nconst = elem.Nconst.Trim();
+            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
 
             return dto;
         }
         private CoActorDto AddCoActorLink(Person elem)
         {
             var dto = _mapper.Map<CoActorDto>(elem);
-            var trimmednconst = elem.Nconst.Trim();
-            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { trimmednconst });
+            elem.Nconst = elem.Nconst.Trim();
+            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
 
             return dto;
         }

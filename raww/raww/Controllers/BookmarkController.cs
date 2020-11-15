@@ -64,12 +64,12 @@ namespace raww.Controllers
 
             if (elem.Nconst != null)
             {
-                var trimmednconst = elem.Nconst.Trim();
-                dto.Link = Url.Link(nameof(PersonController.GetPerson), new { trimmednconst });
+                elem.Nconst = elem.Nconst.Trim();
+                dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
             } else
             {
-                var trimmedtconst = elem.Tconst.Trim();
-                dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { trimmedtconst });
+                elem.Tconst = elem.Tconst.Trim();
+                dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { elem.Tconst });
             }
 
             return dto;
