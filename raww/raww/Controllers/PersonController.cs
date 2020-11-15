@@ -30,7 +30,8 @@ namespace raww.Controllers
             }
 
             var mapped = _mapper.Map<PersonDto>(result);
-            mapped.Link = Url.Link(nameof(BookmarkController.Bookmark), new { mapped.Nconst, movie = false });
+            var trimmednconst = mapped.Nconst.Trim(); 
+            mapped.Link = Url.Link(nameof(BookmarkController.Bookmark), new { trimmednconst, movie = false });
 
             return Ok(mapped);
         }
