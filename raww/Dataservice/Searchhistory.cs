@@ -7,7 +7,7 @@ namespace DataserviceLib
     public class Searchhistory
     {
         public string Username { get; set; }
-        public bool Mysearch { get; set; }
+        public string Mysearch { get; set; }
         
     }
 }
