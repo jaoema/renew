@@ -7,7 +7,6 @@ namespace raww.Models
 {
     public class SearchHistoryDto
     {
-        public string Link { get; set; }
         public string SearchString { get; set; }
         public string Mysearch { get; set; }
 
