@@ -28,6 +28,12 @@ namespace DataserviceLib
         public DbSet<Titleaka> Titleakas { get; set; }
         public DbSet<Titleepisode> Titleepisodes { get; set; }
 
+        public DbSet<Genre> Genres { get; set; }
+
+        public DbSet<Omdb> omdbs { get; set; }
+
+        public DbSet<SimpleSearch> SimpleSearches { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -39,10 +45,11 @@ namespace DataserviceLib
             modelBuilder.Entity<Person>().HasNoKey();
             modelBuilder.Entity<Person>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Person>().Property(x => x.Primaryname).HasColumnName("primaryname");
-            modelBuilder.Entity<Person>().Property(x => x.Birthyear).HasColumnName("birthyear");
-            modelBuilder.Entity<Person>().Property(x => x.Deathyear).HasColumnName("deathyear");
+            //modelBuilder.Entity<Person>().Property(x => x.Birthyear).HasColumnName("birthyear");
+            //modelBuilder.Entity<Person>().Property(x => x.Deathyear).HasColumnName("deathyear");
 
             modelBuilder.Entity<User>().HasNoKey();
+            modelBuilder.Entity<User>().ToTable("username");
             modelBuilder.Entity<User>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
 
@@ -70,11 +77,26 @@ namespace DataserviceLib
             modelBuilder.Entity<Bookmark>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Bookmark>().Property(x => x.Nconst).HasColumnName("nconst");
 
+            modelBuilder.Entity<SimpleSearch>().HasNoKey();
+            modelBuilder.Entity<SimpleSearch>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<SimpleSearch>().Property(x => x.Title).HasColumnName("primarytitle");
+            modelBuilder.Entity<SimpleSearch>().Property(x => x.Year).HasColumnName("startyear");
+            
+
             modelBuilder.Entity<Titleaka>().HasKey(x => x.Tconst);
 
-            modelBuilder.Entity<Titleepisode>().
+            modelBuilder.Entity<Genre>().HasKey("Tconst");
 
+            modelBuilder.Entity<Omdb>().HasKey("Tconst");
 
+            modelBuilder.Entity<Titleepisode>().HasKey("Tconst");
+
+            modelBuilder.Entity<Titleprincipal>().HasKey("Tconst");
+
+            modelBuilder.Entity<Titlerating>().HasKey("Tconst");
+
+            modelBuilder.Entity<Types>().HasKey("Tconst");
         }
+
     }
 }

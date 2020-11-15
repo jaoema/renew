@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using System.Dynamic;
 using Microsoft.EntityFrameworkCore;
 using SqlFunctions;
-
+using Npgsql;
 
 namespace DataserviceLib
 {
     public class Dataservice
     {
 
-        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
+        // string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
+        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+       
         string adminUsername = "hans1";
         string adminPassword = "grethe";
 
@@ -23,12 +25,12 @@ namespace DataserviceLib
             //get data 
         };
 
-        private List<SimpleSearch> _SimpleSearch = new List<SimpleSearch>
+        /*private List<SimpleSearch> _SimpleSearch = new List<SimpleSearch>
         {
             new SimpleSearch {Tconst = "tconst123", Title = "test", Year = 2000, Rating = 2.5},
             new SimpleSearch {Tconst = "tconst1", Title = "test2", Year = 200, Rating = 3.5},
             //get data 
-        };
+        };*/
 
 
         public Titlebasics GetTitle(string tconst)
@@ -41,9 +43,9 @@ namespace DataserviceLib
 
         public bool CreateUser(string username, string password)
         {
-            var ctx = new ImdbContext(connectionString);
+            /*var ctx = new ImdbContext(connectionString);
 
-            /*var user = ctx.Users.Find(username);
+            var user = ctx.Users.Find(username);
 
             if (user == null)
             {
@@ -54,12 +56,20 @@ namespace DataserviceLib
             else
             {
                 return false;
-            }*/
+            } */
 
-            ctx.Database.ExecuteSqlInterpolated($"select create_user('{username}', '{password}')");
-            ctx.SaveChanges();
-            return true;
+            //var result = ctx.Database.ExecuteSqlInterpolated($"select create_user('{username}', '{password}')");
+            //ctx.SaveChanges();
+            //return true;
 
+            var ctx = new ImdbContext(connectionString);
+           
+                var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
+                connection.Open();
+                var cmd = new NpgsqlCommand($"select create_user('{username}','{password}')", connection);
+                cmd.ExecuteNonQuery();
+                return true;
+        
         }
 
         public bool Login(string username, string password)
@@ -91,13 +101,21 @@ namespace DataserviceLib
             var mylist = new List<SimpleSearch>();
             // use string search
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Titlebasicses.FromSqlInterpolated($"select * from string_search({adminUsername},'vampire')");
+            var result = ctx.SimpleSearches.FromSqlInterpolated($"select * from string_search({adminUsername},{searchstring})");
+
+            foreach(var searchResult in result)
+            {
+                mylist.Add(searchResult);
+            }
 
             return mylist
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
         }
+
+
+      
 
         public IList<Person> FindActor(string searchstring, int page = 1, int pagesize = 50)
         {

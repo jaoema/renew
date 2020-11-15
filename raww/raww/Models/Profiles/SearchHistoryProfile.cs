@@ -9,9 +9,9 @@ namespace raww.Models.Profiles
 {
     public class SearchHistoryProfile : Profile
     {
-        SearchHistoryProfile()
+        public SearchHistoryProfile()
         {
-            CreateMap<Searchhistory, SearchHistoryDto>();
+            CreateMap<Searchhistory, SearchHistoryDto>().ReverseMap();
         }
     }
 }
