@@ -9,7 +9,7 @@ namespace raww.Models
     {
         public string Tconst { get; set; }
         public string Originaltitle { get; set; }
-        public int Endyear { get; set; }
+        public string Endyear { get; set; }
         public int Runtimeminutes { get; set; }
         public string Bookmarklink { get; set; }
     }
