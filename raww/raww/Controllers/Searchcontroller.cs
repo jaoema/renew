@@ -20,7 +20,7 @@ namespace raww.Controllers
         }
 
         [HttpGet("api/simplesearch/{searchstring}", Name = nameof(SimpleSearch))]
-        public IActionResult SimpleSearch(string searchstring, int page, int pagesize)
+        public IActionResult SimpleSearch(string searchstring, int page = 1, int pagesize = 50)
         {
             var ds = new Dataservice();
             var searchresult = ds.SimpleSearch(searchstring, page, pagesize);
@@ -39,7 +39,7 @@ namespace raww.Controllers
             var ds = new Dataservice();
             var searchresult = ds.FindActor(searchstring, page, pagesize);
 
-            if (searchresult == null)
+            if (!searchresult.Any())
             {
                 return NotFound();
             }
@@ -65,21 +65,25 @@ namespace raww.Controllers
         private SearchDto AddSearchLink(SimpleSearch elem)
         {
             var dto = _mapper.Map<SearchDto>(elem);
-            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { elem.Tconst });
+            var trimmedtconst = elem.Tconst.Trim();
+            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { trimmedtconst });
 
             return dto;
         }
         private PersonDto AddNameLink(Person elem)
         {
             var dto = _mapper.Map<PersonDto>(elem);
-            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
+
+            var trimmednconst = elem.Nconst.Trim();
+            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { trimmednconst });
 
             return dto;
         }
         private CoActorDto AddCoActorLink(Person elem)
         {
             var dto = _mapper.Map<CoActorDto>(elem);
-            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
+            var trimmednconst = elem.Nconst.Trim();
+            dto.Link = Url.Link(nameof(PersonController.GetPerson), new { trimmednconst });
 
             return dto;
         }

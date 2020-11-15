@@ -32,7 +32,7 @@ namespace raww.Controllers
 
             if (!success)
             {
-                return Conflict();
+                return NotFound();
             }
 
             return Ok();

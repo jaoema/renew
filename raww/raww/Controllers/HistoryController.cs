@@ -76,7 +76,8 @@ namespace raww.Controllers
         private RatingHistoryDto MapRatingElement(Ratinghistory elem)
         {
             var dto = _mapper.Map<RatingHistoryDto>(elem);
-            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { elem.Tconst });
+            var trimmedtconst = elem.Tconst.Trim();
+            dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { trimmedtconst });
 
             return dto;
         }
