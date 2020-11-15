@@ -22,7 +22,7 @@ namespace raww.Controllers
         public IActionResult GetPerson(string nconst)
         {
             var ds = new Dataservice();
-            var result = ds.FindActor(nconst);
+            var result = ds.GetPerson(nconst);
 
             if (result == null)
             {
@@ -30,8 +30,8 @@ namespace raww.Controllers
             }
 
             var mapped = _mapper.Map<PersonDto>(result);
-            var trimmednconst = mapped.Nconst.Trim(); 
-            mapped.Link = Url.Link(nameof(BookmarkController.Bookmark), new { trimmednconst, movie = false });
+            result.Nconst = result.Nconst.Trim(); 
+            mapped.Link = Url.Link(nameof(BookmarkController.Bookmark), new { result.Nconst, movie = false });
 
             return Ok(mapped);
         }
