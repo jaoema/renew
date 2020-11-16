@@ -34,7 +34,9 @@ namespace DataserviceLib
 
         public DbSet<SimpleSearch> SimpleSearches { get; set; }
 
+        
 
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(_connectionString);
@@ -42,7 +44,8 @@ namespace DataserviceLib
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>().HasNoKey();
+            modelBuilder.Entity<Person>().HasKey(x => x.Nconst);
+            modelBuilder.Entity<Person>().ToTable("person");
             modelBuilder.Entity<Person>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Person>().Property(x => x.Primaryname).HasColumnName("primaryname");
             //modelBuilder.Entity<Person>().Property(x => x.Birthyear).HasColumnName("birthyear");
@@ -54,14 +57,15 @@ namespace DataserviceLib
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
 
             modelBuilder.Entity<Titlebasics>().HasKey(x => x.Tconst);
+            modelBuilder.Entity<Titlebasics>().ToTable("title_basics");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Titletype).HasColumnName("titletype");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Primarytitle).HasColumnName("primarytitle");
-            modelBuilder.Entity<Titlebasics>().Property(x => x.Originaltitle).HasColumnName("origintitle");
+            modelBuilder.Entity<Titlebasics>().Property(x => x.Originaltitle).HasColumnName("originaltitle");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Isadult).HasColumnName("isadult");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Startyear).HasColumnName("startyear");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Endyear).HasColumnName("endyear");
-            modelBuilder.Entity<Titlebasics>().Property(x => x.Runtimeminutes).HasColumnName("runtimeminutes");
+            //modelBuilder.Entity<Titlebasics>().Property(x => x.Runtimeminutes).HasColumnName("runtimeminutes");
 
             modelBuilder.Entity<Ratinghistory>().HasNoKey();
             modelBuilder.Entity<Ratinghistory>().Property(x => x.Username).HasColumnName("username");
@@ -81,11 +85,16 @@ namespace DataserviceLib
             modelBuilder.Entity<SimpleSearch>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<SimpleSearch>().Property(x => x.Title).HasColumnName("primarytitle");
             modelBuilder.Entity<SimpleSearch>().Property(x => x.Year).HasColumnName("startyear");
+
+
             
 
             modelBuilder.Entity<Titleaka>().HasKey(x => x.Tconst);
 
             modelBuilder.Entity<Genre>().HasKey("Tconst");
+            modelBuilder.Entity<Genre>().ToTable("genre");
+            modelBuilder.Entity<Genre>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Genre>().Property(x => x.Name).HasColumnName("name");
 
             modelBuilder.Entity<Omdb>().HasKey("Tconst");
 
@@ -96,7 +105,10 @@ namespace DataserviceLib
             modelBuilder.Entity<Titlerating>().HasKey("Tconst");
 
             modelBuilder.Entity<Types>().HasKey("Tconst");
-        }
 
+            
+        }
     }
+
+    
 }

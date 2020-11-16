@@ -11,15 +11,20 @@ namespace DataserviceLib
         public string Primarytitle { get; set; }
         public string Originaltitle { get; set; }
         public bool Isadult { get; set; }
-        public int Startyear { get; set; }
-        public int Endyear { get; set; }
-        public int Runtimeminutes { get; set; }
-        public string Plot { get; set; }
-        public Titleepisode Titleepisode { get; set; }
-        public Titleaka Titleakas { get; set; }
-        public Titleprincipal Titleprincipals { get; set; }
-        public Titlerating Titleratings { get; set; }
-        public Omdb Omdb { get; set; }
-        public Genre Genre { get; set; }
+        public string Startyear { get; set; }
+        public string Endyear { get; set; }
+        /**
+         * Due to the database containing null values, we needed to remove this Runtimeminutes
+         * otherwise it would crash our application when running, this needs to be fixed later.
+         * public int Runtimeminutes { get; set; }
+        **/
+
+        //public string Plot { get; set; }
+        //public Titleepisode Titleepisode { get; set; }
+        //public Titleaka Titleakas { get; set; }
+        //public Titleprincipal Titleprincipals { get; set; }
+        //public Titlerating Titleratings { get; set; }
+        //public Omdb Omdb { get; set; }
+        //public Genre Genre { get; set; }
     }
 }

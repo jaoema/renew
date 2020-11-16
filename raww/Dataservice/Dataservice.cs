@@ -11,19 +11,19 @@ namespace DataserviceLib
     public class Dataservice
     {
 
-        // string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
-        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
-       
+        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
+        // string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+
         string adminUsername = "hans1";
         string adminPassword = "grethe";
 
 
-        private List<Titlebasics> _titlebasics = new List<Titlebasics>
+        /*private List<Titlebasics> _titlebasics = new List<Titlebasics>
         {
             new Titlebasics {Tconst = "tconst123", Titletype = "test", Primarytitle = "minfilm", Originaltitle = "minflm", Isadult = false, Startyear = 2000, Endyear = 2002, Runtimeminutes = 120},
             new Titlebasics {Tconst = "tconst1", Primarytitle = "minfil"}
             //get data 
-        };
+        };*/
 
         /*private List<SimpleSearch> _SimpleSearch = new List<SimpleSearch>
         {
@@ -62,14 +62,14 @@ namespace DataserviceLib
             ctx.SaveChanges();
             return true;
 
-           /* var ctx = new ImdbContext(connectionString);
-           
-                var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
-                connection.Open();
-                var cmd = new NpgsqlCommand($"select create_user({username},{password})", connection);
-                cmd.ExecuteNonQuery();
-                return true; */
-        
+            /* var ctx = new ImdbContext(connectionString);
+
+                 var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
+                 connection.Open();
+                 var cmd = new NpgsqlCommand($"select create_user({username},{password})", connection);
+                 cmd.ExecuteNonQuery();
+                 return true; */
+
         }
 
         public bool Login(string username, string password)
@@ -103,7 +103,7 @@ namespace DataserviceLib
             var ctx = new ImdbContext(connectionString);
             var result = ctx.SimpleSearches.FromSqlInterpolated($"select * from string_search({adminUsername},{searchstring})");
 
-            foreach(var searchResult in result)
+            foreach (var searchResult in result)
             {
                 mylist.Add(searchResult);
             }
@@ -115,7 +115,7 @@ namespace DataserviceLib
         }
 
 
-      
+
 
         public IList<Person> FindActor(string searchstring, int page = 0, int pagesize = 50)
         {
@@ -175,7 +175,7 @@ namespace DataserviceLib
                 .Take(pagesize)
                 .ToList();
         }
-        
+
         public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)
         {
             var mylist = new List<Ratinghistory>();
@@ -183,7 +183,7 @@ namespace DataserviceLib
 
             var result = ctx.Ratinghistories.FromSqlInterpolated($"select * from ratinghistory where username = {adminUsername}");
 
-           foreach (var searchResult in result)
+            foreach (var searchResult in result)
             {
                 mylist.Add(searchResult);
             }
@@ -208,15 +208,15 @@ namespace DataserviceLib
                 type = null;
             }
 
-            ctx.Database.ExecuteSqlInterpolated($"select bookmark('{adminUsername}','{id}', {type})");
+            ctx.Database.ExecuteSqlInterpolated($"select bookmark({adminUsername},{id}, {type})");
             ctx.SaveChanges();
 
-            var bookmark = ctx.Bookmarks.Find(adminUsername, id);
+            //var bookmark = ctx.Bookmarks.Find(adminUsername, id);
 
-            if (bookmark == null)
-            {
-                return false;
-            }
+            //if (bookmark == null)
+            //{
+            //    return false;
+            //}
 
             return true;
 
@@ -244,6 +244,15 @@ namespace DataserviceLib
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
+        }
+        public bool Rate(string tconst, int rating)
+        {
+            var ctx = new ImdbContext(connectionString);
+
+            var result = ctx.Database.ExecuteSqlInterpolated($"select rate({adminUsername}, {tconst},{rating})");
+            ctx.SaveChanges();
+            return true;
+
         }
 
     }
