@@ -33,12 +33,13 @@ namespace raww.Controllers
             
             var mapped = _mapper.Map<TitleDto>(movie);
             movie.Tconst = movie.Tconst.Trim();
-            mapped.Bookmarklink = Url.Link(nameof(BookmarkController.Bookmark), new { movie.Tconst , movie=true});
+            mapped.Bookmarklink = Url.Link(nameof(BookmarkController.Bookmark), new { id = movie.Tconst , movie=true});
+            mapped.Ratelink = Url.Link(nameof(Rate), new { movie.Tconst, rating = 5 });
             
             return Ok(mapped);
         }
-        [HttpPost("api/movie/rate")]
-        public IActionResult Login(string tconst, int rating)
+        [HttpPost("api/movie/rate", Name = nameof(Rate))]
+        public IActionResult Rate(string tconst, int rating)
         {
             var ds = new Dataservice();
             var success = ds.Rate(tconst, rating);

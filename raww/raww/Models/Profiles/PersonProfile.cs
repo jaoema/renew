@@ -13,6 +13,7 @@ namespace raww.Models.Profiles
         {
             CreateMap<Person, PersonDto>();
             CreateMap<Person, CoActorDto>();
+            CreateMap<Person, PopularActorDto>();
         }
     }
 }

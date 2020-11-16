@@ -9,8 +9,8 @@ namespace raww.Models
     {
         public string Tconst { get; set; }
         public string Originaltitle { get; set; }
-        public string Endyear { get; set; }
-        public int Runtimeminutes { get; set; }
+        public string Startyear { get; set; }
         public string Bookmarklink { get; set; }
+        public string Ratelink { get; set; }
     }
 }
