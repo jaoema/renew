@@ -33,7 +33,7 @@ namespace raww.Controllers
             
             var mapped = _mapper.Map<TitleDto>(movie);
             movie.Tconst = movie.Tconst.Trim();
-            mapped.Bookmarklink = Url.Action(nameof(BookmarkController.Bookmark), new { id = movie.Tconst , movie=true});
+            mapped.Bookmarklink = Url.Link(nameof(BookmarkController.Bookmark), new { id = movie.Tconst , movie=true});
             mapped.Ratelink = Url.Link(nameof(Rate), new { movie.Tconst, rating = 5 });
 
             
