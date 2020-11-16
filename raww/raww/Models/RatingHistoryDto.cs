@@ -9,6 +9,7 @@ namespace raww.Models
     {
         public string Link { get; set; }
         public string Title { get; set; }
+        public string Tconst { get; set; }
         public double Rating { get; set; }
     }
 }

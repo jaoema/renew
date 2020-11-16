@@ -218,7 +218,7 @@ namespace DataserviceLib
             return true;
         }
 
-        public IList<Bookmark> GetBookmarked(int page = 1, int pagesize = 50)
+        public IList<Bookmark> GetBookmarked(int page = 0, int pagesize = 50)
         {
 
             var mylist = new List<Bookmark>();

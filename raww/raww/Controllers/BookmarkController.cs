@@ -44,7 +44,7 @@ namespace raww.Controllers
             return Ok();
         }
         [HttpGet("api/bookmarked", Name = nameof(Bookmarked))]
-        public IActionResult Bookmarked(int page, int pagesize)
+        public IActionResult Bookmarked(int page = 0, int pagesize = 50)
         {
             var ds = new Dataservice();
             var searchresult = ds.GetBookmarked(page, pagesize);

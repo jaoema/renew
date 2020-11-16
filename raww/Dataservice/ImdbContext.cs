@@ -69,6 +69,7 @@ namespace DataserviceLib
 
             modelBuilder.Entity<Ratinghistory>().HasNoKey();
             modelBuilder.Entity<Ratinghistory>().Property(x => x.Username).HasColumnName("username");
+            modelBuilder.Entity<Ratinghistory>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Entity<Ratinghistory>().Property(x => x.Rating).HasColumnName("rating");
             modelBuilder.Entity<Ratinghistory>().Property(x => x.Tconst).HasColumnName("tconst");
 
@@ -76,7 +77,8 @@ namespace DataserviceLib
             modelBuilder.Entity<Searchhistory>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Searchhistory>().Property(x => x.Mysearch).HasColumnName("mysearch");
 
-            modelBuilder.Entity<Bookmark>().HasNoKey();
+           modelBuilder.Entity<Bookmark>().HasNoKey();
+
             modelBuilder.Entity<Bookmark>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Bookmark>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Bookmark>().Property(x => x.Nconst).HasColumnName("nconst");
@@ -105,6 +107,7 @@ namespace DataserviceLib
             modelBuilder.Entity<Titlerating>().HasKey("Tconst");
 
             modelBuilder.Entity<Types>().HasKey("Tconst");
+           
 
             
         }
