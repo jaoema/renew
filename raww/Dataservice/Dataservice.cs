@@ -18,12 +18,12 @@ namespace DataserviceLib
         string adminPassword = "grethe";
 
 
-        private List<Titlebasics> _titlebasics = new List<Titlebasics>
+        /*private List<Titlebasics> _titlebasics = new List<Titlebasics>
         {
             new Titlebasics {Tconst = "tconst123", Titletype = "test", Primarytitle = "minfilm", Originaltitle = "minflm", Isadult = false, Startyear = 2000, Endyear = 2002, Runtimeminutes = 120},
             new Titlebasics {Tconst = "tconst1", Primarytitle = "minfil"}
             //get data 
-        };
+        };*/
 
         /*private List<SimpleSearch> _SimpleSearch = new List<SimpleSearch>
         {
@@ -244,6 +244,15 @@ namespace DataserviceLib
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
+        }
+        public bool Rate(string tconst, int rating)
+        {
+            var ctx = new ImdbContext(connectionString);
+
+            var result = ctx.Database.ExecuteSqlInterpolated($"select rate({adminUsername}, {tconst},{rating})");
+            ctx.SaveChanges();
+            return true;
+
         }
 
     }

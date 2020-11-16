@@ -37,6 +37,18 @@ namespace raww.Controllers
             
             return Ok(mapped);
         }
+        [HttpPost("api/movie/rate")]
+        public IActionResult Login(string tconst, int rating)
+        {
+            var ds = new Dataservice();
+            var success = ds.Rate(tconst, rating);
 
+            if (!success)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
     }
 }
