@@ -44,7 +44,7 @@ namespace DataserviceLib
         {
             var ctx = new ImdbContext(connectionString);
 
-            /*var user = ctx.Users.Find(username);
+            var user = ctx.Users.Find(username);
 
             if (user == null)
             {
@@ -55,19 +55,11 @@ namespace DataserviceLib
             else
             {
                 return false;
-            } */
+            } 
 
-            var result = ctx.Database.ExecuteSqlInterpolated($"select create_user({username}, {password})");
-            ctx.SaveChanges();
-            return true;
-
-            /* var ctx = new ImdbContext(connectionString);
-
-                 var connection = (NpgsqlConnection)ctx.Database.GetDbConnection();
-                 connection.Open();
-                 var cmd = new NpgsqlCommand($"select create_user({username},{password})", connection);
-                 cmd.ExecuteNonQuery();
-                 return true; */
+            //var result = ctx.Database.ExecuteSqlInterpolated($"select create_user({username}, {password})");
+            //ctx.SaveChanges();
+            //return true;
 
         }
 
