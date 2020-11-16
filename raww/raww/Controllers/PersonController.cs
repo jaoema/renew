@@ -41,6 +41,11 @@ namespace raww.Controllers
             var ds = new Dataservice();
             var result = ds.GetPopularActors(amount, page, pagesize);
 
+            if (!result.Any())
+            {
+                return NotFound();
+            }
+
             var populatedresult = CreatePopularActorResult(page, pagesize, result);
 
             return Ok(populatedresult);

@@ -35,6 +35,7 @@ namespace raww.Controllers
             movie.Tconst = movie.Tconst.Trim();
             mapped.Bookmarklink = Url.Link(nameof(BookmarkController.Bookmark), new { id = movie.Tconst , movie=true});
             mapped.Ratelink = Url.Link(nameof(Rate), new { movie.Tconst, rating = 5 });
+
             
             return Ok(mapped);
         }
