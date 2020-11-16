@@ -19,7 +19,7 @@ namespace raww.Controllers
         }
 
         [HttpGet("api/searchhistory", Name = nameof(SearchHistory))]
-        public IActionResult SearchHistory(int page, int pagesize)
+        public IActionResult SearchHistory(int page = 0, int pagesize = 50)
         {
             var ds = new Dataservice();
             var searchresult = ds.GetSearchHistory(page, pagesize);
@@ -34,7 +34,7 @@ namespace raww.Controllers
             return Ok(populatedresult);
         }
         [HttpGet("api/ratinghistory", Name = nameof(RatingHistory))]
-        public IActionResult RatingHistory(int page, int pagesize)
+        public IActionResult RatingHistory(int page = 0, int pagesize = 50)
         {
             var ds = new Dataservice();
             var searchresult = ds.GetRatingHistory(page, pagesize);
