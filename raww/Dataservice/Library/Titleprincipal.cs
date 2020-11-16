@@ -12,6 +12,5 @@ namespace DataserviceLib
         public string Category { get; set; }
         public string Job { get; set; }
         public string Characters { get; set; }
-       // public Person Person { get; set; }
     }
 }

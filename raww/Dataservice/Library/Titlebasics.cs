@@ -18,13 +18,5 @@ namespace DataserviceLib
          * otherwise it would crash our application when running, this needs to be fixed later.
          * public int Runtimeminutes { get; set; }
         **/
-
-        //public string Plot { get; set; }
-        //public Titleepisode Titleepisode { get; set; }
-        //public Titleaka Titleakas { get; set; }
-        //public Titleprincipal Titleprincipals { get; set; }
-        //public Titlerating Titleratings { get; set; }
-        //public Omdb Omdb { get; set; }
-        //public Genre Genre { get; set; }
     }
 }

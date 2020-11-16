@@ -4,10 +4,10 @@ using System.Text;
 
 namespace DataserviceLib
 {
-    public class Titlecrew
+    public class SimpleSearch
     {
         public string Tconst { get; set; }
-        public string Directors { get; set; }
-        public string Writers { get; set; }
+        public string Title { get; set; }
+        public string Year { get; set; } 
     }
 }

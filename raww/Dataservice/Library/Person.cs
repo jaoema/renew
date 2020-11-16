@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DataserviceLib
 {
-    public class Primaryprofession
+    public class Person
     {
         public string Nconst { get; set; }
-        public string Profession { get; set; }
+        public string Primaryname { get; set; }
     }
 }

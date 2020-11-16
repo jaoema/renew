@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SqlFunctions\**" />
+    <Content Remove="SqlFunctions\**" />
+    <EmbeddedResource Remove="SqlFunctions\**" />
+    <None Remove="SqlFunctions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Npgsql" Version="4.1.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
@@ -12,10 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dataservice\DataserviceLib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SqlFunctions\" />
   </ItemGroup>
 
 </Project>

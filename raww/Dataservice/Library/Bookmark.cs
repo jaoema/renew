@@ -4,10 +4,10 @@ using System.Text;
 
 namespace DataserviceLib
 {
-    public class Rate
+    public class Bookmark
     {
+        public string Username { get; set; }
         public string Tconst { get; set; }
-        public int Rating { get; set; }
-        
+        public string Nconst { get; set; }
     }
 }

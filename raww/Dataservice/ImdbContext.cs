@@ -35,8 +35,6 @@ namespace DataserviceLib
         public DbSet<SimpleSearch> SimpleSearches { get; set; }
 
         
-
-        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(_connectionString);
@@ -48,9 +46,7 @@ namespace DataserviceLib
             modelBuilder.Entity<Person>().ToTable("person");
             modelBuilder.Entity<Person>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Person>().Property(x => x.Primaryname).HasColumnName("primaryname");
-            //modelBuilder.Entity<Person>().Property(x => x.Birthyear).HasColumnName("birthyear");
-            //modelBuilder.Entity<Person>().Property(x => x.Deathyear).HasColumnName("deathyear");
-
+           
             modelBuilder.Entity<User>().HasKey(x => x.Username);
             modelBuilder.Entity<User>().ToTable("username");
             modelBuilder.Entity<User>().Property(x => x.Username).HasColumnName("username");
@@ -65,8 +61,7 @@ namespace DataserviceLib
             modelBuilder.Entity<Titlebasics>().Property(x => x.Isadult).HasColumnName("isadult");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Startyear).HasColumnName("startyear");
             modelBuilder.Entity<Titlebasics>().Property(x => x.Endyear).HasColumnName("endyear");
-            //modelBuilder.Entity<Titlebasics>().Property(x => x.Runtimeminutes).HasColumnName("runtimeminutes");
-
+           
             modelBuilder.Entity<Ratinghistory>().HasNoKey();
             modelBuilder.Entity<Ratinghistory>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Ratinghistory>().Property(x => x.Title).HasColumnName("title");
@@ -77,8 +72,7 @@ namespace DataserviceLib
             modelBuilder.Entity<Searchhistory>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Searchhistory>().Property(x => x.Mysearch).HasColumnName("mysearch");
 
-           modelBuilder.Entity<Bookmark>().HasNoKey();
-
+            modelBuilder.Entity<Bookmark>().HasNoKey();
             modelBuilder.Entity<Bookmark>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Bookmark>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Bookmark>().Property(x => x.Nconst).HasColumnName("nconst");
@@ -87,9 +81,6 @@ namespace DataserviceLib
             modelBuilder.Entity<SimpleSearch>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<SimpleSearch>().Property(x => x.Title).HasColumnName("primarytitle");
             modelBuilder.Entity<SimpleSearch>().Property(x => x.Year).HasColumnName("startyear");
-
-
-            
 
             modelBuilder.Entity<Titleaka>().HasKey(x => x.Tconst);
 
@@ -106,12 +97,7 @@ namespace DataserviceLib
 
             modelBuilder.Entity<Titlerating>().HasKey("Tconst");
 
-            modelBuilder.Entity<Types>().HasKey("Tconst");
-           
-
-            
+            modelBuilder.Entity<Types>().HasKey("Tconst"); 
         }
-    }
-
-    
+    } 
 }
