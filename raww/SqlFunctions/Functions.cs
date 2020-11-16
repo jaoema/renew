@@ -14,7 +14,7 @@ namespace SqlFunctions
             //var connectionString = "host=localhost;db=amdb;uid=postgres;pwd =Franet0365";
 
             //(UseAdo(connectionString);
-            NameSearch(connectionString);
+            //NameSearch(connectionString);
             //FindPopularActors(connectionString);
             //AddRatingHistory(connectionString);
             // CreateUser(connectionString);

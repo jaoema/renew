@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataserviceLib;
-using SqlFunctions;
 using raww.Models;
 
 namespace raww.Controllers

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Dynamic;
 using Microsoft.EntityFrameworkCore;
-using SqlFunctions;
 using Npgsql;
 
 namespace DataserviceLib
