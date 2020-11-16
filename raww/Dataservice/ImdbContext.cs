@@ -51,7 +51,7 @@ namespace DataserviceLib
             //modelBuilder.Entity<Person>().Property(x => x.Birthyear).HasColumnName("birthyear");
             //modelBuilder.Entity<Person>().Property(x => x.Deathyear).HasColumnName("deathyear");
 
-            modelBuilder.Entity<User>().HasNoKey();
+            modelBuilder.Entity<User>().HasKey(x => x.Username);
             modelBuilder.Entity<User>().ToTable("username");
             modelBuilder.Entity<User>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
