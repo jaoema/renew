@@ -24,7 +24,7 @@ namespace raww.Controllers
             var ds = new Dataservice();
             var searchresult = ds.GetSearchHistory(page, pagesize);
 
-            if (searchresult == null)
+            if (!searchresult.Any())
             {
                 return NotFound();
             }
@@ -39,7 +39,7 @@ namespace raww.Controllers
             var ds = new Dataservice();
             var searchresult = ds.GetRatingHistory(page, pagesize);
 
-            if (searchresult == null)
+            if (!searchresult.Any())
             {
                 return NotFound();
             }
