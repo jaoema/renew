@@ -1,0 +1,31 @@
+{
+  // 20201202105234
+  // https://raw.githubusercontent.com/bulskov/RAWDATA_2020_Livecode11/master/Livecode11/libman.json
+
+  //{
+  //"version": "1.0",
+  //"defaultProvider": "cdnjs",
+  //"libraries": [
+  //  {
+  //    "library": "knockout@3.5.1",
+  //    "destination": "wwwroot/js/lib/knockout"
+  //  },
+  //  {
+  //    "library": "require.js@2.3.6",
+  //    "destination": "wwwroot/js/lib/require.js/"
+  //  },
+  //  {
+  //    "library": "require-text@2.0.12",
+  //    "destination": "wwwroot/js/lib/require-text/"
+  //  },
+  //  {
+  //    "library": "twitter-bootstrap@4.5.3",
+  //    "destination": "wwwroot/css/lib/twitter-bootstrap/"
+  //  },
+  //  {
+  //    "library": "jquery@3.5.1",
+  //    "destination": "wwwroot/js/lib/jquery/"
+  //  }
+  //]
+//}
+}
