@@ -7,11 +7,11 @@ using Npgsql;
 
 namespace DataserviceLib
 {
-    public class Dataservice
+    public class Dataservice : IDataService
     {
 
-        //string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
-        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
+        //string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
         string adminUsername = "hans1";
         string adminPassword = "grethe";
 
@@ -119,6 +119,8 @@ namespace DataserviceLib
                 .Take(pagesize)
                 .ToList();
         }
+
+    
         public IList<Searchhistory> GetSearchHistory(int page = 0, int pagesize = 50)
         {
             var mylist = new List<Searchhistory>();
@@ -197,5 +199,8 @@ namespace DataserviceLib
             ctx.SaveChanges();
             return true;
         }
+
+
+  
     }
 }
