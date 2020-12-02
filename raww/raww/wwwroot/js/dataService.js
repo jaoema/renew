@@ -1,7 +1,8 @@
 ﻿
+console.log("Before fetch");
 
 let getSearchHistory = function(callback) {
-    fetch("api/searchhistory")}
+    fetch("api/searchhistory")
         .then(function(response) {
             return response.json();
         })
@@ -9,7 +10,10 @@ let getSearchHistory = function(callback) {
             callback(data);
         });
 
-    getSearchHistory(function(data) {
-        console.log(data);
-    });
-}
+};
+
+getSearchHistory(function (data) {
+    console.log(data);
+});
+
+console.log("After fetch");
