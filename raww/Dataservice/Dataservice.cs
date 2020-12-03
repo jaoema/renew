@@ -84,14 +84,20 @@ namespace DataserviceLib
         {
             //get results from DB name search function
             var mylist = new List<Person>();
+
             var ctx = new ImdbContext(connectionString);
+
             var result = ctx.Persons.FromSqlInterpolated($"select * from name_search({adminUsername},{searchstring})");
+            
 
             foreach (var searchResult in result)
             {
                 mylist.Add(searchResult);
             }
-            return mylist;
+            return mylist
+            .Skip(page * pagesize)
+            .Take(pagesize)
+            .ToList();
         }
 
         public Person GetPerson(string nconst)
@@ -129,8 +135,6 @@ namespace DataserviceLib
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
-                //.FromSqlInterpolated($"select * from searchhistory where username = {adminUsername}");
-
 
                 return result;
 
@@ -138,19 +142,18 @@ namespace DataserviceLib
 
         public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)
         {
-            var mylist = new List<Ratinghistory>();
+            
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Ratinghistories.FromSqlInterpolated($"select * from ratinghistory where username = {adminUsername}");
-
-            foreach (var searchResult in result)
-            {
-                mylist.Add(searchResult);
-            }
-            return mylist
+            var result = ctx.Ratinghistories
+                .Where(x => x.Username == adminUsername)
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
+
+            return result;
         }
+
+    
 
         public bool CreateBookmark(string id, bool movie)
         {
@@ -177,19 +180,15 @@ namespace DataserviceLib
 
         public IList<Bookmark> GetBookmarked(int page = 0, int pagesize = 50)
         {
-
-            var mylist = new List<Bookmark>();
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Bookmarks.FromSqlInterpolated($"select * from bookmarked where username = {adminUsername}");
-
-            foreach (var searchResult in result)
-            {
-                mylist.Add(searchResult);
-            }
-            return mylist
+            var result = ctx.Bookmarks
+                .Where(x => x.Username == adminUsername)
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
+
+            return result;
+
         }
         public bool Rate(string tconst, int rating)
         {
