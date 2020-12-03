@@ -123,18 +123,17 @@ namespace DataserviceLib
     
         public IList<Searchhistory> GetSearchHistory(int page = 0, int pagesize = 50)
         {
-            var mylist = new List<Searchhistory>();
             var ctx = new ImdbContext(connectionString);
-            var result = ctx.Searchhistories.FromSqlInterpolated($"select * from searchhistory where username = {adminUsername}");
-
-            foreach (var searchResult in result)
-            {
-                mylist.Add(searchResult);
-            }
-            return mylist
+            var result = ctx.Searchhistories
+                .Where(x => x.Username == adminUsername)
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
+                //.FromSqlInterpolated($"select * from searchhistory where username = {adminUsername}");
+
+
+                return result;
+
         }
 
         public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)

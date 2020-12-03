@@ -69,6 +69,7 @@ namespace DataserviceLib
             modelBuilder.Entity<Ratinghistory>().Property(x => x.Tconst).HasColumnName("tconst");
 
             modelBuilder.Entity<Searchhistory>().HasNoKey();
+            modelBuilder.Entity<Searchhistory>().ToTable("searchhistory");
             modelBuilder.Entity<Searchhistory>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Searchhistory>().Property(x => x.Mysearch).HasColumnName("mysearch");
 

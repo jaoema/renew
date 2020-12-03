@@ -1,8 +1,7 @@
 ﻿define(['knockout'], function (ko) {
     //private part
     let name = ko.observable("Peter");
-    let names = ko.observableArray(
-        [{ name: "Peter" }, { name: "Rasmus" }, { name: "Jakob" }]);
+    let names = ko.observableArray();
 
 
     fetch("api/searchhistory")
@@ -10,7 +9,9 @@
             return response.json();
         })
         .then(function(data) {
-            names(data);
+            names(data.mappedhistory);
+            debugger;
+            console.log(names());
         });
 
     //public part
