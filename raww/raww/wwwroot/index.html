@@ -4,7 +4,18 @@
     <title>index</title>
 </head>
 <body>
-    <h1> Hello there </h1>
-    <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
+<h1> Hello there </h1>
+    
+<input data-bind="value: name"/>
+<div data-bind=" text: name"></div>
+
+<ul data-bind="foreach: names">
+    <li>
+        <span data-bind="text: name"></span>
+    </li>
+</ul>
+
+
+<script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
 </body>
 </html>

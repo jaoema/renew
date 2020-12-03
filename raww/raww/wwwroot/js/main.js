@@ -7,6 +7,6 @@ require.config({
 });
 
 require(['knockout', 'viewModel'], function (ko, vm) {
-    console.log(vm.name);
-    ko.applyBindings({});
+    //console.log(vm.name);
+    ko.applyBindings(vm);
 });
