@@ -1,19 +1,15 @@
-﻿
-console.log("Before fetch");
+﻿define([], () => {
 
-let getSearchHistory = function(callback) {
-    fetch("api/searchhistory")
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(data) {
-            callback(data);
-        });
 
-};
+    let getSearchHistory = (callback) => {
+        fetch("api/searchhistory")
+            .then(response => response.json())
+            .then(callback);
+    }
 
-getSearchHistory(function (data) {
-    console.log(data);
+
+    return {
+        getSearchHistory
+    }
+
 });
-
-console.log("After fetch");
