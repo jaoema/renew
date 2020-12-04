@@ -3,8 +3,14 @@
 <input data-bind="textInput: searchterm"/>
 <button data-bind="click: clickSearch">Search</button>
 
-<ul data-bind="foreach: searchresults">
-    <li>
-        <span data-bind="text: primaryname"></span>
-    </li>
-</ul>
+<div>
+    <div>
+        <persondetails params="person: selectedPerson"></persondetails>
+    </div>
+
+    <ul data-bind="foreach: searchresults">
+        <li>
+            <span data-bind="text: primaryname, click: $parent.selectPerson"></span>
+        </li>
+    </ul>
+</div>

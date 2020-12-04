@@ -4,7 +4,7 @@ require.config({
     paths: {
         knockout: "lib/knockout/knockout-latest",
         text: "lib/require-text/text.min",
-        dataservice: "services/dataService",
+        dataservice: "services/dataService"
     }
 });
 
@@ -19,6 +19,14 @@ require(['knockout', 'text'], (ko) => {
         template: { require: "text!components/namesearch/namesearch.html" }
 
     });
+
+    ko.components.register("persondetails", {
+        viewModel: { require: "components/persondetails/persondetails" },
+        template: { require: "text!components/persondetails/persondetails.html" }
+
+    });
+
+
 });
 
 require(['knockout', 'viewModel'], function (ko, vm) {
