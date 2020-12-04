@@ -1,5 +1,6 @@
 ﻿define(['knockout', 'dataservice'], (ko, ds) => {
     return function(params) {
+        //private part
 
         let names = ko.observableArray([]);
 

@@ -1,0 +1,10 @@
+﻿<h1>Search for a person</h1>
+
+<input data-bind="textInput: searchterm"/>
+<button data-bind="click: clickSearch">Search</button>
+
+<ul data-bind="foreach: searchresults">
+    <li>
+        <span data-bind="text: primaryname"></span>
+    </li>
+</ul>
