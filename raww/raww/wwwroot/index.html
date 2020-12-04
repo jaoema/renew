@@ -24,9 +24,9 @@
         </div>
     </nav>
 
-    <namesearch></namesearch>
+<button data-bind="click: changeContent">Change content</button>
 
-    <searchhistory></searchhistory>
+<div data-bind="component: {name: selectedComponent}"></div>
 
 
     <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>

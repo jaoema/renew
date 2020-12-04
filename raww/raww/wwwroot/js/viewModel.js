@@ -2,21 +2,22 @@
     //private part
     let currentComponent = ko.observable("home");
     let menuElements = ["Home", "Contact"];
+    let selectedComponent = ko.observable('namesearch');
 
-    //let names = ko.observableArray([]);
 
-
-    //fetch("api/searchhistory")
-    //    .then(function(response) {
-    //        return response.json();
-    //    })
-    //    .then(function(data) {
-    //        names(data.mappedhistory);
-    //    });
+    let changeContent = () => {
+        if (selectedComponent() === "namesearch") {
+            selectedComponent('searchhistory');
+        } else {
+            selectedComponent('namesearch');
+        }
+    }
 
     //public part
     return {
         currentComponent,
-        menuElements
+        menuElements,
+        selectedComponent,
+        changeContent
     };
 });
