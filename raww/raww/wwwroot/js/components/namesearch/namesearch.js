@@ -7,7 +7,6 @@
 
 
         let selectPerson = person => {
-            console.log(person);
             selectedPerson(person);
         }
 
