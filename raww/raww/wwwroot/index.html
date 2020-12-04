@@ -3,9 +3,26 @@
 <head>
     <title>AMDB</title>
     <link href="style/style.css" rel="stylesheet" />
+    <link href="css/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
     <h1> Welcome to Awesome Movie DataBase! </h1>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navigation</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav" data-bind="foreach: menuElements">
+                <li class="nav-item" <!--data-bind="css: $parent.isActive($data)"-->>
+                    <a class="nav-link" href="#" data-bind="click: $parent.changeContent">
+                        <span data-bind="text: $data"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <namesearch></namesearch>
 
