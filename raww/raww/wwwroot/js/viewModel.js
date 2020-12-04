@@ -1,5 +1,7 @@
 ﻿define(['knockout'], function (ko) {
     //private part
+    let currentComponent = ko.observable("home");
+    let menuElements = ["Home", "Contact"];
 
     //let names = ko.observableArray([]);
 
@@ -14,6 +16,7 @@
 
     //public part
     return {
-       // names
+        currentComponent,
+        menuElements
     };
 });
