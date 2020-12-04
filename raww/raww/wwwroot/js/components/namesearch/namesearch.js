@@ -1,4 +1,4 @@
-﻿define(['knockout', 'dataservice'], (ko, ds) => {
+﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         //private part
         let searchresults = ko.observableArray([]);
@@ -8,6 +8,7 @@
 
         let selectPerson = person => {
             selectedPerson(person);
+            postman.publish('changePerson', person);
         }
 
         let clickSearch = function () {

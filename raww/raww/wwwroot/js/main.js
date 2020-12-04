@@ -4,7 +4,8 @@ require.config({
     paths: {
         knockout: "lib/knockout/knockout-latest",
         text: "lib/require-text/text.min",
-        dataservice: "services/dataService"
+        dataservice: "services/dataService",
+        postman: "services/postman"
     }
 });
 
