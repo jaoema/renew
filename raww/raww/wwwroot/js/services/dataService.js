@@ -13,6 +13,11 @@
             .then(callback);
     }
 
+    let getPerson = (nconst, callback) => {
+        fetch("api/person/" + nconst)
+            .then(response => response.json())
+            .then(callback);
+    }
 
     return {
         getSearchHistory,

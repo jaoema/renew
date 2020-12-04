@@ -1,1 +1,7 @@
-﻿
+﻿h1 {
+    color: darkgreen;
+    margin-left: 20px;
+}
+body {
+    color: red;
+}
