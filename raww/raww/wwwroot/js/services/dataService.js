@@ -19,10 +19,26 @@
             .then(callback);
     }
 
+    let searchTitle = (searchterm, callback) => {
+        fetch("api/simplesearch/" + searchterm)
+            .then(response => response.json())
+            .then(callback);
+        //debugger;
+    }
+
+    let getTitle = (tconst, callback) => {
+        fetch("api/movie/" + tconst)
+            .then(response => response.json())
+            .then(callback);
+    }
+    
+
     return {
         getSearchHistory,
         searchName,
-        getPerson
+        getPerson,
+        searchTitle,
+        getTitle
     }
 
 });

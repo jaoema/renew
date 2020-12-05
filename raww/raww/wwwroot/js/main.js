@@ -1,5 +1,4 @@
-﻿/// <reference path="lib/jquery/jquery.min.js" />
-
+﻿
 require.config({
     baseUrl: "js",
     paths: {
@@ -24,15 +23,22 @@ require(['knockout', 'text'], (ko) => {
     ko.components.register("namesearch", {
         viewModel: { require: "components/namesearch/namesearch" },
         template: { require: "text!components/namesearch/namesearch.html" }
-
     });
 
     ko.components.register("persondetails", {
         viewModel: { require: "components/persondetails/persondetails" },
         template: { require: "text!components/persondetails/persondetails.html" }
-
     });
 
+    ko.components.register("simplesearch", {
+        viewModel: { require: "components/simplesearch/simplesearch" },
+        template: { require: "text!components/simplesearch/simplesearch.html" }
+    });
+
+    ko.components.register("titledetails", {
+        viewModel: { require: "components/titledetails/titledetails" },
+        template: { require: "text!components/titledetails/titledetails.html" }
+    });
 
 });
 
