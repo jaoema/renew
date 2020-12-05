@@ -2,31 +2,31 @@
 <html>
 <head>
     <title>AMDB</title>
-    <link href="style/style.css" rel="stylesheet" />
-    <link href="css/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="style/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
-    <h1> Welcome to Awesome Movie DataBase! </h1>
+<body class="container-fluid">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navigation</a>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AMDB</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav" data-bind="foreach: menuElements">
-                <li class="nav-item" <!--data-bind="css: $parent.isActive($data)"-->>
+                <li class="nav-item" data-bind="css: $parent.isActive($data)">
                     <a class="nav-link" href="#" data-bind="click: $parent.changeContent">
-                        <span data-bind="text: $data"></span>
+                        <span data-bind="text: titleName"></span>
                     </a>
                 </li>
             </ul>
+
+            <span class="navbar-text ml-auto" >
+                Welcome to Awesome Movie DataBase!
+            </span>
         </div>
     </nav>
 
-<button data-bind="click: changeContent">Change content</button>
-
-<div data-bind="component: {name: selectedComponent}"></div>
+    <div data-bind="component: {name: currentComponent}"></div>
 
 
     <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>

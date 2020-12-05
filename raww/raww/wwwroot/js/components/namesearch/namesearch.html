@@ -1,16 +1,21 @@
-﻿<h1>Search for a person</h1>
+﻿<h2>Search for a person</h2>
 
-<input data-bind="textInput: searchterm"/>
-<button data-bind="click: clickSearch">Search</button>
+<div class="input-group mb-3">
+    <input data-bind="textInput: searchterm" type="text" class="col-2 form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button data-bind="click: clickSearch" class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+</div>
+
 
 <div>
     <div>
         <persondetails params="person: selectedPerson"></persondetails>
     </div>
 
-    <ul data-bind="foreach: searchresults">
-        <li>
+    <ul data-bind="foreach: searchresults" class="list-group">
+        <button type="button" class="list-group-item list-group-item-action">
             <span data-bind="text: primaryname, click: $parent.selectPerson"></span>
-        </li>
+        </button>
     </ul>
 </div>
