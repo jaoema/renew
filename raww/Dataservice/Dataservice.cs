@@ -10,6 +10,8 @@ namespace DataserviceLib
     public class Dataservice
     {
 
+//        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
+        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
         string adminUsername = "hans1";
         string adminPassword = "grethe";
 
@@ -124,8 +126,72 @@ namespace DataserviceLib
                 .ToList();
         }
 
+        /*table
+            Primaryname (person)
+            primarytile (titlebasics)
+            nconst (person)
+            tconst (titlebasics
+            */
 
-        public IList<Searchhistory> GetSearchHistory(int page, int pagesize)
+
+        //using (var context = new BookStore())
+        //Virker ikke helt endnu, Melder fejl: column t0.titlebasicsTconst does not exist
+        public IList<Object> GetSpecificMovie(string tconst, int page = 0, int pagesize = 50)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var dataa = ctx.Titlebasicses
+                .Where(x => x.Tconst == tconst)
+                .Join(
+                ctx.Titleprincipals,
+            titlebasics => titlebasics.Primarytitle,
+            titleprincipal => titleprincipal.Titlebasics.Primarytitle,
+            (titlebasics, titleprincipal) => new
+            {
+                //Tconst = titleprincipal.Tconst,
+                Primarytitle = titlebasics.Primarytitle,
+                Nconst = titleprincipal.Nconst,
+
+                //BookTitle = book.Title
+            }
+        )
+                .ToList()
+                .Skip(page * pagesize)
+                .Take(pagesize);
+
+            foreach (var movie in dataa)
+            {
+                Console.WriteLine( movie.Primarytitle, movie.Nconst);
+            } //movie.Tconst,
+            return (IList<Object>)dataa;
+                
+                
+        } 
+
+        
+
+/*public IList<object> GetSpecificPerson(string nconst)
+        {
+            var ctx = new ImdbContext(connectionString);
+            var data = ctx.Persons.Where(x => x.
+        .Join(
+            ctx.Titlebasicses,
+            Person => Person.Nconst,
+            Titlebasics => Titlebasics.Person.AuthorId,
+            (author, book) => new
+            {
+                BookId = book.BookId,
+                AuthorName = author.Name,
+                BookTitle = book.Title
+            }
+        ).ToList();
+	
+    foreach(var book in data)
+    {
+        Console.WriteLine("Book Title: {0} \n\t Written by {1}", book.BookTitle, book.AuthorName);
+    }
+    }*/
+
+        public IList<Searchhistory> GetSearchHistory(int page = 0, int pagesize = 50)
         {
             using var ctx = new ImdbContext();
 

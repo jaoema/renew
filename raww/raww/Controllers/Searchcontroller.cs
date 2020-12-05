@@ -18,7 +18,23 @@ namespace raww.Controllers
         {
             _mapper = mapper;
         }
+        //
+        [HttpGet("api/specificmovie/{tconst}", Name = nameof(GetSpecificMovie))]
+        public IActionResult GetSpecificMovie(string tconst, int page = 0, int pagesize = 50)
+        {
+            var ds = new Dataservice();
+            var searchresult = ds.GetSpecificMovie(tconst,page,pagesize);
 
+            if (!searchresult.Any())
+            {
+                return NotFound();
+            }
+
+            var populatedresult = CreateSpecificMovieResult(page, pagesize, searchresult);
+            return Ok(populatedresult);
+            //return Ok();
+        }
+        //
         [HttpGet("api/simplesearch/{searchstring}", Name = nameof(SimpleSearch))]
         public IActionResult SimpleSearch(string searchstring, int page = 0, int pagesize = 50)
         {
@@ -86,6 +102,26 @@ namespace raww.Controllers
             dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
 
             return dto;
+        }
+
+        private object CreateSpecificMovieResult(int page, int pageSize, IList<Object> tconst)
+        {
+            var count = tconst.Count();
+
+            //var titlelist = tconst.Select(AddSearchLink);
+
+            var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(Object));
+
+            var result = new
+            {
+                navigationUrls.prev,
+                navigationUrls.cur,
+                navigationUrls.next,
+                count,
+                //titlelist
+            };
+
+            return result;
         }
         private object CreateSimpleSearchResult(int page, int pageSize, IList<SimpleSearch> titles)
         {
