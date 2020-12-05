@@ -10,8 +10,7 @@ namespace DataserviceLib
     public class Dataservice
     {
 
-//        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
-        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
+        // Hej Rasmus - nyt sted at skifte connectionstring inde i "ImdbContext"
         string adminUsername = "hans1";
         string adminPassword = "grethe";
 
@@ -138,7 +137,7 @@ namespace DataserviceLib
         //Virker ikke helt endnu, Melder fejl: column t0.titlebasicsTconst does not exist
         public IList<Object> GetSpecificMovie(string tconst, int page = 0, int pagesize = 50)
         {
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var dataa = ctx.Titlebasicses
                 .Where(x => x.Tconst == tconst)
                 .Join(
@@ -171,7 +170,7 @@ namespace DataserviceLib
 
 /*public IList<object> GetSpecificPerson(string nconst)
         {
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var data = ctx.Persons.Where(x => x.
         .Join(
             ctx.Titlebasicses,
