@@ -14,8 +14,6 @@
     </div>
 
     <ul data-bind="foreach: searchresults" class="list-group">
-        <button type="button" class="list-group-item list-group-item-action">
-            <span data-bind="text: primaryname, click: $parent.selectPerson"></span>
-        </button>
+        <button data-bind="text: primaryname, click: $parent.selectPerson" type="button" class="list-group-item list-group-item-action"></button>
     </ul>
 </div>
