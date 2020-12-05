@@ -26,6 +26,9 @@ namespace DataserviceLib
         public DbSet<Bookmark> Bookmarks { get; set; }
 
         public DbSet<Titleaka> Titleakas { get; set; }
+
+        public DbSet<Titleprincipal> Titleprincipals { get; set; }
+
         public DbSet<Titleepisode> Titleepisodes { get; set; }
 
         public DbSet<Genre> Genres { get; set; }
@@ -96,8 +99,17 @@ namespace DataserviceLib
             modelBuilder.Entity<Titleepisode>().HasKey("Tconst");
 
             modelBuilder.Entity<Titleprincipal>().HasKey("Tconst");
+            modelBuilder.Entity<Titleprincipal>().HasKey("Nconst");
+            modelBuilder.Entity<Titleprincipal>().ToTable("title_principals");
+            modelBuilder.Entity<Titleprincipal>().Property(x => x.Tconst).HasColumnName("tconst");
+            modelBuilder.Entity<Titleprincipal>().Property(x => x.Ordering).HasColumnName("ordering");
+            modelBuilder.Entity<Titleprincipal>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<Titleprincipal>().Property(x => x.Category).HasColumnName("category");
+            modelBuilder.Entity<Titleprincipal>().Property(x => x.Job).HasColumnName("job");
+            modelBuilder.Entity<Titleprincipal>().Property(x => x.Characters).HasColumnName("characters");
 
-            modelBuilder.Entity<Titlerating>().HasKey("Tconst");
+
+        modelBuilder.Entity<Titlerating>().HasKey("Tconst");
 
             modelBuilder.Entity<Types>().HasKey("Tconst"); 
         }
