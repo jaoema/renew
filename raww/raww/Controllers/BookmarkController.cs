@@ -76,7 +76,9 @@ namespace raww.Controllers
         }
         private object CreateBookmarkedResult(IList<Bookmark> bookmarks, int page = 1, int pageSize = 50)
         {
-            var count = bookmarks.Count();
+            var ds = new Dataservice();
+
+            var count = ds.numberOfBookmarks();
 
             var personlist = bookmarks.Select(MapBookmarks);
 

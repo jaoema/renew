@@ -2,14 +2,36 @@
     return function(params) {
         //private part
 
-        let names = ko.observableArray([]);
+        let searchhistory = ko.observableArray([]);
+        let prev = ko.observable();
+        let next = ko.observable();
 
-        ds.getSearchHistory(function(data) { names(data.mappedhistory) });
+
+        let getData = url => {
+            ds.getSearchhistory(url, data => {
+                prev(data.prev);
+                next(data.next);
+                searchhistory(data.mappedhistory);
+            });
+        }
+
+        let showPrev = history => {
+            console.log(prev);
+            getData(prev());
+        }
+        let showNext = history => {
+            console.log(next());
+            getData(next());
+        }
+
+        getData();
 
 
         //public part
         return {
-            names
-        }
+            searchhistory,
+            showPrev,
+            showNext
+        };
     }
 });

@@ -2,7 +2,7 @@
     return function (params) {
         //private part
         let searchresults = ko.observableArray([]);
-        let searchterm = ko.observable();
+        let searchterm = ko.observable("");
         let selectedPerson = ko.observable();
 
 
@@ -16,13 +16,16 @@
             searchterm("");
         }
 
+        let enableSearch = ko.computed(() => searchterm() !== "");
+
         //public part
         return {
             searchresults,
             searchterm,
             clickSearch,
             selectPerson,
-            selectedPerson
+            selectedPerson,
+            enableSearch
         }
     }
 });

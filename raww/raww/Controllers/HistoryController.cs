@@ -19,7 +19,7 @@ namespace raww.Controllers
         }
 
         [HttpGet("api/searchhistory", Name = nameof(SearchHistory))]
-        public IActionResult SearchHistory(int page = 0, int pagesize = 50)
+        public IActionResult SearchHistory(int page = 0, int pagesize = 10)
         {
             var ds = new Dataservice();
             var searchresult = ds.GetSearchHistory(page, pagesize);
@@ -50,13 +50,15 @@ namespace raww.Controllers
         private SearchHistoryDto MapSearchElement(Searchhistory elem)
         {
             var dto = _mapper.Map<SearchHistoryDto>(elem);
-            //dto.Link = Url.Link(nameof(), new { elem.Nconst });
+            //dto.Url = Url.Link(nameof(), new { elem.Nconst });
 
             return dto;
         }
         private object CreateSearchHistoryResult(int page, int pageSize, IList<Searchhistory> histories)
         {
-            var count = histories.Count();
+            var ds = new Dataservice();
+
+            var count = ds.numberOfSearchHistories();
 
             var mappedhistory = histories.Select(MapSearchElement);
 
@@ -83,7 +85,9 @@ namespace raww.Controllers
         }
         private object CreateRatingHistoryResult(int page, int pageSize, IList<Ratinghistory> histories)
         {
-            var count = histories.Count();
+            var ds = new Dataservice();
+
+            var count = ds.numberOfRatingHistories();
 
             var mappedhistory = histories.Select(MapRatingElement);
 
@@ -111,8 +115,10 @@ namespace raww.Controllers
 
             string next = null;
 
-            if (page < (int)Math.Ceiling((double)count / pageSize) - 1)
-                next = Url.Link(prefix, new { page = page + 1, pageSize });
+            if (page < (int) Math.Ceiling((double) count / pageSize) - 1)
+            {
+                next = Url.Link(prefix, new {page = page + 1, pageSize});
+            }
 
             var cur = Url.Link(prefix, new { page, pageSize });
 

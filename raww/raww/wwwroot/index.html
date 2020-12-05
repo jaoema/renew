@@ -6,11 +6,14 @@
 </head>
 <body class="container-fluid">
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+        <!-- logo in navbar -->
         <a class="navbar-brand" href="#">AMDB</a>
+        <!-- burgermenu in navbar -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- site navigation in navbar -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav" data-bind="foreach: menuElements">
                 <li class="nav-item" data-bind="css: $parent.isActive($data)">
@@ -19,8 +22,13 @@
                     </a>
                 </li>
             </ul>
-
-            <span class="navbar-text ml-auto" >
+            <!-- search form in navbar -->
+            <form class="form-inline">
+                <input data-bind="textInput: searchterm"class="form-control ml-auto" type="search" placeholder="Search Titles" aria-label="Search">
+                <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <!-- text in navbar -->
+            <span class="navbar-text ml-auto">
                 Welcome to Awesome Movie DataBase!
             </span>
         </div>

@@ -7,13 +7,6 @@ namespace DataserviceLib
 {
     class ImdbContext : DbContext
     {
-        private readonly string _connectionString;
-
-        public ImdbContext(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
         public DbSet<Person> Persons { get; set; }
         public DbSet<User> Users { get; set; }
 
@@ -37,7 +30,8 @@ namespace DataserviceLib
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(_connectionString);
+            optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Franet0365");
+           // optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Baad666");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

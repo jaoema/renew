@@ -1,11 +1,22 @@
 ﻿define([], () => {
+    const searchhistoryApiUrl = "api/searchhistory";
 
+    let getJson = (url, callback) => {
+        fetch(url).then(response => response.json()).then(callback);
+    };
 
-    let getSearchHistory = (callback) => {
-        fetch("api/searchhistory")
-            .then(response => response.json())
-            .then(callback);
-    }
+    let getSearchhistory = (url, callback) => {
+        if (url === undefined) {
+            url = searchhistoryApiUrl;
+        }
+        getJson(url, callback);
+    };
+
+    //let getSearchHistory = (callback) => {
+    //    fetch("api/searchhistory")
+    //        .then(response => response.json())
+    //        .then(callback);
+    //}
 
     let searchName = (searchterm, callback) => {
         fetch("api/namesearch/" + searchterm)
@@ -34,7 +45,8 @@
     
 
     return {
-        getSearchHistory,
+        //getSearchHistory,
+        getSearchhistory,
         searchName,
         getPerson,
         searchTitle,

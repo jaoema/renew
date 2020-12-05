@@ -7,11 +7,9 @@ using Npgsql;
 
 namespace DataserviceLib
 {
-    public class Dataservice : IDataService
+    public class Dataservice
     {
 
-        string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Franet0365";
-        //string connectionString = "host=localhost;db=imdb;uid=postgres;pwd =Baad666";
         string adminUsername = "hans1";
         string adminPassword = "grethe";
 
@@ -19,14 +17,14 @@ namespace DataserviceLib
 
         public Titlebasics GetTitle(string tconst)
         {
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var title = ctx.Titlebasicses.Find(tconst);
             return title;
         }
 
         public bool CreateUser(string username, string password)
         {
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var user = ctx.Users.Find(username);
 
             if (user == null)
@@ -38,14 +36,14 @@ namespace DataserviceLib
             else
             {
                 return false;
-            } 
+            }
         }
 
         public bool Login(string username, string password)
         {
             //DB login command
-            var ctx = new ImdbContext(connectionString);
-          
+            var ctx = new ImdbContext();
+
             if (username == adminUsername && password == adminPassword)
             {
                 return true;
@@ -64,7 +62,7 @@ namespace DataserviceLib
             //get results from DB function. Take amount equal to page*pagesize -> tolist
             var mylist = new List<SimpleSearch>();
             // use string search
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var result = ctx.SimpleSearches.FromSqlInterpolated($"select * from string_search({adminUsername},{searchstring})");
 
             foreach (var searchResult in result)
@@ -85,10 +83,10 @@ namespace DataserviceLib
             //get results from DB name search function
             var mylist = new List<Person>();
 
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
 
             var result = ctx.Persons.FromSqlInterpolated($"select * from name_search({adminUsername},{searchstring})");
-            
+
 
             foreach (var searchResult in result)
             {
@@ -103,7 +101,7 @@ namespace DataserviceLib
         public Person GetPerson(string nconst)
         {
             //get person
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var person = ctx.Persons.Find(nconst);
 
             return person;
@@ -126,24 +124,30 @@ namespace DataserviceLib
                 .ToList();
         }
 
-    
-        public IList<Searchhistory> GetSearchHistory(int page = 0, int pagesize = 50)
+
+        public IList<Searchhistory> GetSearchHistory(int page, int pagesize)
         {
-            var ctx = new ImdbContext(connectionString);
+            using var ctx = new ImdbContext();
+
             var result = ctx.Searchhistories
-                .Where(x => x.Username == adminUsername)
-                .Skip(page * pagesize)
-                .Take(pagesize)
-                .ToList();
+                .Where(x => x.Username == adminUsername);
 
-                return result;
+            return result
+                    .Skip(page * pagesize)
+                    .Take(pagesize)
+                    .ToList();
+        }
 
+        public int numberOfSearchHistories()
+        {
+            using var ctx = new ImdbContext();
+            return ctx.Searchhistories
+                .Count(x => x.Username == adminUsername);
         }
 
         public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)
         {
-            
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var result = ctx.Ratinghistories
                 .Where(x => x.Username == adminUsername)
                 .Skip(page * pagesize)
@@ -153,11 +157,16 @@ namespace DataserviceLib
             return result;
         }
 
-    
+        public int numberOfRatingHistories()
+        {
+            using var ctx = new ImdbContext();
+            return ctx.Searchhistories
+                .Count(x => x.Username == adminUsername);
+        }
 
         public bool CreateBookmark(string id, bool movie)
         {
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             string type;
             if (movie)
             {
@@ -180,7 +189,7 @@ namespace DataserviceLib
 
         public IList<Bookmark> GetBookmarked(int page = 0, int pagesize = 50)
         {
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var result = ctx.Bookmarks
                 .Where(x => x.Username == adminUsername)
                 .Skip(page * pagesize)
@@ -188,17 +197,22 @@ namespace DataserviceLib
                 .ToList();
 
             return result;
-
+        }
+        public int numberOfBookmarks()
+        {
+            using var ctx = new ImdbContext();
+            return ctx.Bookmarks
+                .Count(x => x.Username == adminUsername);
         }
         public bool Rate(string tconst, int rating)
         {
-            var ctx = new ImdbContext(connectionString);
+            var ctx = new ImdbContext();
             var result = ctx.Database.ExecuteSqlInterpolated($"select rate({adminUsername}, {tconst},{rating})");
             ctx.SaveChanges();
             return true;
         }
 
 
-  
+
     }
 }

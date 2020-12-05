@@ -30,9 +30,9 @@ require(['knockout', 'text'], (ko) => {
         template: { require: "text!components/persondetails/persondetails.html" }
     });
 
-    ko.components.register("simplesearch", {
-        viewModel: { require: "components/simplesearch/simplesearch" },
-        template: { require: "text!components/simplesearch/simplesearch.html" }
+    ko.components.register("titlesearch", {
+        viewModel: { require: "components/titlesearch/titlesearch" },
+        template: { require: "text!components/titlesearch/titlesearch.html" }
     });
 
     ko.components.register("titledetails", {

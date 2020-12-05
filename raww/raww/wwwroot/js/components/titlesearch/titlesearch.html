@@ -1,0 +1,24 @@
+﻿<h2>Search for a title</h2>
+
+<div class="input-group mb-3">
+    <input data-bind="textInput: searchterm" type="text" class="col-2 form-control" placeholder="Title/Plot" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-primary" type="button">Search</button>
+    </div>
+</div>
+
+<div>
+    <div>
+        <titledetails params="title: selectedTitle"></titledetails>
+    </div>
+    <div data-bind="if: searchFromComp">
+        <ul data-bind="foreach: searchresults" class="list-group">
+            <button data-bind="text: title, click: $parent.selectTitle" type="button" class="list-group-item list-group-item-action"></button>
+        </ul>
+    </div>
+    <div data-bind="if: searchFromNav">
+        <ul data-bind="foreach: searchresults" class="list-group">
+            <button data-bind="text: title, click: $parent.selectTitle" type="button" class="list-group-item list-group-item-action"></button>
+        </ul>
+    </div>
+</div>
