@@ -33,8 +33,8 @@ namespace DataserviceLib
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Franet0365");
-           // optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Baad666");
+            //optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Franet0365");
+            optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Baad666");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -92,8 +92,9 @@ namespace DataserviceLib
 
             modelBuilder.Entity<Titleepisode>().HasKey("Tconst");
 
-            modelBuilder.Entity<Titleprincipal>().HasKey("Tconst");
-            modelBuilder.Entity<Titleprincipal>().HasKey("Nconst");
+           modelBuilder.Entity<Titleprincipal>().HasKey("Tconst");
+          // modelBuilder.Entity<Titleprincipal>().HasKey("Nconst");
+           //modelBuilder.Entity<Titleprincipal>().HasNoKey();
             modelBuilder.Entity<Titleprincipal>().ToTable("title_principals");
             modelBuilder.Entity<Titleprincipal>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Titleprincipal>().Property(x => x.Ordering).HasColumnName("ordering");

@@ -109,6 +109,7 @@ namespace DataserviceLib
 
         }
 
+
         public IList<Person> FindCoActor(string searchstring)
         {
             //get results from db coplayer search function
@@ -124,46 +125,40 @@ namespace DataserviceLib
                 .Take(pagesize)
                 .ToList();
         }
-
-        /*table
-            Primaryname (person)
-            primarytile (titlebasics)
-            nconst (person)
-            tconst (titlebasics
-            */
-
-
-        //using (var context = new BookStore())
-        //Virker ikke helt endnu, Melder fejl: column t0.titlebasicsTconst does not exist
-        public IList<Object> GetSpecificMovie(string tconst, int page = 0, int pagesize = 50)
+        public Object GetSpecificMovie(string tconst)
         {
             var ctx = new ImdbContext();
-            var dataa = ctx.Titlebasicses
+
+            // from p in ctx.Titlebasicses
+            // select new { Tconst = p.Tconst, Primaryname = p.Primarytitle, p.Titleprincipal.Characters, };
+
+            var dataa = ctx.Titlebasicses.Find(tconst);
+                //.Where(x => x.Tconst == tconst)
+               // .Include(ctx.Titleprincipals.Tconst);
+
+           // ctx.Entry(dataa).Collection("Titleprincipals").Load();
+
+            /*dataa.titleprincipal = ctx.Titleprincipals
                 .Where(x => x.Tconst == tconst)
-                .Join(
+                .First<Titleprincipal>();
+                
+            
+            /*Join(
                 ctx.Titleprincipals,
-            titlebasics => titlebasics.Primarytitle,
-            titleprincipal => titleprincipal.Titlebasics.Primarytitle,
+            titlebasics => titlebasics.Tconst,
+            titleprincipal => titleprincipal.Titlebasics.Tconst,
             (titlebasics, titleprincipal) => new
             {
-                //Tconst = titleprincipal.Tconst,
+                Tconst = titleprincipal.Tconst,
                 Primarytitle = titlebasics.Primarytitle,
                 Nconst = titleprincipal.Nconst,
 
                 //BookTitle = book.Title
             }
-        )
-                .ToList()
-                .Skip(page * pagesize)
-                .Take(pagesize);
-
-            foreach (var movie in dataa)
-            {
-                Console.WriteLine( movie.Primarytitle, movie.Nconst);
-            } //movie.Tconst,
-            return (IList<Object>)dataa;
-                
-                
+        );   */
+   
+            return dataa;
+           
         } 
 
         

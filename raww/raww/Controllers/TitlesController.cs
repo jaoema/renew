@@ -39,6 +39,22 @@ namespace raww.Controllers
             
             return Ok(mapped);
         }
+        [HttpGet("api/specificmovie/{tconst}", Name = nameof(GetSpecificMovie))]
+        public IActionResult GetSpecificMovie(string tconst)
+        {
+            var ds = new Dataservice();
+            var searchresult = ds.GetSpecificMovie(tconst);
+
+            if (searchresult is null)
+            {
+                return NotFound();
+            }
+
+           // var populatedresult = CreateSpecificMovieResult(page, pagesize, searchresult);
+            return Ok(searchresult);
+            //return Ok();
+        }
+
         [HttpPost("api/movie/rate", Name = nameof(Rate))]
         public IActionResult Rate(string tconst, int rating)
         {
