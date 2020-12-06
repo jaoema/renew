@@ -1,5 +1,6 @@
 ﻿define([], () => {
     const searchhistoryApiUrl = "api/searchhistory";
+    const namesearchApiUrl = "api/namesearch/";
 
     let getJson = (url, callback) => {
         fetch(url).then(response => response.json()).then(callback);
@@ -20,6 +21,14 @@
     //        .then(callback);
     //}
 
+    let getSearchName = (searchterm, url, callback) => {
+        if (url === undefined) {
+            url = namesearchApiUrl + searchterm;
+        }
+        getJson(url, callback);
+    };
+
+
     let searchName = (searchterm, callback) => {
         fetch("api/namesearch/" + searchterm)
             .then(response => response.json())
@@ -36,7 +45,6 @@
         fetch("api/simplesearch/" + searchterm)
             .then(response => response.json())
             .then(callback);
-        //debugger;
     }
 
     let getTitle = (tconst, callback) => {
@@ -50,6 +58,7 @@
         //getSearchHistory,
         getSearchhistory,
         getSearchhistoryUrlWithPageSize,
+        getSearchName,
         searchName,
         getPerson,
         searchTitle,
