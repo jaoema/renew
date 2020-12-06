@@ -5,6 +5,8 @@
         let searchhistory = ko.observableArray([]);
         let prev = ko.observable();
         let next = ko.observable();
+        let pageSizes = [10, 20, 30];
+        let selectedPageSize = ko.observableArray([10]);
 
 
         let getData = url => {
@@ -16,13 +18,19 @@
         }
 
         let showPrev = history => {
-            console.log(prev);
             getData(prev());
         }
         let showNext = history => {
-            console.log(next());
             getData(next());
         }
+
+        let enablePrev = ko.computed(() => prev() !== null);
+        let enableNext = ko.computed(() => next() !== null);
+
+        selectedPageSize.subscribe(() => {
+            var size = selectedPageSize()[0];
+            getData(ds.getSearchhistoryUrlWithPageSize(size));
+        });
 
         getData();
 
@@ -31,6 +39,10 @@
         return {
             searchhistory,
             showPrev,
+            enableNext,
+            enablePrev,
+            pageSizes,
+            selectedPageSize,
             showNext
         };
     }

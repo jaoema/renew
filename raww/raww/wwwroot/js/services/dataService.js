@@ -12,6 +12,8 @@
         getJson(url, callback);
     };
 
+    let getSearchhistoryUrlWithPageSize = size => searchhistoryApiUrl + "?pagesize=" + size;
+
     //let getSearchHistory = (callback) => {
     //    fetch("api/searchhistory")
     //        .then(response => response.json())
@@ -47,6 +49,7 @@
     return {
         //getSearchHistory,
         getSearchhistory,
+        getSearchhistoryUrlWithPageSize,
         searchName,
         getPerson,
         searchTitle,
