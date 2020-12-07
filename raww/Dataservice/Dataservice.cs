@@ -40,13 +40,6 @@ namespace DataserviceLib
             }
         }
 
-        public User FindUser(string username)
-        {
-            using var ctx = new ImdbContext();
-
-            return ctx.Users.Find(username);
-        }
-
         public bool Login(string username, string password)
         {
             //DB login command
@@ -91,9 +84,6 @@ namespace DataserviceLib
                 .ToList();
         }
 
-
-
-
         public IList<Person> FindActor(string searchstring, int page = 0, int pagesize = 50)
         {
             //get results from DB name search function
@@ -123,7 +113,6 @@ namespace DataserviceLib
 
 
         }
-
 
         public IList<Person> FindCoActor(string searchstring)
         {
