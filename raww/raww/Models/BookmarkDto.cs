@@ -7,7 +7,9 @@ namespace raww.Models
 {
     public class BookmarkDto
     {
-        public string Id { get; set; }
+        public string Tconst { get; set; }
+
+        public string Nconst { get; set; }
         public string Link { get; set; }
     }
 }
