@@ -43,13 +43,20 @@ namespace DataserviceLib
         public bool Login(string username, string password)
         {
             //DB login command
-            var ctx = new ImdbContext();
+            using var ctx = new ImdbContext();
 
-            if (username == adminUsername && password == adminPassword)
+            var data = ctx.Users.Where(x => x.Username == username);
+
+            if(data != null)
             {
-                return true;
+                if (username == adminUsername && password == adminPassword)
+                {
+                    return true;
+                }
+
             }
             return false;
+
         }
 
         public bool Logout(string username)

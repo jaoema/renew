@@ -2,16 +2,18 @@
     //private part
 
     //components with a title and a filename
-    let nameSearchComp = { titleName: "Find Person", fileName: "namesearch" }
-    let searchHistoryComp = { titleName: "Search History", fileName: "searchhistory" }
-    let titleSearchComp = { titleName: "Find Title", fileName: "titlesearch" }
+    let nameSearchComp = { titleName: "Find Person", fileName: "namesearch" };
+    let searchHistoryComp = { titleName: "Search History", fileName: "searchhistory" };
+    let titleSearchComp = { titleName: "Find Title", fileName: "titlesearch" };
+    let signInComp = { titleName: "Sign In", fileName: "signin" };
     let searchterm = ko.observable("");
 
 
 
-    let currentComponent = ko.observable(nameSearchComp.fileName);
-    let menuElements = [nameSearchComp, titleSearchComp, searchHistoryComp];
-    let selectedComponent = ko.observable('namesearch');
+    let currentComponent = ko.observable(signInComp.fileName);
+    let menuElements = [signInComp, nameSearchComp, titleSearchComp, searchHistoryComp];
+
+    let selectedComponent = ko.observable();
 
     let changeContent = element => {
         currentComponent(element.fileName.toLowerCase());
