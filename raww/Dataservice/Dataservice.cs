@@ -18,14 +18,14 @@ namespace DataserviceLib
 
         public Titlebasics GetTitle(string tconst)
         {
-            var ctx = new ImdbContext();
-            var title = ctx.Titlebasicses.Find(tconst);
-            return title;
+           using var ctx = new ImdbContext();
+
+           return ctx.Titlebasicses.Find(tconst);
         }
 
         public bool CreateUser(string username, string password)
         {
-            var ctx = new ImdbContext();
+            using var ctx = new ImdbContext();
             var user = ctx.Users.Find(username);
 
             if (user == null)
@@ -84,7 +84,7 @@ namespace DataserviceLib
             //get results from DB name search function
             var mylist = new List<Person>();
 
-            var ctx = new ImdbContext();
+           using var ctx = new ImdbContext();
 
             var result = ctx.Persons.FromSqlInterpolated($"select * from name_search({adminUsername},{searchstring})");
 
@@ -102,10 +102,10 @@ namespace DataserviceLib
         public Person GetPerson(string nconst)
         {
             //get person
-            var ctx = new ImdbContext();
-            var person = ctx.Persons.Find(nconst);
+            using var ctx = new ImdbContext();
 
-            return person;
+            return ctx.Persons.Find(nconst);
+
 
         }
 
