@@ -35,11 +35,7 @@
     let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + "?pagesize=" + size;
 
     let getBookmarkUrlWithPageSize = size => bookmarkApiUrl + "?pagesize=" + size;
-    //let getSearchHistory = (callback) => {
-    //    fetch("api/searchhistory")
-    //        .then(response => response.json())
-    //        .then(callback);
-    //}
+
 
     let getSearchName = (searchterm, url, callback) => {
         if (url === undefined) {
@@ -56,20 +52,8 @@
     };
 
 
-    let searchName = (searchterm, callback) => {
-        fetch("api/namesearch/" + searchterm)
-            .then(response => response.json())
-            .then(callback);
-    }
-
     let getPerson = (nconst, callback) => {
         fetch("api/person/" + nconst)
-            .then(response => response.json())
-            .then(callback);
-    }
-
-    let searchTitle = (searchterm, callback) => {
-        fetch("api/simplesearch/" + searchterm)
             .then(response => response.json())
             .then(callback);
     }
@@ -82,7 +66,6 @@
     
 
     return {
-        //getSearchHistory,
         getSearchhistory,
         getRatinghistory,
         getBookmarked,
@@ -91,9 +74,7 @@
         getBookmarkUrlWithPageSize,
         getSearchName,
         getSearchTitle,
-        searchName,
         getPerson,
-        searchTitle,
         getTitle
     }
 

@@ -1,5 +1,10 @@
 ﻿<h2>Your Bookmarks</h2>
-<div>
+
+<div data-bind="ifnot: bookmark">
+    <span> No Search History</span>
+</div>
+
+<div data-bind="if: bookmark">
     <div>
         Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
     </div>
