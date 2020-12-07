@@ -40,17 +40,24 @@ namespace DataserviceLib
             }
         }
 
+        public User FindUser(string username)
+        {
+            using var ctx = new ImdbContext();
+
+            return ctx.Users.Find(username);
+        }
+
         public bool Login(string username, string password)
         {
             //DB login command
             using var ctx = new ImdbContext();
 
-            var data = ctx.Users.Where(x => x.Username == username);
+            var data = ctx.Users.Find(username);
             
 
             if(data != null)
             {
-                if (username == adminUsername && password == adminPassword)
+                if (username == data.Username && password == data.Password)
                 {
                     return true;
                 }

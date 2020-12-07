@@ -11,13 +11,22 @@
         postman.subscribe('changeSearchFromNav', searchFromNav);
 
 
+        let getData = url => {
+            ds.getSearchTitle(searchterm(), url, data => {
+                //prev(data.prev);
+                //next(data.next);
+                searchresults(data.titlelist);
+            });
+        }
+
         let selectTitle = title => {
             selectedTitle(title);
             postman.publish('changeTitle', title);
         }
 
         let clickSearch = function () {
-            ds.searchTitle(searchterm(), function (data) { searchresults(data.titlelist) });
+            getData();
+            //debugger;
             searchterm("");
             searchFromComp(true);
             searchFromNav(false);

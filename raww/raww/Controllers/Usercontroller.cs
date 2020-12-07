@@ -24,7 +24,7 @@ namespace raww.Controllers
             return Ok();
         }
 
-        [HttpPost("api/login/{username, password}")]
+        [HttpGet("api/login/{username}/{password}")]
         public IActionResult Login(string username, string password)
         {
             var ds = new Dataservice();
@@ -35,7 +35,7 @@ namespace raww.Controllers
                 return NotFound();
             }
 
-            return Ok();
+            return Ok(success);
         }
 
         [HttpPost("api/logout")] //?username={username}

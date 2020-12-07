@@ -3,6 +3,7 @@
     const ratinghistoryApiUrl = "api/ratinghistory";
     const bookmarkhistoryApiUrl = "api/bookmarked";
     const namesearchApiUrl = "api/namesearch/";
+    const titlesearchApiUrl = "api/simplesearch/";
 
     let getJson = (url, callback) => {
         fetch(url).then(response => response.json()).then(callback);
@@ -47,6 +48,13 @@
         getJson(url, callback);
     };
 
+    let getSearchTitle = (searchterm, url, callback) => {
+        if (url === undefined) {
+            url = titlesearchApiUrl + searchterm;
+        }
+        getJson(url, callback);
+    };
+
 
     let searchName = (searchterm, callback) => {
         fetch("api/namesearch/" + searchterm)
@@ -82,6 +90,7 @@
         getRatinghistoryUrlWithPageSize,
         getBookmarkUrlWithPageSize,
         getSearchName,
+        getSearchTitle,
         searchName,
         getPerson,
         searchTitle,
