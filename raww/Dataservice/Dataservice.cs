@@ -46,6 +46,7 @@ namespace DataserviceLib
             using var ctx = new ImdbContext();
 
             var data = ctx.Users.Where(x => x.Username == username);
+            
 
             if(data != null)
             {

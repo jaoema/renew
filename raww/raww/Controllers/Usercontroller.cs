@@ -24,7 +24,7 @@ namespace raww.Controllers
             return Ok();
         }
 
-        [HttpPost("api/login")]
+        [HttpPost("api/login/{username, password}")]
         public IActionResult Login(string username, string password)
         {
             var ds = new Dataservice();
