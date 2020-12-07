@@ -125,10 +125,19 @@ namespace DataserviceLib
                 .Take(pagesize)
                 .ToList();
         }
+
+        
         public Object GetSpecificMovie(string tconst)
         {
-            var ctx = new ImdbContext();
+            using var ctx = new ImdbContext();
 
+            return ctx.Titlebasicses
+                .Where(x => x.Tconst == tconst)
+                //.Include(x => x.Titleprincipal)
+                .FirstOrDefault(x => x.Tconst == tconst);
+               
+               
+           
             // from p in ctx.Titlebasicses
             // select new { Tconst = p.Tconst, Primaryname = p.Primarytitle, p.Titleprincipal.Characters, };
 
@@ -207,7 +216,7 @@ namespace DataserviceLib
 
         public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)
         {
-            var ctx = new ImdbContext();
+            using var ctx = new ImdbContext();
             var result = ctx.Ratinghistories
                 .Where(x => x.Username == adminUsername)
                 .Skip(page * pagesize)

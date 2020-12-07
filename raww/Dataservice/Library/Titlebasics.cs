@@ -15,9 +15,12 @@ namespace DataserviceLib
         public bool Isadult { get; set; }
         public string Startyear { get; set; }
         public string Endyear { get; set; }
-        public  Titleprincipal Titleprincipal {get; set;}
+        //public string TitleprincipalTconst { get; set; }
+        public List<Titleprincipal> Titleprincipal {get; set;}
 
-        
+       
+
+
 
         /**
          * Due to the database containing null values, we needed to remove this Runtimeminutes

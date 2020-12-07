@@ -9,7 +9,7 @@ namespace DataserviceLib
     {
         
         public string Tconst { get; set; }
-        [ForeignKey("Tconst")]
+        //[ForeignKey("Tconst")]
 
         public int Ordering { get; set; }
         //[System.ComponentModel.DataAnnotations.Schema.ForeignKey("Nconst")]
@@ -21,6 +21,6 @@ namespace DataserviceLib
 
        // [ForeignKey("Titlebasics")]
        // public virtual string Tconst { get; set; }
-        public virtual ICollection<Titlebasics> Titlebasics { get; set; }
+        public Titlebasics Titlebasics { get; set; }
     }
 }
