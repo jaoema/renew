@@ -1,5 +1,6 @@
 ﻿define([], () => {
     const searchhistoryApiUrl = "api/searchhistory";
+    const ratinghistoryApiUrl = "api/ratinghistory";
     const namesearchApiUrl = "api/namesearch/";
 
     let getJson = (url, callback) => {
@@ -13,7 +14,16 @@
         getJson(url, callback);
     };
 
+    let getRatinghistory = (url, callback) => {
+        if (url === undefined) {
+            url = ratinghistoryApiUrl;
+        }
+        getJson(url, callback);
+    };
+
     let getSearchhistoryUrlWithPageSize = size => searchhistoryApiUrl + "?pagesize=" + size;
+
+    let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + "?pagesize=" + size;
 
     //let getSearchHistory = (callback) => {
     //    fetch("api/searchhistory")
@@ -57,7 +67,9 @@
     return {
         //getSearchHistory,
         getSearchhistory,
+        getRatinghistory,
         getSearchhistoryUrlWithPageSize,
+        getRatinghistoryUrlWithPageSize,
         getSearchName,
         searchName,
         getPerson,

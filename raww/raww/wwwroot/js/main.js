@@ -20,6 +20,11 @@ require(['knockout', 'text'], (ko) => {
         template: { require: "text!components/searchhistory/searchhistory.html" }
     });
 
+    ko.components.register("ratinghistory", {
+        viewModel: { require: "components/ratinghistory/ratinghistory" },
+        template: { require: "text!components/ratinghistory/ratinghistory.html" }
+    });
+
     ko.components.register("namesearch", {
         viewModel: { require: "components/namesearch/namesearch" },
         template: { require: "text!components/namesearch/namesearch.html" }

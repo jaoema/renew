@@ -4,13 +4,14 @@
     //components with a title and a filename
     let nameSearchComp = { titleName: "Find Person", fileName: "namesearch" }
     let searchHistoryComp = { titleName: "Search History", fileName: "searchhistory" }
+    let ratingHistoryComp = { titleName: "Rating History", fileName: "ratinghistory" }
     let titleSearchComp = { titleName: "Find Title", fileName: "titlesearch" }
     let searchterm = ko.observable("");
 
 
 
     let currentComponent = ko.observable(nameSearchComp.fileName);
-    let menuElements = [nameSearchComp, titleSearchComp, searchHistoryComp];
+    let menuElements = [nameSearchComp, titleSearchComp, searchHistoryComp, ratingHistoryComp];
     let selectedComponent = ko.observable('namesearch');
 
     let changeContent = element => {

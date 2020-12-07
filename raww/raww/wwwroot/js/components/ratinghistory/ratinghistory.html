@@ -1,0 +1,16 @@
+﻿<h2>Your Rating History</h2>
+<div>
+    <div>
+        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
+    <ul data-bind="foreach: ratinghistory" class="list-group">
+        <button type="button" class="list-group-item list-group-item-action">
+            rating: <span data-bind="text: tconst"></span>
+            rating: <span data-bind="text: rating"></span>
+        </button>
+    </ul>
+    <div class="btn-group navigationbuttons">
+        <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+        <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+    </div>
+</div>
