@@ -56,7 +56,7 @@ namespace raww.Controllers
 
             var populatedresult = CreateBookmarkedResult(searchresult, page, pagesize);
 
-            return Ok(searchresult);
+            return Ok(populatedresult);
         }
         private BookmarkDto MapBookmarks(Bookmark elem)
         {

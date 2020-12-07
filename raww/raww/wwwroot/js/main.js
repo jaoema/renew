@@ -25,6 +25,11 @@ require(['knockout', 'text'], (ko) => {
         template: { require: "text!components/ratinghistory/ratinghistory.html" }
     });
 
+    ko.components.register("bookmark", {
+        viewModel: { require: "components/bookmark/bookmark" },
+        template: { require: "text!components/bookmark/bookmark.html" }
+    });
+
     ko.components.register("namesearch", {
         viewModel: { require: "components/namesearch/namesearch" },
         template: { require: "text!components/namesearch/namesearch.html" }

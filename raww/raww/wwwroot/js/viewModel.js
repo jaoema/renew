@@ -7,12 +7,14 @@
     let ratingHistoryComp = { titleName: "Rating History", fileName: "ratinghistory" }
     let titleSearchComp = { titleName: "Find Title", fileName: "titlesearch" }
     let signInComp = { titleName: "Sign In", fileName: "signin" }
+    let bookmarkComp = { titleName: "Bookmarks", fileName: "bookmark" }
+    
     let searchterm = ko.observable("");
 
 
 
     let currentComponent = ko.observable(signInComp.fileName);
-    let menuElements = [signInComp, nameSearchComp, titleSearchComp, searchHistoryComp, ratingHistoryComp];
+    let menuElements = [signInComp, nameSearchComp, titleSearchComp, searchHistoryComp, ratingHistoryComp, bookmarkComp];
     let selectedComponent = ko.observable('namesearch');
 
     let changeContent = element => {

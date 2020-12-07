@@ -1,6 +1,7 @@
 ﻿define([], () => {
     const searchhistoryApiUrl = "api/searchhistory";
     const ratinghistoryApiUrl = "api/ratinghistory";
+    const bookmarkhistoryApiUrl = "api/bookmarked";
     const namesearchApiUrl = "api/namesearch/";
 
     let getJson = (url, callback) => {
@@ -21,10 +22,18 @@
         getJson(url, callback);
     };
 
+    let getBookmarked = (url, callback) => {
+        if (url === undefined) {
+            url = bookmarkhistoryApiUrl;
+        }
+        getJson(url, callback);
+    };
+
     let getSearchhistoryUrlWithPageSize = size => searchhistoryApiUrl + "?pagesize=" + size;
 
     let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + "?pagesize=" + size;
 
+    let getBookmarkUrlWithPageSize = size => bookmarkApiUrl + "?pagesize=" + size;
     //let getSearchHistory = (callback) => {
     //    fetch("api/searchhistory")
     //        .then(response => response.json())
@@ -68,8 +77,10 @@
         //getSearchHistory,
         getSearchhistory,
         getRatinghistory,
+        getBookmarked,
         getSearchhistoryUrlWithPageSize,
         getRatinghistoryUrlWithPageSize,
+        getBookmarkUrlWithPageSize,
         getSearchName,
         searchName,
         getPerson,
