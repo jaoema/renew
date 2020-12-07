@@ -12,8 +12,15 @@
     <div>
         <persondetails params="person: selectedPerson"></persondetails>
     </div>
+    <div>
+        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
 
     <ul data-bind="foreach: searchresults" class="list-group">
         <button data-bind="text: primaryname, click: $parent.selectPerson" type="button" class="list-group-item list-group-item-action"></button>
     </ul>
+    <div class="btn-group navigationbuttons">
+        <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+        <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+    </div>
 </div>

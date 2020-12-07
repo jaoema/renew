@@ -1,10 +1,15 @@
 ﻿<h2>Your Search History</h2>
-<ul data-bind="foreach: searchhistory" class="list-group">
-    <button type="button" class="list-group-item list-group-item-action">
-        Searchterm: <span data-bind="text: mysearch"></span>
-    </button>
-</ul>
-<div class="btn-group navigationbuttons" >
-    <button type="button" class="btn btn-primary" data-bind="click: showPrev">prev</button>
-    <button type="button" class="btn btn-primary" data-bind="click: showNext">next</button>
+<div>
+    <div>
+        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+    </div>
+    <ul data-bind="foreach: searchhistory" class="list-group">
+        <button type="button" class="list-group-item list-group-item-action">
+            Searchterm: <span data-bind="text: mysearch"></span>
+        </button>
+    </ul>
+    <div class="btn-group navigationbuttons">
+        <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+        <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+    </div>
 </div>
