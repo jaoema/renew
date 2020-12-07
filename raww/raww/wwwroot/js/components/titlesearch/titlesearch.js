@@ -36,7 +36,7 @@
 
         searchFromNav.subscribe(function (newValue) {
             if (newValue === true) {
-                ds.searchTitle(searchterm(), function (data) { searchresults(data.titlelist) });
+                getData();
 
                 searchFromComp(false);
                 searchterm("");

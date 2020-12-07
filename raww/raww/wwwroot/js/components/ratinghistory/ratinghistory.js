@@ -29,7 +29,7 @@
 
         selectedPageSize.subscribe(() => {
             var size = selectedPageSize()[0];
-            getData(ds.getRatingHistoryUrlWithPageSize(size));
+            getData(ds.getRatinghistoryUrlWithPageSize(size));
         });
 
         getData();

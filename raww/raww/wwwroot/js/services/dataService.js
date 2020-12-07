@@ -34,7 +34,7 @@
 
     let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + "?pagesize=" + size;
 
-    let getBookmarkUrlWithPageSize = size => bookmarkApiUrl + "?pagesize=" + size;
+    let getBookmarkUrlWithPageSize = size => bookmarkhistoryApiUrl + "?pagesize=" + size;
 
 
     let getSearchName = (searchterm, url, callback) => {
