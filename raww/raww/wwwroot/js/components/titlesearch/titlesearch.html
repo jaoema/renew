@@ -12,13 +12,28 @@
         <titledetails params="title: selectedTitle"></titledetails>
     </div>
     <div data-bind="if: searchFromComp">
+        <div>
+            Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+        </div>
         <ul data-bind="foreach: searchresults" class="list-group">
             <button data-bind="text: title, click: $parent.selectTitle" type="button" class="list-group-item list-group-item-action"></button>
         </ul>
+        <div class="btn-group navigationbuttons">
+            <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+            <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+        </div>
     </div>
+
     <div data-bind="if: searchFromNav">
+        <div>
+            Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+        </div>
         <ul data-bind="foreach: searchresults" class="list-group">
             <button data-bind="text: title, click: $parent.selectTitle" type="button" class="list-group-item list-group-item-action"></button>
         </ul>
+        <div class="btn-group navigationbuttons">
+            <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+            <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+        </div>
     </div>
 </div>

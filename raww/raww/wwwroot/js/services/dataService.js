@@ -38,7 +38,7 @@
 
     let getNamesearchUrlWithPageSize = (size, searchterm) => namesearchApiUrl + searchterm + "?pagesize=" + size;
 
-    let getTitlesearchUrlWithPageSize = size => titlesearchApiUrl + "?pagesize=" + size;
+    let getTitlesearchUrlWithPageSize = (size, searchterm) => titlesearchApiUrl + searchterm + "?pagesize=" + size;
 
 
     let getSearchName = (searchterm, url, callback) => {

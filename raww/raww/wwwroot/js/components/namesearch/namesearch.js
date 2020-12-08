@@ -9,6 +9,7 @@
         let next = ko.observable();
         let pageSizes = [10, 20, 30];
         let selectedPageSize = ko.observableArray([10]);
+        let showSearch = ko.observable();
 
 
         let getData = url => {
@@ -16,7 +17,6 @@
                 prev(data.prev);
                 next(data.next);
                 searchresults(data.personlist);
-                console.log(data.count);
             });
         }
 
@@ -28,13 +28,14 @@
         let clickSearch = function () {
             getData();
             currentSearchterm = searchterm();
+            showSearch(true);
             searchterm("");
         }
 
-        let showPrev = history => {
+        let showPrev = () => {
             getData(prev());
         }
-        let showNext = history => {
+        let showNext = () => {
             getData(next());
         }
 
@@ -63,7 +64,8 @@
             enablePrev,
             pageSizes,
             selectedPageSize,
-            showNext
+            showNext,
+            showSearch
         }
     }
 });
