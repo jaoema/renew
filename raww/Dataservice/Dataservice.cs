@@ -66,7 +66,7 @@ namespace DataserviceLib
             return true;
         }
 
-        public IList<SimpleSearch> SimpleSearch(string searchstring, int page = 0, int pagesize = 50)
+        public (IList<SimpleSearch>, int amount) SimpleSearch(string searchstring, int page = 0, int pagesize = 50)
         {
             //get results from DB function. Take amount equal to page*pagesize -> tolist
             var mylist = new List<SimpleSearch>();
@@ -78,18 +78,22 @@ namespace DataserviceLib
             {
                 mylist.Add(searchResult);
             }
-            return mylist
+
+            var amount = mylist.Count();
+            var pagedlist = mylist
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
+
+            return (pagedlist, amount);
         }
 
-        public IList<Person> FindActor(string searchstring, int page = 0, int pagesize = 50)
+        public (IList<Person>, int amount) FindActors(string searchstring, int page = 0, int pagesize = 50)
         {
             //get results from DB name search function
             var mylist = new List<Person>();
 
-           using var ctx = new ImdbContext();
+            using var ctx = new ImdbContext();
 
             var result = ctx.Persons.FromSqlInterpolated($"select * from name_search({adminUsername},{searchstring})");
 
@@ -98,10 +102,13 @@ namespace DataserviceLib
             {
                 mylist.Add(searchResult);
             }
-            return mylist
+            var amount = mylist.Count();
+            var pagedlist = mylist
             .Skip(page * pagesize)
             .Take(pagesize)
             .ToList();
+
+            return (pagedlist, amount);
         }
 
         public Person GetPerson(string nconst)
