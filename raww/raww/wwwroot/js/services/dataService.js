@@ -1,7 +1,7 @@
 ﻿define(['knockout', 'postman'], (ko, postman) => {
     const searchhistoryApiUrl = "api/searchhistory/";
-    const ratinghistoryApiUrl = "api/ratinghistory";
-    const bookmarkhistoryApiUrl = "api/bookmarked";
+    const ratinghistoryApiUrl = "api/ratinghistory/";
+    const bookmarkhistoryApiUrl = "api/bookmarked/";
     const namesearchApiUrl = "api/namesearch/";
     const titlesearchApiUrl = "api/simplesearch/";
 
@@ -34,23 +34,23 @@
 
     let getRatinghistory = (url, callback) => {
         if (url === undefined) {
-            url = ratinghistoryApiUrl;
+            url = ratinghistoryApiUrl + username();
         }
         getJson(url, callback);
     };
 
     let getBookmarked = (url, callback) => {
         if (url === undefined) {
-            url = bookmarkhistoryApiUrl;
+            url = bookmarkhistoryApiUrl + username();
         }
         getJson(url, callback);
     };
 
     let getSearchhistoryUrlWithPageSize = size => searchhistoryApiUrl + username() + "?pagesize=" + size;
 
-    let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + "?pagesize=" + size;
+    let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + username() + "?pagesize=" + size;
 
-    let getBookmarkUrlWithPageSize = size => bookmarkhistoryApiUrl + "?pagesize=" + size;
+    let getBookmarkUrlWithPageSize = size => bookmarkhistoryApiUrl + username() + "?pagesize=" + size;
 
     let getNamesearchUrlWithPageSize = (size, searchterm) => namesearchApiUrl + username() + "/" + searchterm + "?pagesize=" + size;
 

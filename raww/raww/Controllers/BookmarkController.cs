@@ -43,18 +43,18 @@ namespace raww.Controllers
 
             return Ok();
         }
-        [HttpGet("api/bookmarked", Name = nameof(Bookmarked))]
-        public IActionResult Bookmarked(int page = 0, int pagesize = 50)
+        [HttpGet("api/bookmarked/{username}", Name = nameof(Bookmarked))]
+        public IActionResult Bookmarked(string username, int page = 0, int pagesize = 50)
         {
             var ds = new Dataservice();
-            var searchresult = ds.GetBookmarked(page, pagesize);
+            var searchresult = ds.GetBookmarked(username, page, pagesize);
 
             if (searchresult == null)
             {
                 return NotFound();
             }
 
-            var populatedresult = CreateBookmarkedResult(searchresult, page, pagesize);
+            var populatedresult = CreateBookmarkedResult(username, searchresult, page, pagesize);
 
             return Ok(populatedresult);
         }
@@ -74,11 +74,11 @@ namespace raww.Controllers
 
             return dto;
         }
-        private object CreateBookmarkedResult(IList<Bookmark> bookmarks, int page = 1, int pageSize = 50)
+        private object CreateBookmarkedResult(string username, IList<Bookmark> bookmarks, int page = 1, int pageSize = 50)
         {
             var ds = new Dataservice();
 
-            var count = ds.numberOfBookmarks();
+            var count = ds.numberOfBookmarks(username);
 
             var personlist = bookmarks.Select(MapBookmarks);
 

@@ -222,11 +222,11 @@ namespace DataserviceLib
                 .Count(x => x.Username == username);
         }
 
-        public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)
+        public IList<Ratinghistory> GetRatingHistory(string username, int page = 0, int pagesize = 50)
         {
             using var ctx = new ImdbContext();
             var result = ctx.Ratinghistories
-                .Where(x => x.Username == adminUsername)
+                .Where(x => x.Username == username)
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
@@ -234,11 +234,11 @@ namespace DataserviceLib
             return result;
         }
 
-        public int numberOfRatingHistories()
+        public int numberOfRatingHistories(string username)
         {
             using var ctx = new ImdbContext();
             return ctx.Searchhistories
-                .Count(x => x.Username == adminUsername);
+                .Count(x => x.Username == username);
         }
 
         public bool CreateBookmark(string id, bool movie)
@@ -264,22 +264,22 @@ namespace DataserviceLib
             return true;
         }
 
-        public IList<Bookmark> GetBookmarked(int page = 0, int pagesize = 50)
+        public IList<Bookmark> GetBookmarked(string username, int page = 0, int pagesize = 50)
         {
             var ctx = new ImdbContext();
             var result = ctx.Bookmarks
-                .Where(x => x.Username == adminUsername)
+                .Where(x => x.Username == username)
                 .Skip(page * pagesize)
                 .Take(pagesize)
                 .ToList();
 
             return result;
         }
-        public int numberOfBookmarks()
+        public int numberOfBookmarks(string username)
         {
             using var ctx = new ImdbContext();
             return ctx.Bookmarks
-                .Count(x => x.Username == adminUsername);
+                .Count(x => x.Username == username);
         }
         public bool Rate(string tconst, int rating)
         {

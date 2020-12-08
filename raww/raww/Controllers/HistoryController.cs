@@ -33,18 +33,18 @@ namespace raww.Controllers
             
             return Ok(populatedresult);
         }
-        [HttpGet("api/ratinghistory", Name = nameof(RatingHistory))]
-        public IActionResult RatingHistory(int page = 0, int pagesize = 50)
+        [HttpGet("api/ratinghistory/{username}", Name = nameof(RatingHistory))]
+        public IActionResult RatingHistory(string username, int page = 0, int pagesize = 50)
         {
             var ds = new Dataservice();
-            var searchresult = ds.GetRatingHistory(page, pagesize);
+            var searchresult = ds.GetRatingHistory(username, page, pagesize);
 
             if (!searchresult.Any())
             {
                 return NotFound();
             }
 
-            var populatedresult = CreateRatingHistoryResult(page, pagesize, searchresult);
+            var populatedresult = CreateRatingHistoryResult(username, page, pagesize, searchresult);
             return Ok(populatedresult);
         }
         private SearchHistoryDto MapSearchElement(Searchhistory elem)
@@ -83,11 +83,11 @@ namespace raww.Controllers
 
             return dto;
         }
-        private object CreateRatingHistoryResult(int page, int pageSize, IList<Ratinghistory> histories)
+        private object CreateRatingHistoryResult(string username, int page, int pageSize, IList<Ratinghistory> histories)
         {
             var ds = new Dataservice();
 
-            var count = ds.numberOfRatingHistories();
+            var count = ds.numberOfRatingHistories(username);
 
             var mappedhistory = histories.Select(MapRatingElement);
 
