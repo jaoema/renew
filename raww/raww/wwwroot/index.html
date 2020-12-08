@@ -15,7 +15,7 @@
         </button>
         <!-- site navigation in navbar -->
         <div class="collapse navbar-collapse" id="navbarNav" data-bind="if: username">
-            <div class="border col-auto">
+            <div class=" col-auto">
                 <ul class="navbar-nav" data-bind="foreach: menuElements">
                     <li class="nav-item" data-bind="css: $parent.isActive($data)">
                         <a class="nav-link" href="#" data-bind="click: $parent.changeContent">
@@ -26,19 +26,24 @@
             </div>
 
             <!-- text in navbar -->
-            <div class="col-auto border">
+            <div class="col-auto ">
                 <span class="navbar-text">Welcome to Awesome Movie DataBase: </span>
                 <strong><span class="navbar-text text-light" data-bind="text: username"></span></strong>
             </div>
 
             <!-- search form in navbar -->
-            <div class="border col-auto ml-auto">
+            <div class=" col-auto ml-auto">
                 <form class="form-inline">
                     <input data-bind="textInput: searchterm" class="form-control" type="search" placeholder="Search Titles" aria-label="Search">
                     <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
+
+            <button data-bind="click: clickSignout" class="btn btn-danger my-2 my-sm-0" type="button">
+                <span>Sign Out</span>
+            </button>
         </div>
+        
     </nav>
 
     <div data-bind="ifnot: username">

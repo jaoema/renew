@@ -38,11 +38,13 @@
             searchterm("");
             postman.publish('changeSearchFromNav', true);
         }, 100);
-        
-        
     }
 
     let enableSearch = ko.computed(() => searchterm() !== "");
+
+    let clickSignout = function() {
+        postman.publish("userSignIn", "");
+    }
 
 
     //public part
@@ -56,6 +58,7 @@
         clickSearch,
         enableSearch,
         username,
-        signInComponent
+        signInComponent,
+        clickSignout
     };
 });

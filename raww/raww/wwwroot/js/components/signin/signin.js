@@ -16,12 +16,10 @@
                     postman.publish("userSignIn", username());
                     username("");
                     password("");
-                    console.log("ok");
                 }).catch( error => {
                     console.log(error);
                     username("");
                     password("");
-                    console.log("user/password incorrect");
                     showIncorrect(true);
                 });
         }
