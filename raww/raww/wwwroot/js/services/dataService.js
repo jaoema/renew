@@ -1,10 +1,13 @@
-﻿define([], () => {
-    const searchhistoryApiUrl = "api/searchhistory";
+﻿define(['knockout', 'postman'], (ko, postman) => {
+    const searchhistoryApiUrl = "api/searchhistory/";
     const ratinghistoryApiUrl = "api/ratinghistory";
     const bookmarkhistoryApiUrl = "api/bookmarked";
     const namesearchApiUrl = "api/namesearch/";
     const titlesearchApiUrl = "api/simplesearch/";
-    const signInApiUrl = "api/login/";
+
+    let username = ko.observable()
+
+    postman.subscribe('userSignIn', username)
 
 
     let handleErrors = (response) => {
@@ -14,7 +17,6 @@
         return response;
     };
 
-
     let getJson = (url, callback) => {
         fetch(url)
             .then(handleErrors)
@@ -23,17 +25,9 @@
             .catch(error => console.log(error));
     };
 
-  
-    let checkSignIn = (username, password, url, callback) => {
-        if (url == undefined) {
-            url = signInApiUrl + username + "/" + password;
-        }
-        getJson(url, callback);
-    };
-
     let getSearchhistory = (url, callback) => {
         if (url === undefined) {
-            url = searchhistoryApiUrl;
+            url = searchhistoryApiUrl + username();
         }
         getJson(url, callback);
     };
@@ -52,31 +46,30 @@
         getJson(url, callback);
     };
 
-    let getSearchhistoryUrlWithPageSize = size => searchhistoryApiUrl + "?pagesize=" + size;
+    let getSearchhistoryUrlWithPageSize = size => searchhistoryApiUrl + username() + "?pagesize=" + size;
 
     let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + "?pagesize=" + size;
 
     let getBookmarkUrlWithPageSize = size => bookmarkhistoryApiUrl + "?pagesize=" + size;
 
-    let getNamesearchUrlWithPageSize = (size, searchterm) => namesearchApiUrl + searchterm + "?pagesize=" + size;
+    let getNamesearchUrlWithPageSize = (size, searchterm) => namesearchApiUrl + username() + "/" + searchterm + "?pagesize=" + size;
 
-    let getTitlesearchUrlWithPageSize = (size, searchterm) => titlesearchApiUrl + searchterm + "?pagesize=" + size;
+    let getTitlesearchUrlWithPageSize = (size, searchterm) => titlesearchApiUrl + username() + "/" + searchterm + "?pagesize=" + size;
 
 
     let getSearchName = (searchterm, url, callback) => {
         if (url === undefined) {
-            url = namesearchApiUrl + searchterm;
+            url = namesearchApiUrl + username() + "/" + searchterm;
         }
         getJson(url, callback);
     };
 
     let getSearchTitle = (searchterm, url, callback) => {
         if (url === undefined) {
-            url = titlesearchApiUrl + searchterm;
+            url = titlesearchApiUrl + username() + "/" + searchterm;
         }
         getJson(url, callback);
     };
-
 
     let getPerson = (nconst, callback) => {
         fetch("api/person/" + nconst)
@@ -104,7 +97,6 @@
         getSearchTitle,
         getPerson,
         getTitle,
-        checkSignIn,
         handleErrors
     }
 

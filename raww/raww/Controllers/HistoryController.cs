@@ -18,18 +18,18 @@ namespace raww.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("api/searchhistory", Name = nameof(SearchHistory))]
-        public IActionResult SearchHistory(int page = 0, int pagesize = 10)
+        [HttpGet("api/searchhistory/{username}", Name = nameof(SearchHistory))]
+        public IActionResult SearchHistory(string username, int page = 0, int pagesize = 10)
         {
             var ds = new Dataservice();
-            var searchresult = ds.GetSearchHistory(page, pagesize);
+            var searchresult = ds.GetSearchHistory(username, page, pagesize);
 
             if (!searchresult.Any())
             {
                 return NotFound();
             }
 
-            var populatedresult = CreateSearchHistoryResult(page, pagesize, searchresult);
+            var populatedresult = CreateSearchHistoryResult(username, page, pagesize, searchresult);
             
             return Ok(populatedresult);
         }
@@ -54,11 +54,11 @@ namespace raww.Controllers
 
             return dto;
         }
-        private object CreateSearchHistoryResult(int page, int pageSize, IList<Searchhistory> histories)
+        private object CreateSearchHistoryResult(string username ,int page, int pageSize, IList<Searchhistory> histories)
         {
             var ds = new Dataservice();
 
-            var count = ds.numberOfSearchHistories();
+            var count = ds.numberOfSearchHistories(username);
 
             var mappedhistory = histories.Select(MapSearchElement);
 

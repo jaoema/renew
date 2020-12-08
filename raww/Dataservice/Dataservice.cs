@@ -46,7 +46,6 @@ namespace DataserviceLib
             using var ctx = new ImdbContext();
 
             var data = ctx.Users.Find(username);
-            
 
             if(data != null)
             {
@@ -54,10 +53,8 @@ namespace DataserviceLib
                 {
                     return true;
                 }
-
             }
             return false;
-
         }
 
         public bool Logout(string username)
@@ -66,13 +63,13 @@ namespace DataserviceLib
             return true;
         }
 
-        public (IList<SimpleSearch>, int amount) SimpleSearch(string searchstring, int page = 0, int pagesize = 50)
+        public (IList<SimpleSearch>, int amount) SimpleSearch(string username, string searchstring, int page = 0, int pagesize = 50)
         {
             //get results from DB function. Take amount equal to page*pagesize -> tolist
             var mylist = new List<SimpleSearch>();
             // use string search
             var ctx = new ImdbContext();
-            var result = ctx.SimpleSearches.FromSqlInterpolated($"select * from string_search({adminUsername},{searchstring})");
+            var result = ctx.SimpleSearches.FromSqlInterpolated($"select * from string_search({username},{searchstring})");
 
             foreach (var searchResult in result)
             {
@@ -88,14 +85,14 @@ namespace DataserviceLib
             return (pagedlist, amount);
         }
 
-        public (IList<Person>, int amount) FindActors(string searchstring, int page = 0, int pagesize = 50)
+        public (IList<Person>, int amount) FindActors(string username, string searchstring, int page = 0, int pagesize = 50)
         {
             //get results from DB name search function
             var mylist = new List<Person>();
 
             using var ctx = new ImdbContext();
 
-            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search({adminUsername},{searchstring})");
+            var result = ctx.Persons.FromSqlInterpolated($"select * from name_search({username},{searchstring})");
 
 
             foreach (var searchResult in result)
@@ -205,12 +202,12 @@ namespace DataserviceLib
     }
     }*/
 
-        public IList<Searchhistory> GetSearchHistory(int page = 0, int pagesize = 50)
+        public IList<Searchhistory> GetSearchHistory(string username, int page = 0, int pagesize = 50)
         {
             using var ctx = new ImdbContext();
 
             var result = ctx.Searchhistories
-                .Where(x => x.Username == adminUsername);
+                .Where(x => x.Username == username);
 
             return result
                     .Skip(page * pagesize)
@@ -218,11 +215,11 @@ namespace DataserviceLib
                     .ToList();
         }
 
-        public int numberOfSearchHistories()
+        public int numberOfSearchHistories(string username)
         {
             using var ctx = new ImdbContext();
             return ctx.Searchhistories
-                .Count(x => x.Username == adminUsername);
+                .Count(x => x.Username == username);
         }
 
         public IList<Ratinghistory> GetRatingHistory(int page = 0, int pagesize = 50)

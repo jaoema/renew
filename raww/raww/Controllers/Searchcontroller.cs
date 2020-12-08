@@ -19,11 +19,11 @@ namespace raww.Controllers
             _mapper = mapper;
         }
         
-        [HttpGet("api/simplesearch/{searchstring}", Name = nameof(SimpleSearch))]
-        public IActionResult SimpleSearch(string searchstring, int page = 0, int pagesize = 10)
+        [HttpGet("api/simplesearch/{username}/{searchstring}", Name = nameof(SimpleSearch))]
+        public IActionResult SimpleSearch(string username, string searchstring, int page = 0, int pagesize = 10)
         {
             var ds = new Dataservice();
-            var searchresult = ds.SimpleSearch(searchstring, page, pagesize);
+            var searchresult = ds.SimpleSearch(username, searchstring, page, pagesize);
 
             if (!searchresult.Item1.Any())
             {
@@ -33,11 +33,11 @@ namespace raww.Controllers
             var populatedresult = CreateSimpleSearchResult(page, pagesize, searchresult.Item1, searchresult.Item2);
             return Ok(populatedresult);
         }
-        [HttpGet("api/namesearch/{searchstring}", Name = nameof(NameSearch))]
-        public IActionResult NameSearch(string searchstring, int page = 0, int pagesize = 10)
+        [HttpGet("api/namesearch/{username}/{searchstring}", Name = nameof(NameSearch))]
+        public IActionResult NameSearch(string username, string searchstring, int page = 0, int pagesize = 10)
         { 
             var ds = new Dataservice();
-            var searchresult = ds.FindActors(searchstring, page, pagesize);
+            var searchresult = ds.FindActors(username, searchstring, page, pagesize);
 
             if (!searchresult.Item1.Any())
             {
