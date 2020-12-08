@@ -35,7 +35,7 @@ namespace raww.Controllers
                 return NotFound();
             }
 
-            return Ok(success);
+            return Ok();
         }
 
         [HttpPost("api/logout")] //?username={username}

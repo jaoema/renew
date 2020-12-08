@@ -15,7 +15,7 @@
         <div>
             Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
         </div>
-        <ul data-bind="foreach: searchresults" class="list-group">
+        <ul class="my-2" data-bind="foreach: searchresults" class="list-group">
             <button data-bind="text: title, click: $parent.selectTitle" type="button" class="list-group-item list-group-item-action"></button>
         </ul>
         <div class="btn-group navigationbuttons">
@@ -28,7 +28,7 @@
         <div>
             Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
         </div>
-        <ul data-bind="foreach: searchresults" class="list-group">
+        <ul class="my-2" data-bind="foreach: searchresults" class="list-group">
             <button data-bind="text: title, click: $parent.selectTitle" type="button" class="list-group-item list-group-item-action"></button>
         </ul>
         <div class="btn-group navigationbuttons">

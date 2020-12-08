@@ -8,7 +8,7 @@
     <div>
         Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
     </div>
-    <ul data-bind="foreach: ratinghistory" class="list-group">
+    <ul class="my-2" data-bind="foreach: ratinghistory" class="list-group">
         <button type="button" class="list-group-item list-group-item-action">
             Tconst: <span data-bind="text: tconst"></span>
             Rating: <span data-bind="text: rating"></span>

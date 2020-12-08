@@ -10,12 +10,14 @@
     let bookmarkComp = { titleName: "Bookmarks", fileName: "bookmark" }
     
     let searchterm = ko.observable("");
+    let username = ko.observable("");
 
+    postman.subscribe("userSignIn", username);
 
-
-    let currentComponent = ko.observable(signInComp.fileName);
-    let menuElements = [signInComp, nameSearchComp, titleSearchComp, searchHistoryComp, ratingHistoryComp, bookmarkComp];
-    let selectedComponent = ko.observable('namesearch');
+    let signInComponent = ko.observable(signInComp.fileName);
+    let currentComponent = ko.observable(titleSearchComp.fileName);
+    let menuElements = [titleSearchComp, nameSearchComp, searchHistoryComp, ratingHistoryComp, bookmarkComp];
+    let selectedComponent = ko.observable();
 
     let changeContent = element => {
         currentComponent(element.fileName.toLowerCase());
@@ -52,6 +54,8 @@
         isActive,
         searchterm,
         clickSearch,
-        enableSearch
+        enableSearch,
+        username,
+        signInComponent
     };
 });

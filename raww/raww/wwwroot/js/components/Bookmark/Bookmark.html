@@ -8,12 +8,10 @@
     <div>
         Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
     </div>
-    <ul data-bind="foreach: bookmark" class="list-group">
+    <ul class="my-2" data-bind="foreach: bookmark" class="list-group">
         <button type="button" class="list-group-item list-group-item-action">
             Bookmarked: <span data-bind="text: tconst"></span>
             <span data-bind="text: nconst"></span>
-
-
         </button>
     </ul>
     <div class="btn-group navigationbuttons">
