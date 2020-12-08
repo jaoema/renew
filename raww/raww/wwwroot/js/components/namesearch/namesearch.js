@@ -3,6 +3,7 @@
         //private part
         let searchresults = ko.observableArray([]);
         let searchterm = ko.observable("");
+        var currentSearchterm = ("");
         let selectedPerson = ko.observable();
         let prev = ko.observable();
         let next = ko.observable();
@@ -15,6 +16,7 @@
                 prev(data.prev);
                 next(data.next);
                 searchresults(data.personlist);
+                console.log(data.count);
             });
         }
 
@@ -25,6 +27,7 @@
 
         let clickSearch = function () {
             getData();
+            currentSearchterm = searchterm();
             searchterm("");
         }
 
@@ -40,7 +43,7 @@
 
         selectedPageSize.subscribe(() => {
             var size = selectedPageSize()[0];
-            getData(ds.getSearchhistoryUrlWithPageSize(size));
+            getData(ds.getNamesearchUrlWithPageSize(size, currentSearchterm));
         });
 
        

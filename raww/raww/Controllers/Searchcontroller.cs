@@ -20,7 +20,7 @@ namespace raww.Controllers
         }
         
         [HttpGet("api/simplesearch/{searchstring}", Name = nameof(SimpleSearch))]
-        public IActionResult SimpleSearch(string searchstring, int page = 0, int pagesize = 50)
+        public IActionResult SimpleSearch(string searchstring, int page = 0, int pagesize = 10)
         {
             var ds = new Dataservice();
             var searchresult = ds.SimpleSearch(searchstring, page, pagesize);
@@ -34,7 +34,7 @@ namespace raww.Controllers
             return Ok(populatedresult);
         }
         [HttpGet("api/namesearch/{searchstring}", Name = nameof(NameSearch))]
-        public IActionResult NameSearch(string searchstring, int page = 0, int pagesize = 50)
+        public IActionResult NameSearch(string searchstring, int page = 0, int pagesize = 10)
         { 
             var ds = new Dataservice();
             var searchresult = ds.FindActors(searchstring, page, pagesize);

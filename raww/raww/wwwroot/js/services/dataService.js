@@ -36,6 +36,10 @@
 
     let getBookmarkUrlWithPageSize = size => bookmarkhistoryApiUrl + "?pagesize=" + size;
 
+    let getNamesearchUrlWithPageSize = (size, searchterm) => namesearchApiUrl + searchterm + "?pagesize=" + size;
+
+    let getTitlesearchUrlWithPageSize = size => titlesearchApiUrl + "?pagesize=" + size;
+
 
     let getSearchName = (searchterm, url, callback) => {
         if (url === undefined) {
@@ -72,6 +76,8 @@
         getSearchhistoryUrlWithPageSize,
         getRatinghistoryUrlWithPageSize,
         getBookmarkUrlWithPageSize,
+        getNamesearchUrlWithPageSize,
+        getTitlesearchUrlWithPageSize,
         getSearchName,
         getSearchTitle,
         getPerson,
