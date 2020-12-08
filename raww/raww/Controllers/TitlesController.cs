@@ -55,11 +55,11 @@ namespace raww.Controllers
             //return Ok();
         }
 
-        [HttpPost("api/movie/rate", Name = nameof(Rate))]
-        public IActionResult Rate(string tconst, int rating)
+        [HttpPost("api/movie/rate/{username}/{tconst}", Name = nameof(Rate))]
+        public IActionResult Rate(string username, string tconst, int rating)
         {
             var ds = new Dataservice();
-            var success = ds.Rate(tconst, rating);
+            var success = ds.Rate(username, tconst, rating);
 
             if (!success)
             {

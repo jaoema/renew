@@ -17,11 +17,11 @@ namespace raww.Controllers
         {
             _mapper = mapper;
         }
-        [HttpPost("api/bookmark/{id}", Name = nameof(Bookmark))]
-        public IActionResult Bookmark(string id, bool movie)
+        [HttpPost("api/bookmark/{username}/{id}", Name = nameof(Bookmark))]
+        public IActionResult Bookmark(string username, string id, bool movie)
         {
             var ds = new Dataservice();
-            bool bookmark = ds.CreateBookmark(id, movie);
+            bool bookmark = ds.CreateBookmark(username, id, movie);
 
             if (!bookmark)
             {

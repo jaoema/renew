@@ -11,10 +11,6 @@ namespace DataserviceLib
     {
 
         // Hej Rasmus - nyt sted at skifte connectionstring inde i "ImdbContext"
-        string adminUsername = "hans1";
-        string adminPassword = "grethe";
-
-
 
         public Titlebasics GetTitle(string tconst)
         {
@@ -241,7 +237,7 @@ namespace DataserviceLib
                 .Count(x => x.Username == username);
         }
 
-        public bool CreateBookmark(string id, bool movie)
+        public bool CreateBookmark(string username, string id, bool movie)
         {
             var ctx = new ImdbContext();
             string type;
@@ -254,7 +250,7 @@ namespace DataserviceLib
                 type = null;
             }
 
-            ctx.Database.ExecuteSqlInterpolated($"select bookmark({adminUsername},{id}, {type})");
+            ctx.Database.ExecuteSqlInterpolated($"select bookmark({username},{id}, {type})");
             ctx.SaveChanges();
             return true;
         }
@@ -281,10 +277,10 @@ namespace DataserviceLib
             return ctx.Bookmarks
                 .Count(x => x.Username == username);
         }
-        public bool Rate(string tconst, int rating)
+        public bool Rate(string username, string tconst, int rating)
         {
             var ctx = new ImdbContext();
-            var result = ctx.Database.ExecuteSqlInterpolated($"select rate({adminUsername}, {tconst},{rating})");
+            var result = ctx.Database.ExecuteSqlInterpolated($"select rate({username}, {tconst},{rating})");
             ctx.SaveChanges();
             return true;
         }
