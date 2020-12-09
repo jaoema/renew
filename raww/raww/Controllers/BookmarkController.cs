@@ -17,7 +17,7 @@ namespace raww.Controllers
         {
             _mapper = mapper;
         }
-        [HttpPost("api/bookmark/{username}/{id}", Name = nameof(Bookmark))]
+        [HttpPost("api/bookmark/{username}/{id}/{movie}", Name = nameof(Bookmark))]
         public IActionResult Bookmark(string username, string id, bool movie)
         {
             var ds = new Dataservice();
@@ -30,19 +30,19 @@ namespace raww.Controllers
 
             return Ok();
         }
-        [HttpDelete("api/bookmark/{id}")]
-        public IActionResult RemoveBookmark(string id)
-        {
-            var ds = new Dataservice();
-            bool done = ds.DeleteBookmark(id);
+        //[HttpDelete("api/bookmark/{id}")]
+        //public IActionResult RemoveBookmark(string id)
+        //{
+        //    var ds = new Dataservice();
+        //    bool done = ds.DeleteBookmark(id);
 
-            if (!done)
-            {
-                return NotFound();
-            }
+        //    if (!done)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
         [HttpGet("api/bookmarked/{username}", Name = nameof(Bookmarked))]
         public IActionResult Bookmarked(string username, int page = 0, int pagesize = 50)
         {

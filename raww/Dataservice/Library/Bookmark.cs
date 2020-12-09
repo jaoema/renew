@@ -11,6 +11,6 @@ namespace DataserviceLib
         public string Nconst { get; set; }
         public string Primarytitle { get; set; }
         public string Primaryname { get; set; }
-        public int Startyear{ get; set; }
+        public string Startyear{ get; set; }
     }
 }

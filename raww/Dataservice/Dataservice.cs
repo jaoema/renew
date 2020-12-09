@@ -240,19 +240,42 @@ namespace DataserviceLib
         public bool CreateBookmark(string username, string id, bool movie)
         {
             var ctx = new ImdbContext();
+
+
             string type;
             if (movie)
             {
-                type = "movie";
+                var bookmark = ctx.Bookmarks
+                .Where(x => x.Username == username)
+                .Where(x => x.Tconst == id)
+                .ToList();
+
+                if(bookmark.Count == 0)
+                {
+                    type = "movie";
+                    ctx.Database.ExecuteSqlInterpolated($"select bookmark({username},{id}, {type})");
+                    ctx.SaveChanges();
+                    return true;
+                }
+
             }
             else
             {
-                type = null;
+                var bookmark = ctx.Bookmarks
+                .Where(x => x.Username == username)
+                .Where(x => x.Nconst == id)
+                .ToList();
+
+                if (bookmark.Count == 0)
+                {
+                    type = "";
+                    ctx.Database.ExecuteSqlInterpolated($"select bookmark({username},{id}, {type})");
+                    ctx.SaveChanges();
+                    return true;
+                }
             }
 
-            ctx.Database.ExecuteSqlInterpolated($"select bookmark({username},{id}, {type})");
-            ctx.SaveChanges();
-            return true;
+            return false;
         }
 
         public bool DeleteBookmark(string id)
