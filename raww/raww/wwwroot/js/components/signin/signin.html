@@ -12,6 +12,15 @@
         <div data-bind="if: showIncorrect" class="my-2">
             <span>Incorrect username or password, please try again</span>
         </div>
-        <button data-bind="click: clickSubmit" type="submit" class="btn btn-primary">Submit</button>
+        <div data-bind="if: userNotCreated" class="my-2">
+            <span>Failed to create user</span>
+        </div>
+        <div data-bind="if: userCreated" class="my-2">
+            <span>User Created - Please sign in</span>
+        </div>
+        <div>
+            <button data-bind="click: clickSignIn, enable: enableButtons" type="submit" class="btn btn-primary">Sign In</button>
+            <button data-bind="click: clickSignUp, enable: enableButtons" type="submit" class="btn btn-secondary">Sign Up</button>
+        </div>
     </form>
 </div>

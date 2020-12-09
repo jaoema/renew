@@ -11,7 +11,7 @@ namespace raww.Controllers
     [ApiController]
     public class Usercontroller : ControllerBase
     {
-        [HttpPost("api/signup")] //?username={username}&password={password}
+        [HttpPost("api/signup/{username}/{password}")] //?username={username}&password={password}
         public IActionResult CreateUser(string username, string password)
         {
             var ds = new Dataservice();

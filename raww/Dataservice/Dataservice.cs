@@ -277,6 +277,7 @@ namespace DataserviceLib
             return ctx.Bookmarks
                 .Count(x => x.Username == username);
         }
+
         public bool Rate(string username, string tconst, int rating)
         {
             var ctx = new ImdbContext();

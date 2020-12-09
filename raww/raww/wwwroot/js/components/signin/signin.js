@@ -5,9 +5,11 @@
         let username = ko.observable("");
         let password = ko.observable("");
         let showIncorrect = ko.observable(false);
+        let userNotCreated = ko.observable(false);
+        let userCreated = ko.observable(false);
 
 
-        let clickSubmit = function () {
+        let clickSignIn = function () {
             showIncorrect(false);
 
             fetch("api/login/" + username() + "/" + password())
@@ -24,13 +26,37 @@
                 });
         }
 
+        let clickSignUp = function () {
+            fetch("api/signup/" + username() + "/" + password(), {
+                method: 'POST'
+
+            })
+                .then(ds.handleErrors)
+                .then(response => {
+                    userCreated(true);
+                    username("");
+                    password("");
+                }).catch(error => {
+                    console.log(error);
+                    username("");
+                    password("");
+                    userNotCreated(true);
+                });
+        }
+
+        let enableButtons = ko.computed(() => username() !== "" && password() !== "");
+
 
         //public part
         return {
             username,
             password,
-            clickSubmit,
-            showIncorrect
+            clickSignIn,
+            showIncorrect,
+            enableButtons,
+            clickSignUp,
+            userCreated,
+            userNotCreated
         };
     }
 });
