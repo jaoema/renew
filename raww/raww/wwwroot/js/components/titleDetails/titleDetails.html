@@ -1,13 +1,16 @@
-﻿<div data-bind="with: title">
+﻿<div data-bind="with: tconst">
     <div>
         <!--<div>
             Id: <span data-bind="text: tconst"></span>
         </div>-->
         <div>
-            Title: <span data-bind="text: title"></span>
+            Title: <span data-bind="text: tconst"></span>
         </div>
         <div>
             Year: <span data-bind="text: year"></span>
+        </div>
+        <div>
+            <button data-bind="click: clickBookmark" type="button" class="btn btn-primary btn-sm">Bookmark</button>        
         </div>
     </div>
 </div>

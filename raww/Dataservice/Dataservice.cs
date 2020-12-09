@@ -233,7 +233,7 @@ namespace DataserviceLib
         public int numberOfRatingHistories(string username)
         {
             using var ctx = new ImdbContext();
-            return ctx.Searchhistories
+            return ctx.Ratinghistories
                 .Count(x => x.Username == username);
         }
 

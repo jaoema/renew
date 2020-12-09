@@ -4,6 +4,8 @@
     const bookmarkhistoryApiUrl = "api/bookmarked/";
     const namesearchApiUrl = "api/namesearch/";
     const titlesearchApiUrl = "api/simplesearch/";
+    const personApiUrl = "api/person/";
+    const titleApiUrl = "api/movie/";
 
     let username = ko.observable()
 
@@ -71,17 +73,31 @@
         getJson(url, callback);
     };
 
-    let getPerson = (nconst, callback) => {
-        fetch("api/person/" + nconst)
-            .then(response => response.json())
-            .then(callback);
-    }
+    let getPerson = (nconst, url, callback) => {
+        if (url === undefined) {
+            url = personApiUrl + nconst();
+        }
+        getJson(url, callback);
+    };
 
-    let getTitle = (tconst, callback) => {
-        fetch("api/movie/" + tconst)
-            .then(response => response.json())
-            .then(callback);
-    }
+    let getTitle = (tconst, url, callback) => {
+        if (url === undefined) {
+            url = titleApiUrl + tconst();
+        }
+        getJson(url, callback);
+    };
+
+    //let getPerson = (nconst, callback) => {
+    //    fetch("api/person/" + nconst)
+    //        .then(response => response.json())
+    //        .then(callback);
+    //}
+
+    //let getTitle = (tconst, callback) => {
+    //    fetch("api/movie/" + tconst)
+    //        .then(response => response.json())
+    //        .then(callback);
+    //}
     
 
     return {

@@ -10,6 +10,10 @@ namespace raww.Models
         public string Tconst { get; set; }
 
         public string Nconst { get; set; }
+        public string Primarytitle { get; set; }
+        public string Primaryname { get; set; }
+        public string Startyear { get; set; }
+
         public string Link { get; set; }
     }
 }

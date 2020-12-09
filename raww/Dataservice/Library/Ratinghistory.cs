@@ -7,6 +7,8 @@ namespace DataserviceLib
     public class Ratinghistory
     {
         public string Username { get; set; }
+        public string Title { get; set; }
+
         public int Rating { get; set; }
         public string Tconst { get; set; }
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey("Tconst")]

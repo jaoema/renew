@@ -1,17 +1,21 @@
 ﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function (params) {
         //private part
-        let title = params.title;
+        //let title = params.title;
+        let tconst = params.tconst;
 
-        //let nconst = params.nconst || "nm0000514";
+        postman.subscribe('changeTconst', tconst);
 
-        //ds.getPerson(nconst, function(data) { person(data) });
 
-        postman.subscribe('changeTitle', title);
+
+        let clickBookmark = function () {
+
+        }
 
         //public part
         return {
-            title
+            tconst,
+            clickBookmark
         }
     }
 });

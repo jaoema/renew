@@ -34,7 +34,7 @@ namespace raww.Controllers
             return Ok(populatedresult);
         }
         [HttpGet("api/ratinghistory/{username}", Name = nameof(RatingHistory))]
-        public IActionResult RatingHistory(string username, int page = 0, int pagesize = 50)
+        public IActionResult RatingHistory(string username, int page = 0, int pagesize = 10)
         {
             var ds = new Dataservice();
             var searchresult = ds.GetRatingHistory(username, page, pagesize);

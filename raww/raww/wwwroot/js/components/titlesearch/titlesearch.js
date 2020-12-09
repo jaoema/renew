@@ -4,7 +4,7 @@
         let searchresults = ko.observableArray([]);
         let searchterm = ko.observable("");
         var currentSearchterm = ("");
-        let selectedTitle = ko.observable();
+        let selectedTconst = ko.observable();
         let searchFromNav = ko.observable(false);
         let searchFromComp = ko.observable(false);
         let prev = ko.observable();
@@ -24,9 +24,9 @@
             });
         }
 
-        let selectTitle = title => {
-            selectedTitle(title);
-            postman.publish('changeTitle', title);
+        let selectTconst = tconst => {
+            selectedTconst(tconst);
+            postman.publish('changeTconst', tconst);
         }
 
         let clickSearch = function () {
@@ -70,8 +70,8 @@
             searchresults,
             searchterm,
             clickSearch,
-            selectTitle,
-            selectedTitle,
+            selectTconst,
+            selectedTconst,
             enableSearch,
             showPrev,
             showNext,
