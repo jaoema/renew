@@ -77,6 +77,9 @@ namespace DataserviceLib
             modelBuilder.Entity<Bookmark>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Bookmark>().Property(x => x.Tconst).HasColumnName("tconst");
             modelBuilder.Entity<Bookmark>().Property(x => x.Nconst).HasColumnName("nconst");
+            modelBuilder.Entity<Bookmark>().Property(x => x.Primarytitle).HasColumnName("primarytitle");
+            modelBuilder.Entity<Bookmark>().Property(x => x.Primaryname).HasColumnName("primaryname");
+            modelBuilder.Entity<Bookmark>().Property(x => x.Startyear).HasColumnName("startyear");
 
             modelBuilder.Entity<SimpleSearch>().HasNoKey();
             modelBuilder.Entity<SimpleSearch>().Property(x => x.Tconst).HasColumnName("tconst");
