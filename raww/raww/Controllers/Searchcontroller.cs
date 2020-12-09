@@ -64,17 +64,17 @@ namespace raww.Controllers
         }
         private SearchDto AddSearchLink(SimpleSearch elem)
         {
-            var dto = _mapper.Map<SearchDto>(elem);
             elem.Tconst = elem.Tconst.Trim();
+
+            var dto = _mapper.Map<SearchDto>(elem);
             dto.Link = Url.Link(nameof(TitlesController.GetMovie), new { elem.Tconst });
 
             return dto;
         }
         private PersonDto AddNameLink(Person elem)
         {
-            var dto = _mapper.Map<PersonDto>(elem);
-
             elem.Nconst = elem.Nconst.Trim();
+            var dto = _mapper.Map<PersonDto>(elem);
             dto.Link = Url.Link(nameof(PersonController.GetPerson), new { elem.Nconst });
 
             return dto;

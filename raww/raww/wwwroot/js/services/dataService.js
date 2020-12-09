@@ -75,14 +75,14 @@
 
     let getPerson = (nconst, url, callback) => {
         if (url === undefined) {
-            url = personApiUrl + nconst();
+            url = personApiUrl + nconst;
         }
         getJson(url, callback);
     };
 
     let getTitle = (tconst, url, callback) => {
         if (url === undefined) {
-            url = titleApiUrl + tconst();
+            url = titleApiUrl + tconst;
         }
         getJson(url, callback);
     };

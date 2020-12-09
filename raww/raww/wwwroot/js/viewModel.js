@@ -19,6 +19,9 @@
     let menuElements = [titleSearchComp, nameSearchComp, searchHistoryComp, ratingHistoryComp, bookmarkComp];
     let selectedComponent = ko.observable();
 
+    postman.subscribe("changeCurrentComp", currentComponent);
+
+
     let changeContent = element => {
         currentComponent(element.fileName.toLowerCase());
 
