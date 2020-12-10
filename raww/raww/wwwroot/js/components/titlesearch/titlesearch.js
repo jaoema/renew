@@ -27,11 +27,8 @@
         let selectTconst = tconst => {
             postman.publish('changeCurrentComp', "titledetails");
             selectedTconst(tconst.tconst);
-            postman.publish('changeTconst', tconst.tconst);
-            postman.publish('changeShowDetails', true);  
-            setTimeout(() => {
-                     
-            }, 100);
+            postman.publish('changeTconst', { tconst: selectedTconst(), showDetails: true });
+         
         }
 
         let clickSearch = function () {

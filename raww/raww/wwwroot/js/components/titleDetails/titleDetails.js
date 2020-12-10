@@ -7,10 +7,14 @@
         let originaltitle = ko.observable();
         let startyear = ko.observable();
         let showDetails = ko.observable(false);
-         
+        let enableBookmark = ko.observable(true);
+        let alreadyBookmarked = ko.observable(false);
+        let addedBookmark = ko.observable(false);
 
-        postman.subscribe('changeTconst', tconst);
-        postman.subscribe('changeShowDetails', showDetails);
+        //empty after testing:
+        let username = ko.observable("hans1");
+
+        postman.subscribe("UserSignIn", username);
 
         let getData = url => {
             console.log(tconst());
@@ -18,32 +22,31 @@
                 title(data);
                 originaltitle(data.originaltitle);
                 startyear(data.startyear);
-                debugger;
             });
         }
 
+        postman.subscribe('changeTconst', data => {
+            tconst(data.tconst);
+            showDetails(data.showDetails);
+            getData();
+        });
+
         let clickBookmark = function () {
             console.log("clicked bookmark");
-            //fetch("api/bookmark/" + username() + "/" + tconst() + "/true" , {
-            //    method: 'POST'
-
-            //})
-            //    .then(ds.handleErrors)
-            //    .then(response => {
-            //        userCreated(true);
-            //    }).catch(error => {
-            //        console.log(error);
-            //        userNotCreated(true);
-            //    });
+            alreadyBookmarked(false);
+            addedBookmark(false);
+            fetch("api/bookmark/" + username() + "/" + tconst() + "/true" , {
+                method: 'POST'
+            })
+                .then(ds.handleErrors)
+                .then(response => {
+                    enableBookmark(false);
+                    addedBookmark(true);
+                }).catch(error => {
+                    console.log(error);
+                    alreadyBookmarked(true);
+                });
         }
-
-        showDetails.subscribe(function (newValue) {
-            if (newValue === true) {
-                getData();
-            }
-                         
-        });
-       
        
 
         //public part
@@ -53,7 +56,10 @@
             title,
             originaltitle,
             startyear,
-            showDetails
+            showDetails,
+            enableBookmark,
+            alreadyBookmarked,
+            addedBookmark
         }
     }
 });

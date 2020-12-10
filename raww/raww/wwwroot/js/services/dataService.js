@@ -7,7 +7,9 @@
     const personApiUrl = "api/person/";
     const titleApiUrl = "api/movie/";
 
-    let username = ko.observable()
+
+    //empty after testing
+    let username = ko.observable("hans1")
 
     postman.subscribe('userSignIn', username)
 

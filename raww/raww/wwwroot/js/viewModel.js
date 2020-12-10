@@ -10,7 +10,9 @@
     let bookmarkComp = { titleName: "Bookmarks", fileName: "bookmark" }
     
     let searchterm = ko.observable("");
-    let username = ko.observable("");
+
+    // empty after testing
+    let username = ko.observable("hans1");
 
     postman.subscribe("userSignIn", username);
 

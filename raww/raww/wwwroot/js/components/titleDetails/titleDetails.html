@@ -13,7 +13,9 @@
             Year: <span data-bind="text: startyear"></span>
         </div>
         <div>
-            <button data-bind="click: clickBookmark" type="button" class="btn btn-primary btn-sm">Bookmark</button>
+            <button data-bind="click: clickBookmark, enable: enableBookmark" type="button" class="btn btn-primary btn-sm">Bookmark</button>
+            <span data-bind="if: alreadyBookmarked">This title is already in your bookmarks</span>
+            <span data-bind="if: addedBookmark">Bookmark added</span>
         </div>
     </div>
 </div>
