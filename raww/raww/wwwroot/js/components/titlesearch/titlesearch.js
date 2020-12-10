@@ -27,7 +27,7 @@
         let selectTconst = tconst => {
             postman.publish('changeCurrentComp', "titledetails");
             selectedTconst(tconst.tconst);
-            postman.publish('changeTconst', { tconst: selectedTconst(), showDetails: true });
+            postman.publish('changeTconst', {tconst: selectedTconst(), showDetails: true });
          
         }
 

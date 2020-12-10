@@ -10,14 +10,11 @@
 
 <div data-bind="if: showSearch">
     <div>
-        <persondetails params="person: selectedPerson"></persondetails>
-    </div>
-    <div>
         Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
     </div>
 
-    <ul class="my-2" data-bind="foreach: searchresults" class="list-group">
-        <button data-bind="text: primaryname, click: $parent.selectPerson" type="button" class="list-group-item list-group-item-action"></button>
+    <ul data-bind="foreach: searchresults" class="list-group my-2">
+        <button data-bind="text: primaryname, click: $parent.selectNconst" type="button" class="list-group-item list-group-item-action"></button>
     </ul>
     <div class="btn-group navigationbuttons">
         <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>

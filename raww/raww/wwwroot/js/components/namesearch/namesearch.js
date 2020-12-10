@@ -4,7 +4,7 @@
         let searchresults = ko.observableArray([]);
         let searchterm = ko.observable("");
         var currentSearchterm = ("");
-        let selectedPerson = ko.observable();
+        let selectedNconst = ko.observable();
         let prev = ko.observable();
         let next = ko.observable();
         let pageSizes = [10, 20, 30];
@@ -20,9 +20,11 @@
             });
         }
 
-        let selectPerson = person => {
-            selectedPerson(person);
-            postman.publish('changePerson', person);
+        let selectNconst = nconst => {
+            postman.publish('changeCurrentComp', "persondetails");
+
+            selectedNconst(nconst.nconst);
+            postman.publish('changeNconst', { nconst: selectedNconst(), showDetails: true });
         }
 
         let clickSearch = function () {
@@ -56,8 +58,8 @@
             searchresults,
             searchterm,
             clickSearch,
-            selectPerson,
-            selectedPerson,
+            selectNconst,
+            selectedNconst,
             enableSearch,
             showPrev,
             enableNext,

@@ -111,7 +111,6 @@ namespace DataserviceLib
 
             return ctx.Persons.Find(nconst);
 
-
         }
 
         public IList<Person> FindCoActor(string searchstring)
@@ -280,6 +279,12 @@ namespace DataserviceLib
 
         public bool DeleteBookmark(string id)
         {
+
+            var ctx = new ImdbContext();
+
+
+
+
             return true;
         }
 
@@ -304,12 +309,21 @@ namespace DataserviceLib
         public bool Rate(string username, string tconst, int rating)
         {
             var ctx = new ImdbContext();
-            var result = ctx.Database.ExecuteSqlInterpolated($"select rate({username}, {tconst},{rating})");
-            ctx.SaveChanges();
-            return true;
+
+            var ratings = ctx.Ratinghistories
+               .Where(x => x.Username == username)
+               .Where(x => x.Tconst == tconst)
+               .ToList();
+
+            if (ratings.Count == 0)
+            {
+                var result = ctx.Database.ExecuteSqlInterpolated($"select rate({username}, {tconst},{rating})");
+                ctx.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
-
-
 
     }
 }

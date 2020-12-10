@@ -10,6 +10,11 @@
         let enableBookmark = ko.observable(true);
         let alreadyBookmarked = ko.observable(false);
         let addedBookmark = ko.observable(false);
+        let enableRate = ko.observable(true);
+        let alreadyRated = ko.observable(false);
+        let addedRating = ko.observable(false);
+        let ratings = [1,2,3,4,5,6,7,8,9,10];
+        let selectedRating = ko.observableArray([5]);
 
         //empty after testing:
         let username = ko.observable("hans1");
@@ -17,7 +22,6 @@
         postman.subscribe("UserSignIn", username);
 
         let getData = url => {
-            console.log(tconst());
             ds.getTitle(tconst(), url, data => {
                 title(data);
                 originaltitle(data.originaltitle);
@@ -32,7 +36,6 @@
         });
 
         let clickBookmark = function () {
-            console.log("clicked bookmark");
             alreadyBookmarked(false);
             addedBookmark(false);
             fetch("api/bookmark/" + username() + "/" + tconst() + "/true" , {
@@ -47,6 +50,22 @@
                     alreadyBookmarked(true);
                 });
         }
+
+        let clickRate = function () {
+            alreadyBookmarked(false);
+            addedBookmark(false);
+            fetch("api/movie/rate/" + username() + "/" + tconst() + "/" + selectedRating()[0], {
+                method: 'POST'
+            })
+                .then(ds.handleErrors)
+                .then(response => {
+                    enableRate(false);
+                    addedRating(true);
+                }).catch(error => {
+                    console.log(error);
+                    alreadyRated(true);
+                });
+        }
        
 
         //public part
@@ -59,7 +78,13 @@
             showDetails,
             enableBookmark,
             alreadyBookmarked,
-            addedBookmark
+            addedBookmark,
+            clickRate,
+            enableRate,
+            alreadyRated,
+            addedRating,
+            ratings,
+            selectedRating
         }
     }
 });
