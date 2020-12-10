@@ -45,15 +45,15 @@
         </div>
         
     </nav>
+    <div class="bg-dark">
+        <div data-bind="ifnot: username">
+            <div data-bind="component: {name: signInComponent}"></div>
+        </div>
 
-    <div data-bind="ifnot: username">
-        <div data-bind="component: {name: signInComponent}"></div>
+        <div data-bind="if: username">
+            <div data-bind="component: {name: currentComponent}"></div>
+        </div>
     </div>
-
-    <div data-bind="if: username">
-        <div data-bind="component: {name: currentComponent}"></div>
-    </div>
-
     <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
 </body>
 </html>

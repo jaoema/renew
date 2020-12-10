@@ -277,15 +277,36 @@ namespace DataserviceLib
             return false;
         }
 
-        public bool DeleteBookmark(string id)
+        public bool DeleteBookmark(string username, string id, bool movie)
         {
 
             var ctx = new ImdbContext();
 
+            if (movie)
+            {
+                var bookmark = ctx.Bookmarks.Where(x => x.Username == username).Where(x => x.Tconst == id).ToList();
 
+                if(bookmark.Count != 0)
+                {
+                    ctx.Bookmarks.Remove(bookmark[0]);
+                    ctx.SaveChanges();
+                    return true;
+                }
 
+            }
+            else
+            {
+                var bookmark = ctx.Bookmarks.Where(x => x.Username == username).Where(x => x.Nconst == id).ToList();
 
-            return true;
+                if (bookmark.Count != 0)
+                {
+                    ctx.Bookmarks.Remove(bookmark[0]);
+                    ctx.SaveChanges();
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public IList<Bookmark> GetBookmarked(string username, int page = 0, int pagesize = 50)

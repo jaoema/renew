@@ -30,19 +30,19 @@ namespace raww.Controllers
 
             return Ok();
         }
-        //[HttpDelete("api/bookmark/{id}")]
-        //public IActionResult RemoveBookmark(string id)
-        //{
-        //    var ds = new Dataservice();
-        //    bool done = ds.DeleteBookmark(id);
+        [HttpPost("api/bookmark/remove/{username}/{id}/{movie}")]
+        public IActionResult RemoveBookmark(string username, string id, bool movie)
+        {
+            var ds = new Dataservice();
+            bool done = ds.DeleteBookmark(username, id, movie);
 
-        //    if (!done)
-        //    {
-        //        return NotFound();
-        //    }
+            if (!done)
+            {
+                return NotFound();
+            }
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
         [HttpGet("api/bookmarked/{username}", Name = nameof(Bookmarked))]
         public IActionResult Bookmarked(string username, int page = 0, int pagesize = 50)
         {
