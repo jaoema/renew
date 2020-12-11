@@ -17,7 +17,6 @@
 
 
         let getData = url => {
-            console.log(nconst());
             ds.getPerson(nconst(), url, data => {
                 person(data);
                 name(data.primaryname);
@@ -31,7 +30,6 @@
         });
 
         let clickBookmark = function () {
-            console.log("clicked bookmark");
             alreadyBookmarked(false);
             addedBookmark(false);
             fetch("api/bookmark/" + username() + "/" + nconst() + "/false", {

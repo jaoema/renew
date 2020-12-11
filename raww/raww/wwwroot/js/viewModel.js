@@ -34,8 +34,8 @@
     }
 
     let clickSearch = function() {
-        //currentComponent(simpleSearchComp.fileName.toLowerCase());
         changeContent(titleSearchComp);
+
         setTimeout(() => {
             postman.publish('changeSearchFromNav', false);
 
