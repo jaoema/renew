@@ -17,9 +17,10 @@
         let selectedRating = ko.observableArray([5]);
 
         //empty after testing:
-        let username = ko.observable("hans1");
+        let username = ko.observable("");
 
-        postman.subscribe("UserSignIn", username);
+        postman.subscribe('userSignIn', username)
+
 
         let getData = url => {
             ds.getTitle(tconst(), url, data => {
@@ -52,8 +53,8 @@
         }
 
         let clickRate = function () {
-            alreadyBookmarked(false);
-            addedBookmark(false);
+            alreadyRated(false);
+            addedRating(false);
             fetch("api/movie/rate/" + username() + "/" + tconst() + "/" + selectedRating()[0], {
                 method: 'POST'
             })

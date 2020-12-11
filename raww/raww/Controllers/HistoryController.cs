@@ -39,7 +39,7 @@ namespace raww.Controllers
             var ds = new Dataservice();
             var searchresult = ds.GetRatingHistory(username, page, pagesize);
 
-            if (!searchresult.Any())
+            if (searchresult == null)
             {
                 return NotFound();
             }

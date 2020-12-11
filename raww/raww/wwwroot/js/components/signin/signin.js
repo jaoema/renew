@@ -15,6 +15,7 @@
             fetch("api/login/" + username() + "/" + password())
                 .then(ds.handleErrors)
                 .then(response => {
+                    console.log(username());
                     postman.publish("userSignIn", username());
                     username("");
                     password("");

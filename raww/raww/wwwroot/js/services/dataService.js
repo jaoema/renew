@@ -9,7 +9,7 @@
 
 
     //empty after testing
-    let username = ko.observable("hans1")
+    let username = ko.observable("")
 
     postman.subscribe('userSignIn', username)
 
@@ -79,6 +79,7 @@
         if (url === undefined) {
             url = personApiUrl + nconst;
         }
+        postman.publish("userSignIn", username());
         getJson(url, callback);
     };
 
@@ -86,19 +87,15 @@
         if (url === undefined) {
             url = titleApiUrl + tconst;
         }
+        postman.publish("userSignIn", username());
         getJson(url, callback);
     };
 
-    //let getPerson = (nconst, callback) => {
-    //    fetch("api/person/" + nconst)
-    //        .then(response => response.json())
-    //        .then(callback);
-    //}
-
-    //let getTitle = (tconst, callback) => {
-    //    fetch("api/movie/" + tconst)
-    //        .then(response => response.json())
-    //        .then(callback);
+    //let getUsername = (user) => {
+    //    if (user === undefined) {
+    //        user = username();
+    //    }
+    //    return user;
     //}
     
 
@@ -115,7 +112,7 @@
         getSearchTitle,
         getPerson,
         getTitle,
-        handleErrors
+        handleErrors,
     }
 
 });

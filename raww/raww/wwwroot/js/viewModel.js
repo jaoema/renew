@@ -12,7 +12,7 @@
     let searchterm = ko.observable("");
 
     // empty after testing
-    let username = ko.observable("hans1");
+    let username = ko.observable("");
 
     postman.subscribe("userSignIn", username);
 

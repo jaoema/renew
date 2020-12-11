@@ -9,9 +9,9 @@
         let selectedPageSize = ko.observableArray([10]);
 
         //empty after testing:
-        let username = ko.observable("hans1");
+        let username = ko.observable("");
 
-        postman.subscribe("UserSignIn", username);
+        postman.subscribe("userSignIn", username);
 
         let getData = url => {
             ds.getRatinghistory(url, data => {
