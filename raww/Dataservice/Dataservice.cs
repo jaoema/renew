@@ -236,6 +236,23 @@ namespace DataserviceLib
                 .Count(x => x.Username == username);
         }
 
+        public bool DeleteRating(string username, string id)
+        {
+            using var ctx = new ImdbContext();
+
+            var rating = ctx.Ratinghistories.Where(x => x.Username == username).Where(x => x.Tconst == id).ToList();
+
+            if (rating.Count != 0)
+            {
+               
+                ctx.Database.ExecuteSqlInterpolated($"select delete_rating({username},{id})");
+                ctx.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
         public bool CreateBookmark(string username, string id, bool movie)
         {
             var ctx = new ImdbContext();
@@ -281,6 +298,7 @@ namespace DataserviceLib
         {
 
             var ctx = new ImdbContext();
+            string type;
 
             if (movie)
             {
@@ -288,7 +306,8 @@ namespace DataserviceLib
 
                 if(bookmark.Count != 0)
                 {
-                    ctx.Bookmarks.Remove(bookmark[0]);
+                    type = "movie";
+                    ctx.Database.ExecuteSqlInterpolated($"select delete_bookmark({username},{id}, {type})");
                     ctx.SaveChanges();
                     return true;
                 }
@@ -300,7 +319,8 @@ namespace DataserviceLib
 
                 if (bookmark.Count != 0)
                 {
-                    ctx.Bookmarks.Remove(bookmark[0]);
+                    type = "";
+                    ctx.Database.ExecuteSqlInterpolated($"select delete_bookmark({username},{id}, {type})");
                     ctx.SaveChanges();
                     return true;
                 }

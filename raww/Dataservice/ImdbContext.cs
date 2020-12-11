@@ -73,7 +73,7 @@ namespace DataserviceLib
             modelBuilder.Entity<Searchhistory>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Searchhistory>().Property(x => x.Mysearch).HasColumnName("mysearch");
 
-            modelBuilder.Entity<Bookmark>().HasKey();
+            modelBuilder.Entity<Bookmark>().HasNoKey();
             modelBuilder.Entity<Bookmark>().ToTable("bookmarked");
             modelBuilder.Entity<Bookmark>().Property(x => x.Username).HasColumnName("username");
             modelBuilder.Entity<Bookmark>().Property(x => x.Tconst).HasColumnName("tconst");

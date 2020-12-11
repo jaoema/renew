@@ -47,6 +47,20 @@ namespace raww.Controllers
             var populatedresult = CreateRatingHistoryResult(username, page, pagesize, searchresult);
             return Ok(populatedresult);
         }
+        [HttpPost("api/ratinghistory/remove/{username}/{id}")]
+        public IActionResult RemoveRating(string username, string id)
+        {
+            var ds = new Dataservice();
+            bool done = ds.DeleteRating(username, id);
+
+            if (!done)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
         private SearchHistoryDto MapSearchElement(Searchhistory elem)
         {
             var dto = _mapper.Map<SearchHistoryDto>(elem);

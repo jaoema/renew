@@ -38,7 +38,6 @@
         });
 
         let deleteBookmark = bookmark => {
-            console.log(bookmark);
             if (bookmark.nconst === null) {
                 fetch("api/bookmark/remove/" + username() + "/" + bookmark.tconst + "/true", {
                     method: 'POST'

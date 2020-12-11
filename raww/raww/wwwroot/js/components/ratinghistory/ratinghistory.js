@@ -1,4 +1,4 @@
-﻿define(['knockout', 'dataservice'], (ko, ds) => {
+﻿define(['knockout', 'dataservice', 'postman'], (ko, ds, postman) => {
     return function(params) {
         //private part
 
@@ -8,6 +8,10 @@
         let pageSizes = [10, 20, 30];
         let selectedPageSize = ko.observableArray([10]);
 
+        //empty after testing:
+        let username = ko.observable("hans1");
+
+        postman.subscribe("UserSignIn", username);
 
         let getData = url => {
             ds.getRatinghistory(url, data => {
@@ -32,6 +36,18 @@
             getData(ds.getRatinghistoryUrlWithPageSize(size));
         });
 
+        let deleteRating = rating => {
+            fetch("api/ratinghistory/remove/" + username() + "/" + rating.tconst , {
+                method: 'POST'
+            })
+                .then(ds.handleErrors)
+                .then(response => {
+                    getData();
+                }).catch(error => {
+                    console.log(error);
+                });
+        }
+
         getData();
 
 
@@ -43,7 +59,8 @@
             enablePrev,
             pageSizes,
             selectedPageSize,
-            showNext
+            showNext,
+            deleteRating
         };
     }
 });
