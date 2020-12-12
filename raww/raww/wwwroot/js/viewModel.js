@@ -4,7 +4,7 @@
     //components with a title and a filename
     let nameSearchComp = { titleName: "Find Person", fileName: "namesearch" }
     let searchHistoryComp = { titleName: "Search History", fileName: "searchhistory" }
-    let ratingHistoryComp = { titleName: "Rating History", fileName: "ratinghistory" }
+    let ratingHistoryComp = { titleName: "Your Ratings", fileName: "ratinghistory" }
     let titleSearchComp = { titleName: "Find Title", fileName: "titlesearch" }
     let signInComp = { titleName: "Sign In", fileName: "signin" }
     let bookmarkComp = { titleName: "Bookmarks", fileName: "bookmark" }
