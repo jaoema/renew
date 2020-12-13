@@ -1,10 +1,17 @@
 ﻿<h2>Search for a person</h2>
 
-<div class="input-group mb-3">
+<!--<div class="input-group mb-3">
     <input data-bind="textInput: searchterm" type="text" class="col-2 form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
     <div class="input-group-append">
         <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-primary" type="button">Search</button>
     </div>
+</div>-->
+
+<div class="col-auto ml-auto mb-3">
+    <form class="form-inline">
+        <input data-bind="textInput: searchterm" class="form-control" type="search" placeholder="Name" aria-label="Search">
+        <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 </div>
 
 

@@ -91,14 +91,6 @@
         getJson(url, callback);
     };
 
-    //let getUsername = (user) => {
-    //    if (user === undefined) {
-    //        user = username();
-    //    }
-    //    return user;
-    //}
-    
-
     return {
         getSearchhistory,
         getRatinghistory,
