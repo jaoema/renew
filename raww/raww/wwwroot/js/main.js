@@ -53,6 +53,10 @@ require(['knockout', 'text'], (ko) => {
         viewModel: { require: "components/signin/signin" },
         template: { require: "text!components/signin/signin.html" }
     });
+    ko.components.register("profile", {
+        viewModel: { require: "components/profile/profile" },
+        template: { require: "text!components/profile/profile.html" }
+    });
 
 });
 

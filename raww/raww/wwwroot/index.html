@@ -4,7 +4,7 @@
     <title>AMDB</title>
     <link href="style/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body class="container-fluid">
+<body>
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <!-- logo in navbar -->
@@ -27,7 +27,7 @@
 
             <!-- text in navbar -->
             <div class="col-auto ">
-                <span class="navbar-text">Welcome to Awesome Movie DataBase: </span>
+                <span class="navbar-text">Welcome: </span>
                 <strong><span class="navbar-text text-light" data-bind="text: username"></span></strong>
             </div>
 
@@ -39,19 +39,21 @@
                 </form>
             </div>
 
-            <button data-bind="click: clickSignout" class="btn btn-danger my-2 my-sm-0" type="button">
+            <button data-bind="click: clickSignout" class="btn btn-danger m-1" type="button">
                 <span>Sign Out</span>
             </button>
         </div>
-        
     </nav>
-    <div class="bg-dark">
-        <div data-bind="ifnot: username">
-            <div data-bind="component: {name: signInComponent}"></div>
-        </div>
 
-        <div data-bind="if: username">
-            <div data-bind="component: {name: currentComponent}"></div>
+    <div class="container-fluid">
+        <div class="bg-dark">
+            <div data-bind="ifnot: username">
+                <div data-bind="component: {name: signInComponent}"></div>
+            </div>
+
+            <div data-bind="if: username">
+                <div data-bind="component: {name: currentComponent}"></div>
+            </div>
         </div>
     </div>
     <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>

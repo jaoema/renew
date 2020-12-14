@@ -1,15 +1,14 @@
 ﻿<h2>Person Details</h2>
 
-<div>
+
+<div class="container">
     <div>
-        <div>
-            Name: <span data-bind="text: name"></span>
-        </div>
-     
-        <div>
-            <button data-bind="click: clickBookmark, enable: enableBookmark" type="button" class="btn btn-primary btn-sm">Bookmark</button>
-            <span data-bind="if: alreadyBookmarked">This person is already in your bookmarks</span>
-            <span data-bind="if: addedBookmark">Bookmark added</span>
-        </div>
+        Name: <span data-bind="text: name"></span>
+    </div>
+
+    <div>
+        <button data-bind="click: clickBookmark, enable: enableBookmark" type="button" class="btn btn-primary btn-sm">Bookmark</button>
+        <span data-bind="if: alreadyBookmarked">This person is already in your bookmarks</span>
+        <span data-bind="if: addedBookmark">Bookmark added</span>
     </div>
 </div>

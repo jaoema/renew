@@ -8,6 +8,7 @@
     let titleSearchComp = { titleName: "Find Title", fileName: "titlesearch" }
     let signInComp = { titleName: "Sign In", fileName: "signin" }
     let bookmarkComp = { titleName: "Bookmarks", fileName: "bookmark" }
+    let profileComp = { titleName: "Profile", fileName: "profile"}
     
     let searchterm = ko.observable("");
 
@@ -18,7 +19,7 @@
 
     let signInComponent = ko.observable(signInComp.fileName);
     let currentComponent = ko.observable(titleSearchComp.fileName);
-    let menuElements = [titleSearchComp, nameSearchComp, searchHistoryComp, ratingHistoryComp, bookmarkComp];
+    let menuElements = [titleSearchComp, nameSearchComp, searchHistoryComp, profileComp];
     let selectedComponent = ko.observable();
 
     postman.subscribe("changeCurrentComp", currentComponent);
@@ -31,6 +32,7 @@
 
     let isActive = element => {
         return element.fileName.toLowerCase() === currentComponent() ? "active" : "";
+        debugger;
     }
 
     let clickSearch = function() {

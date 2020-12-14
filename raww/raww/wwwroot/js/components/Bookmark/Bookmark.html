@@ -1,22 +1,28 @@
-﻿<h2>Your Bookmarks</h2>
+﻿<h2 class="text-center">Your Bookmarks</h2>
 
-<div data-bind="ifnot: bookmark">
-    <span> No Search History</span>
-</div>
-
-<div data-bind="if: bookmark">
-    <div>
-        Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+<div>
+    <div data-bind="ifnot: bookmark">
+        <span> No Search History</span>
     </div>
-    <ul class="my-2" data-bind="foreach: bookmark" class="list-group">
-        <li type="button" class="list-group-item list-group-item-action">
-            Bookmarked: <span data-bind="text: primarytitle"></span>
-            <span data-bind="text: primaryname"></span>
-            <button type="button" class="btn-sm btn-danger" data-bind="click: $parent.deleteBookmark">Delete</button>
-        </li>
-    </ul>
-    <div class="btn-group navigationbuttons">
-        <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
-        <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+
+    <div data-bind="if: bookmark">
+        <div>
+            Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+        </div>
+        <ul data-bind="foreach: bookmark" class="list-group my-2">
+            <li type="button" class="list-group-item list-group-item-action">
+                Bookmarked: <span data-bind="text: primarytitle"></span>
+                <span data-bind="text: primaryname"></span>
+                <button type="button" class="btn-sm btn-danger ml-auto" data-bind="click: $parent.deleteBookmark">Delete</button>
+            </li>
+        </ul>
+
+        <div class="container justify-content-center">
+            <div class="btn-group navigationbuttons">
+                <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+                <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+            </div>
+        </div>
+
     </div>
 </div>
