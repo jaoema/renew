@@ -33,6 +33,8 @@
         if (url === undefined) {
             url = searchhistoryApiUrl + username();
         }
+        postman.publish("userSignIn", username());
+
         getJson(url, callback);
     };
 

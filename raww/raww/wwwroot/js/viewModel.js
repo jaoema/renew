@@ -19,7 +19,7 @@
 
     let signInComponent = ko.observable(signInComp.fileName);
     let currentComponent = ko.observable(titleSearchComp.fileName);
-    let menuElements = [titleSearchComp, nameSearchComp, searchHistoryComp, profileComp];
+    let menuElements = [titleSearchComp, nameSearchComp, profileComp];
     let selectedComponent = ko.observable();
 
     postman.subscribe("changeCurrentComp", currentComponent);

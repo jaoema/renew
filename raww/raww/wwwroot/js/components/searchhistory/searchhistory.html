@@ -1,24 +1,26 @@
-﻿<h2>Your Search History</h2>
+﻿<h3>Your Search History</h3>
 
-<div class="container">
-    <div data-bind="ifnot: searchhistory">
-        <span> No Search History</span>
-    </div>
-
-    <div data-bind="if: searchhistory">
-        <div>
-            Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
+<div>
+    <div >
+        <div data-bind="ifnot: searchhistory">
+            <span> No Search History</span>
         </div>
-        <ul data-bind="foreach: searchhistory" class="list-group my-2">
-            <button type="button" class="list-group-item list-group-item-action">
-                Searchterm: <span data-bind="text: mysearch"></span>
-            </button>
-        </ul>
-        <ul class="pagination justify-content-center">
-            <div class="btn-group navigationbuttons">
-                <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
-                <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+
+        <div data-bind="if: searchhistory">
+            <div>
+                Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
             </div>
-        </ul>
+            <ul data-bind="foreach: searchhistory" class="list-group my-2">
+                <button type="button" class="list-group-item list-group-item-action">
+                    Searchterm: <span data-bind="text: mysearch"></span>
+                </button>
+            </ul>
+            <ul class="pagination justify-content-center">
+                <div class="btn-group navigationbuttons">
+                    <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+                    <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+                </div>
+            </ul>
+        </div>
     </div>
 </div>

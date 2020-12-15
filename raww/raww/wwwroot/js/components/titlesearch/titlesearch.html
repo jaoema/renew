@@ -1,45 +1,44 @@
 ﻿<h2>Search for a title</h2>
 
-<div class="container">
-    <div class="col-auto ml-auto mb-3">
-        <form class="form-inline">
-            <input data-bind="textInput: searchterm" class="form-control" type="search" placeholder="Title/plot" aria-label="Search">
-            <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
+<div class="container-fluid">
+    <div class="col-lg-6">
+        <div class="mb-3">
+            <form class="form-inline">
+                <input data-bind="textInput: searchterm" class="form-control" type="search" placeholder="Title/plot" aria-label="Search">
+                <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
 
-    <div>
         <div>
-            <!--<titledetails ></titledetails>-->
-        </div>
-        <div data-bind="if: searchFromComp">
-            <div>
-                Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
-            </div>
-            <ul data-bind="foreach: searchresults" class="list-group my-2">
-                <button data-bind="text: title, click: $parent.selectTconst" type="button" class="list-group-item list-group-item-action"></button>
-            </ul>
-            <ul class="pagination justify-content-center">
-                <div class="btn-group navigationbuttons">
-                    <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
-                    <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+            <div data-bind="if: searchFromComp">
+                <div>
+                    Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
                 </div>
-            </ul>
-        </div>
+                <ul data-bind="foreach: searchresults" class="list-group my-2">
+                    <li data-bind="text: title, click: $parent.selectTconst" type="button" class="list-group-item list-group-item-action"></li>
+                </ul>
+                <ul class="pagination justify-content-center">
+                    <div class="btn-group navigationbuttons">
+                        <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+                        <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+                    </div>
+                </ul>
+            </div>
 
-        <div data-bind="if: searchFromNav">
-            <div>
-                Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
-            </div>
-            <ul data-bind="foreach: searchresults" class="list-group my-2">
-                <button data-bind="text: title, click: $parent.selectTconst" type="button" class="list-group-item list-group-item-action"></button>
-            </ul>
-            <ul class="pagination justify-content-center">
-                <div class="btn-group navigationbuttons">
-                    <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
-                    <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+            <div data-bind="if: searchFromNav">
+                <div>
+                    Page size: <select data-bind="options: pageSizes, selectedOptions: selectedPageSize"></select>
                 </div>
-            </ul>
+                <ul data-bind="foreach: searchresults" class="list-group my-2">
+                    <button data-bind="text: title, click: $parent.selectTconst" type="button" class="list-group-item list-group-item-action"></button>
+                </ul>
+                <ul class="pagination justify-content-center">
+                    <div class="btn-group navigationbuttons">
+                        <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+                        <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+                    </div>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

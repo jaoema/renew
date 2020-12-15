@@ -2,28 +2,30 @@
 
 
 
-<div class="container">
-    <div>
-        Tconst: <span data-bind="text: tconst"></span>
-    </div>
-    <div>
-        Title: <span data-bind="text: originaltitle"></span>
-    </div>
-    <div>
-        Year: <span data-bind="text: startyear"></span>
-    </div>
-    <div class="my-2">
-        <button data-bind="click: clickBookmark, enable: enableBookmark" type="button" class="btn btn-primary btn-sm">Bookmark</button>
-        <span data-bind="if: alreadyBookmarked">This title is already in your bookmarks</span>
-        <span data-bind="if: addedBookmark">Bookmark added</span>
-    </div>
-    <div class="my-2">
+<div class="container-fluid">
+    <div class="col-lg-6">
         <div>
-            Rating: <select data-bind="options: ratings, selectedOptions: selectedRating"></select>
-            <button data-bind="click: clickRate, enable: enableRate" type="button" class="btn btn-primary btn-sm">Rate</button>
+            Tconst: <span data-bind="text: tconst"></span>
         </div>
+        <div>
+            Title: <span data-bind="text: originaltitle"></span>
+        </div>
+        <div>
+            Year: <span data-bind="text: startyear"></span>
+        </div>
+        <div class="my-2">
+            <button data-bind="click: clickBookmark, enable: enableBookmark" type="button" class="btn btn-primary btn-sm">Bookmark</button>
+            <span data-bind="if: alreadyBookmarked">This title is already in your bookmarks</span>
+            <span data-bind="if: addedBookmark">Bookmark added</span>
+        </div>
+        <div class="my-2">
+            <div>
+                Rating: <select data-bind="options: ratings, selectedOptions: selectedRating"></select>
+                <button data-bind="click: clickRate, enable: enableRate" type="button" class="btn btn-primary btn-sm">Rate</button>
+            </div>
 
-        <span data-bind="if: alreadyRated">You have already rated this title</span>
-        <span data-bind="if: addedRating">Rating added</span>
+            <span data-bind="if: alreadyRated">You have already rated this title</span>
+            <span data-bind="if: addedRating">Rating added</span>
+        </div>
     </div>
 </div>
