@@ -40,6 +40,8 @@
         if (url === undefined) {
             url = ratinghistoryApiUrl + username();
         }
+        postman.publish("userSignIn", username());
+
         getJson(url, callback);
     };
 
@@ -47,6 +49,8 @@
         if (url === undefined) {
             url = bookmarkhistoryApiUrl + username();
         }
+        postman.publish("userSignIn", username());
+
         getJson(url, callback);
     };
 

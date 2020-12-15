@@ -17,9 +17,11 @@
         <ul data-bind="foreach: searchresults" class="list-group my-2">
             <button data-bind="text: primaryname, click: $parent.selectNconst" type="button" class="list-group-item list-group-item-action"></button>
         </ul>
-        <div class="btn-group navigationbuttons">
-            <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
-            <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
-        </div>
+        <ul class="pagination justify-content-center">
+            <div class="btn-group navigationbuttons">
+                <button type="button" class="btn btn-primary" data-bind="click: showPrev, enable: enablePrev">prev</button>
+                <button type="button" class="btn btn-primary" data-bind="click: showNext, enable: enableNext">next</button>
+            </div>
+        </ul>
     </div>
 </div>
