@@ -32,19 +32,12 @@
 
     let isActive = element => {
         return element.fileName.toLowerCase() === currentComponent() ? "active" : "";
-        debugger;
     }
 
     let clickSearch = function() {
         changeContent(titleSearchComp);
-
-        setTimeout(() => {
-            postman.publish('changeSearchFromNav', false);
-
-            postman.publish('changeSearchterm', searchterm());
-            searchterm("");
-            postman.publish('changeSearchFromNav', true);
-        }, 100);
+        postman.publish('changeSearchFromNav', { searchFromNav: true, searchterm: searchterm() });
+        searchterm("");
     }
 
     let enableSearch = ko.computed(() => searchterm() !== "");

@@ -12,11 +12,8 @@
         let pageSizes = [10, 20, 30];
         let selectedPageSize = ko.observableArray([10]);
 
-        postman.subscribe('changeSearchterm', searchterm);
-        postman.subscribe('changeSearchFromNav', searchFromNav);
-
-
         let getData = url => {
+
             ds.getSearchTitle(searchterm(), url, data => {
                 prev(data.prev);
                 next(data.next);
@@ -24,11 +21,20 @@
             });
         }
 
+        postman.subscribe('changeSearchFromNav', data => {
+
+            searchFromNav(data.searchFromNav);
+            searchFromComp(false);
+            searchterm(data.searchterm)
+            getData();
+            currentSearchterm = searchterm();
+            searchterm("");
+        });
+
         let selectTconst = tconst => {
             postman.publish('changeCurrentComp', "titledetails");
             selectedTconst(tconst.tconst);
             postman.publish('changeTconst', {tconst: selectedTconst(), showDetails: true });
-         
         }
 
         let clickSearch = function () {
@@ -55,16 +61,6 @@
         });
 
         let enableSearch = ko.computed(() => searchterm() !== "");
-
-        searchFromNav.subscribe(function (newValue) {
-            if (newValue === true) {
-                getData();
-                currentSearchterm = searchterm();
-
-                searchFromComp(false);
-                searchterm("");
-            }
-        });
 
 
         //public part
