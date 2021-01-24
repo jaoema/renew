@@ -1,4 +1,5 @@
-﻿define(['knockout', 'postman'], (ko, postman) => {
+﻿//Defines the URL to APIs
+define(['knockout', 'postman'], (ko, postman) => {
     const searchhistoryApiUrl = "api/searchhistory/";
     const ratinghistoryApiUrl = "api/ratinghistory/";
     const bookmarkhistoryApiUrl = "api/bookmarked/";
@@ -10,17 +11,17 @@
 
     //empty after testing
     let username = ko.observable("")
-
+    //Subscriber til userSignIn
     postman.subscribe('userSignIn', username)
 
-
+    // Sender en fejl tekts hvis der opstår fejl. Hvis respons ikke er ok, post fejl. 
     let handleErrors = (response) => {
         if (!response.ok) {
             throw Error(response.statusText);
         }
         return response;
     };
-
+    //tar URL og et callback, håndtere errors, tar respons, sender det tilbage til som json
     let getJson = (url, callback) => {
         fetch(url)
             .then(handleErrors)
@@ -28,7 +29,7 @@
             .then(callback)
             .catch(error => console.log(error));
     };
-
+    //Hvis url = undefined, bruges standard url, publish username, kalder vi vores json funktion for at få json tilbage. 
     let getSearchhistory = (url, callback) => {
         if (url === undefined) {
             url = searchhistoryApiUrl + username();
@@ -56,6 +57,7 @@
         getJson(url, callback);
     };
 
+    //Tar standard url med username og indsætter pagesize.
     let getSearchhistoryUrlWithPageSize = size => searchhistoryApiUrl + username() + "?pagesize=" + size;
 
     let getRatinghistoryUrlWithPageSize = size => ratinghistoryApiUrl + username() + "?pagesize=" + size;
@@ -66,7 +68,7 @@
 
     let getTitlesearchUrlWithPageSize = (size, searchterm) => titlesearchApiUrl + username() + "/" + searchterm + "?pagesize=" + size;
 
-
+    
     let getSearchName = (searchterm, url, callback) => {
         if (url === undefined) {
             url = namesearchApiUrl + username() + "/" + searchterm;

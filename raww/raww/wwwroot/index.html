@@ -5,7 +5,7 @@
     <link href="style/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-
+    <!-- Standard BS class, fixed top (sidder fast øverst) -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <!-- logo in navbar -->
         <a class="navbar-brand" href="#">AMDB</a>
@@ -13,19 +13,24 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- site navigation in navbar -->
+        <!-- site navigation in navbar, binds username - viser ikke elementer i navbar før user logges ind. -->
         <div class="collapse navbar-collapse" id="navbarNav" data-bind="if: username">
             <div class=" col-auto">
+                <!-- Data-binder til vores menuElements,  -->
                 <ul class="navbar-nav" data-bind="foreach: menuElements">
+                    <!-- $parent ligger i vores viewmodel -->
                     <li class="nav-item" data-bind="css: $parent.isActive($data)">
                         <a class="nav-link" href="#" data-bind="click: $parent.changeContent">
+                            <!-- data-binder titlename på vores menu elements, istedet for at tage fileName-->
                             <span data-bind="text: titleName"></span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <!-- text in navbar -->
+            <!-- text in navbar (midten: viser hvem der er logget ind)
+            col auto = tilpasser grindsystemet
+            ml/mr =tilpasser margin til venstre/højre-->
             <div class="col-auto ml-auto mr-auto">
                 <span class="navbar-text">Welcome: </span>
                 <strong><span class="navbar-text text-light" data-bind="text: username"></span></strong>
@@ -34,20 +39,29 @@
             <!-- search form in navbar -->
             <div class=" col-auto ml-auto">
                 <form class="form-inline">
+                    <!-- Binder input (serchterm) fra vireModel (opdateres, da det en observabel) -->
                     <input data-bind="textInput: searchterm" class="form-control" type="search" placeholder="Search Titles" aria-label="Search">
+                    <!-- Bundet op på clicksearch i viewmodel, gir respons når knappen klikkes.
+                    my-2 = margin på 2 på y-aksen
+                    my-sm-0 = margin på 0 på mindre skræm.-->
                     <button data-bind="click: clickSearch, enable: enableSearch" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-
+            <!-- Databind singout, logger ud -->
             <button data-bind="click: clickSignout" class="btn btn-danger m-1" type="button">
                 <span>Sign Out</span>
             </button>
         </div>
     </nav>
-
+    <!-- container-fluid bruger hele viewport
+        hvis sign in = true, vises current content.
+        hvis sign in = false, vises signin component
+        veklser mellem views. -->
     <div class="container-fluid">
         <div class="bg-dark">
             <div data-bind="ifnot: username">
+                <!-- data-bind="component = type
+                     name: signInComponent = navnet på component-->
                 <div data-bind="component: {name: signInComponent}"></div>
             </div>
 
@@ -56,6 +70,7 @@
             </div>
         </div>
     </div>
+    <!-- specificere hvilke filer der er krævet -->
     <script data-main="js/main.js" src="js/lib/require.js/require.js"></script>
 </body>
 </html>

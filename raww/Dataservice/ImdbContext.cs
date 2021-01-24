@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataserviceLib
 {
+    //Definere Database sets, hvilket kan bruges til at instanciere entities af vores classer ex person.
     class ImdbContext : DbContext
     {
         public DbSet<Person> Persons { get; set; }
@@ -40,9 +41,11 @@ namespace DataserviceLib
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {   //Definere en pimary key, hvis den entity har en. 
             modelBuilder.Entity<Person>().HasKey(x => x.Nconst);
+            //Mapper vores enity til et table.
             modelBuilder.Entity<Person>().ToTable("person");
+            //definere hvilke attributes der skal sættes ind fra vores database. 
             modelBuilder.Entity<Person>().Property(x => x.Nconst).HasColumnName("nconst");
             modelBuilder.Entity<Person>().Property(x => x.Primaryname).HasColumnName("primaryname");
            

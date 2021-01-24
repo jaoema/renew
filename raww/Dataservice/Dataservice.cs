@@ -9,24 +9,24 @@ namespace DataserviceLib
 {
     public class Dataservice
     {
-
-        // Hej Rasmus - nyt sted at skifte connectionstring inde i "ImdbContext"
-
         public Titlebasics GetTitle(string tconst)
         {
-           using var ctx = new ImdbContext();
-
+           //definere vores imdbcontext
+            using var ctx = new ImdbContext();
+            //finder tconst for vores entity titlbasics. 
            return ctx.Titlebasicses.Find(tconst);
         }
 
         public bool CreateUser(string username, string password)
         {
             using var ctx = new ImdbContext();
+            //tjekker om der findes et username i databasen
             var user = ctx.Users.Find(username);
-
+            //hvis user ikke findes, laves der en user ved at kalde en sql query
             if (user == null)
             {
                 ctx.Database.ExecuteSqlInterpolated($"select create_user({username}, {password})");
+                //Gemmer ændringer, så de kommer ind i databasen. 
                 ctx.SaveChanges();
                 return true;
             }

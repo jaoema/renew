@@ -9,39 +9,45 @@
     let signInComp = { titleName: "Sign In", fileName: "signin" }
     let bookmarkComp = { titleName: "Bookmarks", fileName: "bookmark" }
     let profileComp = { titleName: "Profile", fileName: "profile"}
+
     
     let searchterm = ko.observable("");
 
     // empty after testing
     let username = ko.observable("");
 
+    //Sibscribes to events for usersignin
     postman.subscribe("userSignIn", username);
 
+    // defines ko.observables
+    // Array with menu elements
     let signInComponent = ko.observable(signInComp.fileName);
     let currentComponent = ko.observable(titleSearchComp.fileName);
     let menuElements = [titleSearchComp, nameSearchComp, profileComp];
     let selectedComponent = ko.observable();
 
+    //Subscribes to events chagecurrentcomp
     postman.subscribe("changeCurrentComp", currentComponent);
 
-
+    //Chages the content
     let changeContent = element => {
         currentComponent(element.fileName.toLowerCase());
 
     }
-
+    // Return element der er aktivt, hvis element = currentcomponent ellers return 0 (Tjekker components)
     let isActive = element => {
         return element.fileName.toLowerCase() === currentComponent() ? "active" : "";
     }
-
+    //Skifter til titlesearch component og publisher event
     let clickSearch = function() {
         changeContent(titleSearchComp);
         postman.publish('changeSearchFromNav', { searchFromNav: true, searchterm: searchterm() });
         searchterm("");
     }
-
+    //Aktiv hvis feltet ikke er tomt. 
     let enableSearch = ko.computed(() => searchterm() !== "");
 
+    //logger ud, publish event. 
     let clickSignout = function() {
         postman.publish("userSignIn", "");
     }

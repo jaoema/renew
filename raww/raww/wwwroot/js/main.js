@@ -1,19 +1,26 @@
-﻿
+﻿//Require bruges til at specificere hvilke libs der skal hentes, og hvor de kan findes (Paths), sørge for de loader
 require.config({
     baseUrl: "js",
     paths: {
+        //Mvvm - Connects til data-binds
         knockout: "lib/knockout/knockout-latest",
+        //For at kunne indlæse HTML filer
         text: "lib/require-text/text.min",
+        //Vores egen dataservice lib
         dataservice: "services/dataService",
+        //Vores Messaging system, subscriber etc. 
         postman: "services/postman",
         jquery: "lib/jquery/jquery.min",
+        //Styling tema, opsætning af grid, udseende etc. 
         bootstrap: "lib/twitter-bootstrap/js/bootstrap.bundle.min"
     },
     shim: {
+        //Bs bruger jquery da nogle funktioner kræver det. 
         bootstrap: ['jquery']
     }
 });
 
+//Registere komponent, gir den et navn og specificere en path til viewModel og template for det specifikke komponent. 
 require(['knockout', 'text'], (ko) => {
     ko.components.register("searchhistory", {
         viewModel: { require: "components/searchhistory/searchhistory" },
@@ -60,6 +67,7 @@ require(['knockout', 'text'], (ko) => {
 
 });
 
+//Alle data-binds vi har i det forskellige filer bliver applied her og bindes til viewModel.
 require(['knockout', 'viewModel', 'bootstrap',], function (ko, vm) {
     ko.applyBindings(vm);
 });

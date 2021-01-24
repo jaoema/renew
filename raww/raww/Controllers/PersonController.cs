@@ -19,17 +19,20 @@ namespace raww.Controllers
         }
         [HttpGet("api/person/{nconst}", Name = nameof(GetPerson))]
         public IActionResult GetPerson(string nconst)
-        {
+        {   //definere ds
             var ds = new Dataservice();
+            //kalder vores ds.getperson
             var result = ds.GetPerson(nconst);
-
+            //intet resultat return null. 
             if (result == null)
             {
                 return NotFound();
             }
-
+            //hvis resultat, mapper vores resultat til persondto
             var mapped = _mapper.Map<PersonDto>(result);
+            //trimmer dataen
             result.Nconst = result.Nconst.Trim();
+            //mapper vores url
             mapped.Link = Url.Link(nameof(BookmarkController.Bookmark), new { id = result.Nconst, movie = false });
 
             return Ok(mapped);
@@ -62,7 +65,7 @@ namespace raww.Controllers
         private object CreatePopularActorResult(int page, int pageSize, IList<Person> actors)
         {
             var count = actors.Count();
-
+            //kører addactorlink på alle actors, så alle actors har et link
             var actorlist = actors.Select(AddActorLink);
 
             var navigationUrls = CreatePagingNavigation(page, pageSize, count, nameof(PopularActors));
