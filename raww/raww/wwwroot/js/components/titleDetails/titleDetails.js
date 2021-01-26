@@ -21,9 +21,10 @@
 
         postman.subscribe('userSignIn', username)
 
-
+        // Lytter efter et event og hvilke data objektet der blir sendt med har
         let getData = url => {
             ds.getTitle(tconst(), url, data => {
+                //Sætter ny title, orgtitel og startyear
                 title(data);
                 originaltitle(data.originaltitle);
                 startyear(data.startyear);

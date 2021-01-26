@@ -35,9 +35,9 @@ namespace DataserviceLib
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw2;uid=raw2;pwd=OlUDAGe9");
+            //optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw2;uid=raw2;pwd=OlUDAGe9");
             //optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Franet0365");
-            //optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Baad666");
+           optionsBuilder.UseNpgsql("host=localhost;db=imdb;uid=postgres;pwd =Baad666");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

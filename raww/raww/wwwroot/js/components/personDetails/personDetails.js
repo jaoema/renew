@@ -15,15 +15,18 @@
 
         postman.subscribe("userSignIn", username);
 
-
+        //getPerson med Observable nconst(), url og data 
         let getData = url => {
             ds.getPerson(nconst(), url, data => {
+                //Data fra person
                 person(data);
+                //priamry name fra dataen
                 name(data.primaryname);
             });
         }
-
+        //Lytter efter et event og hvilke data "objektet har"
         postman.subscribe('changeNconst', data => {
+            //Skifter nconst, til den fra data. 
             nconst(data.nconst);
             showDetails(data.showDetails);
             getData();
@@ -37,7 +40,9 @@
             })
                 .then(ds.handleErrors)
                 .then(response => {
+                    //Disable bookmark knappen
                     enableBookmark(false);
+                    //Giver visuel tekst til bruger (fra vores html doc)
                     addedBookmark(true);
                 }).catch(error => {
                     console.log(error);
